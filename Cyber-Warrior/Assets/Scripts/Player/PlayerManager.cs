@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Player
@@ -8,6 +7,7 @@ namespace Player
         #region Serilized Fields
         
         [SerializeField] private float moveSpeed;
+        [SerializeField] private float rotationSpeed;
 
         #endregion
 
@@ -20,6 +20,8 @@ namespace Player
         private Vector2 _inputVector;
 
         #endregion
+
+        #region Unity Methods
 
         private void Awake()
         {
@@ -34,9 +36,8 @@ namespace Player
 
         private void Update()
         {
-            _inputVector = _inputActions.Player.Movement.ReadValue<Vector2>();
-            _moveVector = new Vector3(_inputVector.x, 0, _inputVector.y);
-            transform.LookAt(transform.position + _moveVector);
+            GetMovementData();
+            LookAtMoveDirection();
             if (_moveVector.magnitude == 0)
             {
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
@@ -51,6 +52,24 @@ namespace Player
         private void OnDisable()
         {
             _inputActions.Player.Disable();
+        }
+
+        #endregion
+
+        private void LookAtMoveDirection()
+        {
+            if (_moveVector.magnitude > 0.01f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);    
+            }
+
+        }
+
+        private void GetMovementData()
+        {
+            _inputVector = _inputActions.Player.Movement.ReadValue<Vector2>();
+            _moveVector = new Vector3(_inputVector.x, 0, _inputVector.y);
         }
     }
 }
