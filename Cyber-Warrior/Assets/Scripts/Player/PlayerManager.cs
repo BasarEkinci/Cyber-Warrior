@@ -10,7 +10,6 @@ namespace Player
         [SerializeField] private PlayerStats playerStats;
 
         #endregion
-
         #region Private Fields
         
         private InputActions _inputActions;
@@ -21,7 +20,6 @@ namespace Player
         private Vector2 _inputVector;
 
         #endregion
-
         #region Unity Methods
 
         private void Awake()
@@ -53,7 +51,7 @@ namespace Player
         }
 
         #endregion
-
+        #region My Methods
         private void LookAtMoveDirection()
         {
             if (_moveVector.magnitude > 0.01f)
@@ -68,5 +66,6 @@ namespace Player
             _inputVector = _inputActions.Player.Movement.ReadValue<Vector2>();
             _moveVector = new Vector3(_inputVector.x, 0, _inputVector.y);
         }
+        #endregion
     }
 }
