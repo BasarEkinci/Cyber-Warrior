@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Player
@@ -6,10 +7,7 @@ namespace Player
     {
         #region Serilized Fields
         
-        [Header("Player Base Stats")]
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float rotationSpeed;
-        [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private PlayerStats playerStats;
 
         #endregion
 
@@ -30,7 +28,7 @@ namespace Player
         {
             _inputActions = new InputActions();
             _rb = GetComponent<Rigidbody>();
-            _playerHealth = new PlayerHealth(maxHealth);
+            _playerHealth = new PlayerHealth(playerStats.maxHealth);
         }
 
         private void OnEnable()
@@ -46,7 +44,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            _rb.linearVelocity += _moveVector * (moveSpeed * Time.fixedDeltaTime);
+            _rb.linearVelocity += _moveVector * (playerStats.moveSpeed * Time.fixedDeltaTime);
         }
 
         private void OnDisable()
@@ -61,9 +59,8 @@ namespace Player
             if (_moveVector.magnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);    
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);    
             }
-
         }
 
         private void GetMovementData()
