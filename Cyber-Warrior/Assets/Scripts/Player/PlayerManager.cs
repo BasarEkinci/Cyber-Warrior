@@ -6,8 +6,10 @@ namespace Player
     {
         #region Serilized Fields
         
+        [Header("Player Base Stats")]
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
+        [SerializeField] private float maxHealth = 100f;
 
         #endregion
 
@@ -15,6 +17,7 @@ namespace Player
         
         private InputActions _inputActions;
         private Rigidbody _rb;
+        private PlayerHealth _playerHealth;
         
         private Vector3 _moveVector;
         private Vector2 _inputVector;
@@ -27,6 +30,7 @@ namespace Player
         {
             _inputActions = new InputActions();
             _rb = GetComponent<Rigidbody>();
+            _playerHealth = new PlayerHealth(maxHealth);
         }
 
         private void OnEnable()
@@ -38,10 +42,6 @@ namespace Player
         {
             GetMovementData();
             LookAtMoveDirection();
-            if (_moveVector.magnitude == 0)
-            {
-                _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
-            }
         }
 
         private void FixedUpdate()
