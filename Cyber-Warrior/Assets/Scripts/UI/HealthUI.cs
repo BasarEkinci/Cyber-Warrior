@@ -24,7 +24,7 @@ namespace UI
         {
             healthEvent.OnHealthChanged += UpdateHealthUI;
         }
-        private void Update()
+        private void LateUpdate()
         {
             transform.LookAt(_mainCamera.transform);
         }

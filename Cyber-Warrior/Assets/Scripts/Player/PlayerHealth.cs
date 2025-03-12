@@ -11,7 +11,7 @@ namespace Player
         
         public PlayerHealth(float maxHealth)
         {
-            _healthEvent = Resources.Load<HealthEvent>("UnityObjects/HealthEvent");
+            _healthEvent = Resources.Load<HealthEvent>("UnityObjects/SingleInstances/HealthEvent");
             _maxHealth = maxHealth;
             _currentHealth = maxHealth;
         }
