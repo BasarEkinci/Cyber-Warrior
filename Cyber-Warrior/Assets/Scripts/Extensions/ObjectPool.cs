@@ -30,9 +30,10 @@ namespace Extensions
             return obj;
         }
 
-        public void ReturnObject(GameObject obj)
+        public void ReturnObject(GameObject obj, Transform spawnPos)
         {
             obj.SetActive(false);
+            obj.transform.position = spawnPos.position;
             _pool.Enqueue(obj);
         }
     }

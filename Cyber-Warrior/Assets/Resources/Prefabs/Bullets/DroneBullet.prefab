@@ -86,8 +86,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0034484863
-        value: 0.00799942
+        time: 0
+        value: 0.17599869
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -170,7 +170,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6604, y: 1.442, z: 0.546}
-  m_LocalScale: {x: 0.020948889, y: 0.020948889, z: 0.020948889}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5827223673321831109}
@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5825ce3dce915b54ebb4d861ecdabbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pool: {fileID: 11400000, guid: e61a991025de3c7478cd46e2ad6f5c5d, type: 2}
 --- !u!54 &-4369545555724563785
 Rigidbody:
   m_ObjectHideFlags: 0

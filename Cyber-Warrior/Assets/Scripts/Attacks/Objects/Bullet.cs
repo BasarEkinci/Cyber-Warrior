@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Attacks.Objects
 {
-    public class DroneBullet : MonoBehaviour
+    public class Bullet : MonoBehaviour
     {
-        
+
         private float _damage;
         private int _maxHitCount = 1;
         private Rigidbody _rb;
@@ -13,21 +13,20 @@ namespace Attacks.Objects
         {
             _rb = GetComponent<Rigidbody>();
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
             {
                 _maxHitCount--;
-                Debug.Log("Enemy Shoot");
                 // other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);   
                 if (_maxHitCount == 0)
                 {
-                    gameObject.SetActive(false);
+                    _damage = 0;
                 }
             }
         }
-        
+
         public void AddForce(Vector3 direction, float force)
         {
             _rb.AddForce(direction * force, ForceMode.VelocityChange);

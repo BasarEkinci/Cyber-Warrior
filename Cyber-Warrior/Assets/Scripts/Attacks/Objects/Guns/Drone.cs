@@ -5,7 +5,7 @@ using Extensions;
 using ScriptableObjects;
 using UnityEngine;
 
-namespace Attacks
+namespace Attacks.Objects.Guns
 {
     public class Drone : MonoBehaviour
     {
@@ -54,11 +54,11 @@ namespace Attacks
                 {
                     bullet.transform.position = attackPoint.position;
                     bullet.transform.rotation = attackPoint.rotation;
-                    bullet.GetComponent<DroneBullet>().SetValues(_drone.damage);
-                    bullet.GetComponent<DroneBullet>().AddForce(attackPoint.transform.forward, _drone.bulletForce);
+                    bullet.GetComponent<Bullet>().SetValues(_drone.damage);
+                    bullet.GetComponent<Bullet>().AddForce(attackPoint.transform.forward, _drone.bulletForce);
                 }
 
-                StartCoroutine(Attack(bullet, 0.2f));
+                StartCoroutine(Attack(bullet, 1f));
                 _fireTiming = 0;
             }
 
@@ -72,7 +72,8 @@ namespace Attacks
         private IEnumerator Attack(GameObject bullet, float extraTime)
         {
             yield return new WaitForSeconds(_drone.fireRate + extraTime);
-            _bulletPool.ReturnObject(bullet);
+            bullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            _bulletPool.ReturnObject(bullet, attackPoint);
         }
 
 
