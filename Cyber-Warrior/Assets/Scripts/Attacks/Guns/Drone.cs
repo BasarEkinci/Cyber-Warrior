@@ -1,4 +1,5 @@
-using System.Collections;
+using System;
+using Cysharp.Threading.Tasks;
 using Extensions;
 using ScriptableObjects;
 using UnityEngine;
@@ -25,8 +26,8 @@ namespace Attacks.Guns
         #endregion
         private void OnEnable()
         {
-            _enemyHolder = new EnemyHolder();
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
+            _enemyHolder = new EnemyHolder();
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
@@ -53,24 +54,18 @@ namespace Attacks.Guns
                     bullet.GetComponent<Bullet>().SetValues(_drone.damage);
                     bullet.GetComponent<Bullet>().AddForce(attackPoint.transform.forward, _drone.bulletForce);
                 }
-
-                StartCoroutine(Attack(bullet, 1f));
+                ReturnBulletToPool(bullet, 0.5f);
                 _fireTiming = 0;
             }
             _enemyHolder.CalculateClosestEnemy(transform.position);
             if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
         }
-
-
-
-        private IEnumerator Attack(GameObject bullet, float extraTime)
+        private async void ReturnBulletToPool(GameObject bullet, float extraTime)
         {
-            yield return new WaitForSeconds(_drone.fireRate + extraTime);
+            await UniTask.Delay(TimeSpan.FromSeconds(_drone.fireRate + extraTime));
             bullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             _bulletPool.ReturnObject(bullet, attackPoint);
         }
-
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
