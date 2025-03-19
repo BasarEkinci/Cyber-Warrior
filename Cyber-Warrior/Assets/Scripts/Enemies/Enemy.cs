@@ -9,67 +9,65 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour
     {
-
-        [SerializeField] private float damage = 10f;
-        [SerializeField] private float attackInterval = 5f; // Hasar verme aralığı
+        [SerializeField] private float damage = 5f;
+        [SerializeField] private float attackInterval = 1f;
 
         private NavMeshAgent _agent;
         private Transform _playerTransform;
         private PlayerHealth _playerHealth;
-        private CancellationTokenSource _damageCancellationToken;
+        private CancellationTokenSource _cancellationToken;
 
         private void OnEnable()
         {
             _agent = GetComponent<NavMeshAgent>();
-
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
-            {
                 _playerTransform = playerManager.transform;
-            }
+
+            _cancellationToken = new CancellationTokenSource();
+            StartDamagingAsync(_cancellationToken);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_playerTransform != null)
-            {
                 _agent.SetDestination(_playerTransform.position);
-            }
         }
 
-        private void OnCollisionEnter(Collision collision)
+        void OnDisable()
         {
-            if (collision.gameObject.TryGetComponent(out _playerHealth))
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
-                _playerHealth.TakeDamage(damage);
-                StartDamageLoop();
+                _playerHealth = playerHealth;
             }
         }
 
-        private void OnCollisionExit(Collision collision)
+        private void OnTriggerExit(Collider other)
         {
-            if (collision.gameObject.TryGetComponent<PlayerHealth>(out _))
+            if (other.CompareTag("Player"))
             {
-                StopDamageLoop();
+                _playerHealth = null;
             }
         }
 
-        private async void StartDamageLoop()
+        private async void StartDamagingAsync(CancellationTokenSource token)
         {
-            _damageCancellationToken?.Cancel();
-            _damageCancellationToken = new CancellationTokenSource();
-
-            while (_playerHealth != null && !_damageCancellationToken.Token.IsCancellationRequested)
+            while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(attackInterval), cancellationToken: _damageCancellationToken.Token);
-                _playerHealth?.TakeDamage(damage);
+                await UniTask.Delay(TimeSpan.FromSeconds(attackInterval));
+                if (_playerHealth != null)
+                {
+                    _playerHealth.TakeDamage(damage);
+                }
             }
         }
 
-        private void StopDamageLoop()
-        {
-            _damageCancellationToken?.Cancel();
-        }
     }
 }
 
