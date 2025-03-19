@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Attacks.Objects;
 using Extensions;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Attacks
@@ -10,24 +11,13 @@ namespace Attacks
     {
         #region Serialized Fields
 
-        [Header("Components")] [SerializeField]
-        private GameObject head;
-
+        [Header("Components")]
+        [SerializeField] private GameObject head;
         [SerializeField] private Transform attackPoint;
-        [SerializeField] private GameObject bulletPrefab;
-
-        [Header("Attack Properties")] [SerializeField]
-        private float damage;
-
-        [SerializeField] private float range;
-        [SerializeField] private float attackRate;
-        [SerializeField] private float bulletForce;
-        [SerializeField] private int maxBulletCount;
-
         #endregion
-
         #region Private Fields
 
+        private RangedGun _drone;
         private BoxCollider _collider;
         private GameObject _peekedEnemy;
         private List<GameObject> _enemiesInRange;
@@ -36,24 +26,16 @@ namespace Attacks
         private float _fireTiming;
 
         #endregion
-
-        private void Awake()
+        private void OnEnable()
         {
+            _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _enemiesInRange = new List<GameObject>();
             _bulletPool = new ObjectPool();
-        }
 
-        private void Start()
-        {
-            _collider.size = new Vector3(range, 1, range);
+            _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
+            _collider.size = new Vector3(_drone.range, 1, _drone.range);
         }
-
-        private void OnEnable()
-        {
-            _bulletPool.Initialize(bulletPrefab, maxBulletCount);
-        }
-
         private void Update()
         {
             _canFire = _enemiesInRange.Count > 0;
@@ -65,18 +47,18 @@ namespace Attacks
             }
             _fireTiming += Time.deltaTime;
 
-            if (_fireTiming >= attackRate)
+            if (_fireTiming >= _drone.fireRate)
             {
                 var bullet = _bulletPool.GetObject();
                 if (bullet != null)
                 {
                     bullet.transform.position = attackPoint.position;
                     bullet.transform.rotation = attackPoint.rotation;
-                    bullet.GetComponent<DroneBullet>().SetValues(damage);
-                    bullet.GetComponent<DroneBullet>().AddForce(attackPoint.transform.forward, bulletForce);
+                    bullet.GetComponent<DroneBullet>().SetValues(_drone.damage);
+                    bullet.GetComponent<DroneBullet>().AddForce(attackPoint.transform.forward, _drone.bulletForce);
                 }
 
-                StartCoroutine(Attack(bullet));
+                StartCoroutine(Attack(bullet, 0.2f));
                 _fireTiming = 0;
             }
 
@@ -85,9 +67,11 @@ namespace Attacks
             if (_enemiesInRange.Count == 0) _peekedEnemy = null;
         }
 
-        private IEnumerator Attack(GameObject bullet)
+
+
+        private IEnumerator Attack(GameObject bullet, float extraTime)
         {
-            yield return new WaitForSeconds(attackRate);
+            yield return new WaitForSeconds(_drone.fireRate + extraTime);
             _bulletPool.ReturnObject(bullet);
         }
 
@@ -98,7 +82,6 @@ namespace Attacks
             {
                 if (_enemiesInRange.Count == 0)
                 {
-                    Debug.Log("Enemy Entered");
                     _peekedEnemy = other.gameObject;
                 }
 

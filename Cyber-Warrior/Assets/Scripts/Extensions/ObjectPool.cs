@@ -7,16 +7,18 @@ namespace Extensions
     {
         private Queue<GameObject> _pool = new();
 
-        public void Initialize(GameObject prefab, int poolSize)
+        public void Initialize(GameObject prefab, int poolSize, Transform parent = null)
         {
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj = Object.Instantiate(prefab);
+                if (parent != null)
+                    obj.transform.SetParent(parent);
                 obj.SetActive(false);
                 _pool.Enqueue(obj);
             }
         }
-        
+
         public GameObject GetObject()
         {
             if (_pool.Count == 0)
@@ -27,7 +29,7 @@ namespace Extensions
             obj.SetActive(true);
             return obj;
         }
-        
+
         public void ReturnObject(GameObject obj)
         {
             obj.SetActive(false);
