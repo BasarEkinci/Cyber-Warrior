@@ -23,6 +23,8 @@ namespace Attacks.Objects
                 if (_maxHitCount == 0)
                 {
                     _damage = 0;
+                    gameObject.SetActive(false);
+                    _rb.linearVelocity = Vector3.zero;
                 }
             }
         }

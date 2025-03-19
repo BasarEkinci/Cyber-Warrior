@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Attacks.Objects;
 using Extensions;
 using ScriptableObjects;
 using UnityEngine;
@@ -18,9 +16,8 @@ namespace Attacks.Objects.Guns
         #region Private Fields
 
         private RangedGun _drone;
+        private EnemyHolder _enemyHolder;
         private BoxCollider _collider;
-        private GameObject _peekedEnemy;
-        private List<GameObject> _enemiesInRange;
         private ObjectPool _bulletPool;
         private bool _canFire;
         private float _fireTiming;
@@ -28,9 +25,9 @@ namespace Attacks.Objects.Guns
         #endregion
         private void OnEnable()
         {
+            _enemyHolder = new EnemyHolder();
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
-            _enemiesInRange = new List<GameObject>();
             _bulletPool = new ObjectPool();
 
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
@@ -38,7 +35,7 @@ namespace Attacks.Objects.Guns
         }
         private void Update()
         {
-            _canFire = _enemiesInRange.Count > 0;
+            _canFire = _enemyHolder.EnemyList.Count > 0;
 
             if (!_canFire)
             {
@@ -61,10 +58,8 @@ namespace Attacks.Objects.Guns
                 StartCoroutine(Attack(bullet, 1f));
                 _fireTiming = 0;
             }
-
-            if (_enemiesInRange.Count > 1) CalculateClosestEnemy();
-            if (_peekedEnemy != null) head.transform.LookAt(_peekedEnemy.transform);
-            if (_enemiesInRange.Count == 0) _peekedEnemy = null;
+            _enemyHolder.CalculateClosestEnemy(transform.position);
+            if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
         }
 
 
@@ -81,34 +76,13 @@ namespace Attacks.Objects.Guns
         {
             if (other.CompareTag("Enemy"))
             {
-                if (_enemiesInRange.Count == 0)
-                {
-                    _peekedEnemy = other.gameObject;
-                }
-
-                _enemiesInRange.Add(other.gameObject);
+                _enemyHolder.EnemyList.Add(other.gameObject);
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Enemy")) _enemiesInRange.Remove(other.gameObject);
-        }
-
-
-        private void CalculateClosestEnemy()
-        {
-            for (var i = 0; i < _enemiesInRange.Count; i++)
-                if (_enemiesInRange.Count == 1)
-                {
-                    _peekedEnemy = _enemiesInRange[i];
-                }
-                else
-                {
-                    if (Vector3.Distance(_peekedEnemy.transform.position, transform.position) >
-                        Vector3.Distance(_enemiesInRange[i].transform.position, transform.position))
-                        _peekedEnemy = _enemiesInRange[i];
-                }
+            if (other.CompareTag("Enemy")) _enemyHolder.EnemyList.Remove(other.gameObject);
         }
     }
 }
