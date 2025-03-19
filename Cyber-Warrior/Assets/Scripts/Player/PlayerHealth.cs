@@ -3,26 +3,24 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHealth
+    public class PlayerHealth : MonoBehaviour
     {
-        private readonly HealthEvent _healthEvent;
+        [SerializeField] private HealthEvent _healthEvent;
         private float _currentHealth;
-        private float _maxHealth;
-        
-        public PlayerHealth(float maxHealth)
+        private float _maxHealth = 100;
+
+        private void OnEnable()
         {
-            _healthEvent = Resources.Load<HealthEvent>("UnityObjects/SingleInstances/HealthEvent");
-            _maxHealth = maxHealth;
-            _currentHealth = maxHealth;
+            _currentHealth = _maxHealth;
         }
-        
+
         public void TakeDamage(float damage)
         {
             _currentHealth -= damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
             _healthEvent.Invoke(_currentHealth);
         }
-        
+
         public void Heal(float healAmount)
         {
             _currentHealth += healAmount;

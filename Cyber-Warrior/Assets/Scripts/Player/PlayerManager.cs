@@ -6,16 +6,14 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         #region Serilized Fields
-        
+
         [SerializeField] private PlayerStats playerStats;
 
         #endregion
         #region Private Fields
-        
+
         private InputActions _inputActions;
         private Rigidbody _rb;
-        private PlayerHealth _playerHealth;
-        
         private Vector3 _moveVector;
         private Vector2 _inputVector;
 
@@ -26,7 +24,6 @@ namespace Player
         {
             _inputActions = new InputActions();
             _rb = GetComponent<Rigidbody>();
-            _playerHealth = new PlayerHealth(playerStats.maxHealth);
         }
 
         private void OnEnable()
@@ -57,7 +54,7 @@ namespace Player
             if (_moveVector.magnitude > 0.01f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);    
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);
             }
         }
 
