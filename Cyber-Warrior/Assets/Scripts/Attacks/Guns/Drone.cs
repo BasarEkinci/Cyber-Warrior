@@ -3,7 +3,7 @@ using Extensions;
 using ScriptableObjects;
 using UnityEngine;
 
-namespace Attacks.Objects.Guns
+namespace Attacks.Guns
 {
     public class Drone : MonoBehaviour
     {
@@ -29,7 +29,6 @@ namespace Attacks.Objects.Guns
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();
-
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
             _collider.size = new Vector3(_drone.range, 1, _drone.range);
         }

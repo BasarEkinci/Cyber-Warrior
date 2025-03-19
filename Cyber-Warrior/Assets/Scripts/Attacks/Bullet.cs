@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Attacks.Objects
+namespace Attacks
 {
     public class Bullet : MonoBehaviour
     {
