@@ -39,7 +39,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            _rb.linearVelocity += _moveVector * (playerStats.moveSpeed * Time.fixedDeltaTime);
+            Move();
         }
 
         private void OnDisable()
@@ -55,6 +55,21 @@ namespace Player
             {
                 Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);
+            }
+        }
+
+        private void Move()
+        {
+            Vector3 targetVelocity = _moveVector * playerStats.moveSpeed;
+            Vector3 velocity = _rb.linearVelocity;
+            velocity.x = targetVelocity.x;
+            velocity.y = _rb.linearVelocity.y;
+            velocity.z = targetVelocity.z;
+            _rb.linearVelocity = velocity;
+
+            if (_moveVector.magnitude == 0)
+            {
+                _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
             }
         }
 
