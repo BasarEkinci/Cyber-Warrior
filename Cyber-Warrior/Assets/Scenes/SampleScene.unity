@@ -596,7 +596,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
+  UpdateMethod: 1
   BlendUpdateMethod: 0
   LensModeOverride:
     Enabled: 0
@@ -1053,7 +1053,6 @@ Transform:
   - {fileID: 244626364}
   - {fileID: 785826924}
   - {fileID: 234883405}
-  - {fileID: 1002631104}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &524133785
@@ -1581,6 +1580,7 @@ GameObject:
   - component: {fileID: 1002631106}
   - component: {fileID: 1002631105}
   - component: {fileID: 1002631108}
+  - component: {fileID: 1002631109}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -1602,7 +1602,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 517831303}
-  m_Father: {fileID: 524133784}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1002631105
 BoxCollider:
@@ -1692,6 +1692,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 517831302}
   attackPoint: {fileID: 1205887511}
+  followOffset: {x: 0.34, y: 1.22, z: -0.47}
+--- !u!54 &1002631109
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002631103}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1205887510
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2115,7 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 2000659300}
+  - {fileID: 1002631104}
   - {fileID: 524133784}
   - {fileID: 422175726}
   - {fileID: 371925417}

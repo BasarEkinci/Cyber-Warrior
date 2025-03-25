@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Extensions;
+using Player;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Attacks.Guns
         [Header("Components")]
         [SerializeField] private GameObject head;
         [SerializeField] private Transform attackPoint;
+        [SerializeField] private Vector3 followOffset;
         #endregion
         #region Private Fields
 
@@ -22,20 +24,30 @@ namespace Attacks.Guns
         private ObjectPool _bulletPool;
         private bool _canFire;
         private float _fireTiming;
+        private Transform _player;
 
         #endregion
         private void OnEnable()
         {
-            _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _enemyHolder = new EnemyHolder();
+            _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
             _collider.size = new Vector3(_drone.range, 1, _drone.range);
+            _player = GameObject.FindAnyObjectByType<PlayerManager>().transform;
         }
+
+        private void FixedUpdate()
+        {
+            if (_player != null)
+                transform.position = Vector3.Lerp(transform.position, _player.position + followOffset, Time.deltaTime * 5f);
+        }
+
         private void Update()
         {
             _canFire = _enemyHolder.EnemyList.Count > 0;
+
 
             if (!_canFire)
             {
@@ -71,12 +83,17 @@ namespace Attacks.Guns
             if (other.CompareTag("Enemy"))
             {
                 _enemyHolder.EnemyList.Add(other.gameObject);
+                Debug.Log("Enemy in range");
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Enemy")) _enemyHolder.EnemyList.Remove(other.gameObject);
+            if (other.CompareTag("Enemy"))
+            {
+                _enemyHolder.EnemyList.Remove(other.gameObject);
+                Debug.Log("Enemy exit the range");
+            }
         }
     }
 }
