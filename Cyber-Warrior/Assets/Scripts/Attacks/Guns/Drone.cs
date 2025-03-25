@@ -41,7 +41,9 @@ namespace Attacks.Guns
         private void FixedUpdate()
         {
             if (_player != null)
+            {
                 transform.position = Vector3.Lerp(transform.position, _player.position + followOffset, Time.deltaTime * 5f);
+            }
         }
 
         private void Update()
