@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Attacks.Guns
 {
-    public class Drone : MonoBehaviour
+    public class Drone : MonoBehaviour, IRangedGun
     {
         #region Serialized Fields
 
@@ -46,6 +46,33 @@ namespace Attacks.Guns
 
         private void Update()
         {
+            Fire();
+            LockTarget();
+        }
+        private async void ReturnBulletToPool(GameObject bullet, float extraTime)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(_drone.fireRate + extraTime));
+            bullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            _bulletPool.ReturnObject(bullet, attackPoint);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                _enemyHolder.EnemyList.Add(other.gameObject);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                _enemyHolder.EnemyList.Remove(other.gameObject);
+            }
+        }
+
+        public void Fire()
+        {
             _canFire = _enemyHolder.EnemyList.Count > 0;
 
 
@@ -69,31 +96,12 @@ namespace Attacks.Guns
                 ReturnBulletToPool(bullet, 0.5f);
                 _fireTiming = 0;
             }
-            _enemyHolder.CalculateClosestEnemy(transform.position);
-            if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
-        }
-        private async void ReturnBulletToPool(GameObject bullet, float extraTime)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(_drone.fireRate + extraTime));
-            bullet.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-            _bulletPool.ReturnObject(bullet, attackPoint);
-        }
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Enemy"))
-            {
-                _enemyHolder.EnemyList.Add(other.gameObject);
-                Debug.Log("Enemy in range");
-            }
         }
 
-        private void OnTriggerExit(Collider other)
+        public void LockTarget()
         {
-            if (other.CompareTag("Enemy"))
-            {
-                _enemyHolder.EnemyList.Remove(other.gameObject);
-                Debug.Log("Enemy exit the range");
-            }
+            _enemyHolder.CalculateClosestEnemy(transform.position);
+            if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
         }
     }
 }
