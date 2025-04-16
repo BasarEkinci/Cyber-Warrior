@@ -93,7 +93,7 @@ namespace Combat.Guns
                 {
                     bullet.transform.position = attackPoint.position;
                     bullet.transform.rotation = attackPoint.rotation;
-                    bullet.GetComponent<Bullet>().SetValues(_drone.damage);
+                    bullet.GetComponent<Bullet>().SetValues(_drone.damage, _drone.knockBackForce);
                     bullet.GetComponent<Bullet>().AddForce(attackPoint.transform.forward, _drone.bulletForce);
                 }
                 ReturnBulletToPool(bullet, 0.5f);

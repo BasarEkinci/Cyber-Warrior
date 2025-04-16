@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 639104304}
   - component: {fileID: 639104308}
   - component: {fileID: 639104309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1223,8 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f06e29615e3354486a9ea79b2df939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackInterval: 0.5
+  enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
 --- !u!1 &719749489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1399,7 @@ GameObject:
   - component: {fileID: 885008713}
   - component: {fileID: 885008718}
   - component: {fileID: 885008719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1533,8 +1532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f06e29615e3354486a9ea79b2df939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackInterval: 0.5
+  enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
 --- !u!1 &1002631103
 GameObject:
   m_ObjectHideFlags: 0

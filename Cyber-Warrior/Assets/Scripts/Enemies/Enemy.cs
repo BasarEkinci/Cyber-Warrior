@@ -1,13 +1,16 @@
 using System;
 using System.Threading;
+using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Enemies
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDamagable, IKnockbackable
     {
         [SerializeField] private ScriptableObjects.Enemy enemy;
 
@@ -15,10 +18,12 @@ namespace Enemies
         private Transform _playerTransform;
         private PlayerHealth _playerHealth;
         private CancellationTokenSource _cancellationToken;
+        private Material _material;
 
         private void OnEnable()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _material = GetComponent<MeshRenderer>().material;
             _agent.speed = enemy.moveSpeed;
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
@@ -68,6 +73,32 @@ namespace Enemies
             }
         }
 
+        public void GetDamage(float amount)
+        {
+            Debug.Log("Damaged");
+        }
+
+        public void Dead()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Knockback(Vector3 direction, float force)
+        {
+            Debug.Log("Knockback");
+
+            _agent.enabled = false;
+
+            Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
+            Vector3 targetPos = transform.position + horizontalDirection * force;
+
+            transform.DOMove(targetPos, 0.1f)
+                .SetEase(Ease.OutExpo)
+                .OnComplete(() =>
+                {
+                    _agent.enabled = true;
+                });
+        }
     }
 }
 

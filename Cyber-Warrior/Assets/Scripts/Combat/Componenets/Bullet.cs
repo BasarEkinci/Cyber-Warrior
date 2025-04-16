@@ -1,3 +1,5 @@
+using Combat.Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Combat.Components
@@ -6,6 +8,7 @@ namespace Combat.Components
     {
 
         private float _damage;
+        private float _knockBackForce;
         private int _maxHitCount = 1;
         private Rigidbody _rb;
 
@@ -16,10 +19,14 @@ namespace Combat.Components
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
             {
+                damagable.GetDamage(_damage);
+                if (other.TryGetComponent<IKnockbackable>(out IKnockbackable _knockBackable))
+                {
+                    _knockBackable.Knockback(-other.transform.forward, _knockBackForce);
+                }
                 _maxHitCount--;
-                // other.gameObject.GetComponent<EnemyHealth>().TakeDamage(_damage);   
                 if (_maxHitCount == 0)
                 {
                     _damage = 0;
@@ -34,10 +41,11 @@ namespace Combat.Components
             _rb.AddForce(direction * force, ForceMode.VelocityChange);
         }
 
-        public void SetValues(float damage, int maxHitCount = 1)
+        public void SetValues(float damage, float knockBackForce, int maxHitCount = 1)
         {
             _damage = damage;
             _maxHitCount = maxHitCount;
+            _knockBackForce = knockBackForce;
         }
     }
 }

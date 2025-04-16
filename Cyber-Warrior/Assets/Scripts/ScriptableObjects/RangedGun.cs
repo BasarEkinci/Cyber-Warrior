@@ -11,5 +11,6 @@ namespace ScriptableObjects
         public float bulletForce;
         public int capacity;
         public GameObject bulletPrefab;
+        [Range(0, 1)] public float knockBackForce;
     }
 }

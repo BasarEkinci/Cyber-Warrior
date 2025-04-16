@@ -2,7 +2,7 @@ namespace Combat.Interfaces
 {
     public interface IDamagable
     {
-        void GetDamage();
+        void GetDamage(float amount);
         void Dead();
     }
 }
