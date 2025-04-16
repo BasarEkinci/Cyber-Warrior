@@ -5,7 +5,7 @@ using Player;
 using ScriptableObjects;
 using UnityEngine;
 
-namespace Attacks.Guns
+namespace Combat.Guns
 {
     public class Drone : MonoBehaviour, IRangedGun
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Attacks
+namespace Combat.Components
 {
     public class Bullet : MonoBehaviour
     {
