@@ -4,7 +4,6 @@ using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -75,7 +74,7 @@ namespace Enemies
 
         public void GetDamage(float amount)
         {
-            Debug.Log("Damaged");
+            _material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Linear);
         }
 
         public void Dead()
@@ -86,18 +85,9 @@ namespace Enemies
         public void Knockback(Vector3 direction, float force)
         {
             Debug.Log("Knockback");
-
-            _agent.enabled = false;
-
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
             Vector3 targetPos = transform.position + horizontalDirection * force;
-
-            transform.DOMove(targetPos, 0.1f)
-                .SetEase(Ease.OutExpo)
-                .OnComplete(() =>
-                {
-                    _agent.enabled = true;
-                });
+            transform.DOMove(targetPos, 0.1f).SetEase(Ease.OutExpo);
         }
     }
 }
