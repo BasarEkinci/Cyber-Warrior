@@ -9,8 +9,7 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private float damage = 5f;
-        [SerializeField] private float attackInterval = 1f;
+        [SerializeField] private ScriptableObjects.Enemy enemy;
 
         private NavMeshAgent _agent;
         private Transform _playerTransform;
@@ -20,6 +19,7 @@ namespace Enemies
         private void OnEnable()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _agent.speed = enemy.moveSpeed;
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
                 _playerTransform = playerManager.transform;
@@ -60,10 +60,10 @@ namespace Enemies
         {
             while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(attackInterval));
+                await UniTask.Delay(TimeSpan.FromSeconds(enemy.attackInterval));
                 if (_playerHealth != null)
                 {
-                    _playerHealth.TakeDamage(damage);
+                    _playerHealth.TakeDamage(enemy.damage);
                 }
             }
         }

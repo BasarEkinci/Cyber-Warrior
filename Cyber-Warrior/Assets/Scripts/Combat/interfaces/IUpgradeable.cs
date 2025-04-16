@@ -1,6 +1,9 @@
-using UnityEngine;
 
-public interface IUpgradeable
+namespace Combat.Interfaces
 {
+    public interface IUpgradeable
+    {
 
+    }
 }
+

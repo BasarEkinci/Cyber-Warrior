@@ -4,10 +4,11 @@ using Extensions;
 using Player;
 using ScriptableObjects;
 using UnityEngine;
+using Combat.Components;
 
 namespace Combat.Guns
 {
-    public class Drone : MonoBehaviour, IRangedGun
+    public class Drone : MonoBehaviour, IRangedGun, IUpgradeable
     {
         #region Serialized Fields
 
@@ -104,6 +105,11 @@ namespace Combat.Guns
         {
             _enemyHolder.CalculateClosestEnemy(transform.position);
             if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
+        }
+
+        public void Upgrade(float amount)
+        {
+            throw new NotImplementedException();
         }
     }
 }
