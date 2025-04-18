@@ -5,6 +5,7 @@ using Player;
 using ScriptableObjects;
 using UnityEngine;
 using Combat.Components;
+using Combat.Interfaces;
 
 namespace Combat.Guns
 {
@@ -60,7 +61,7 @@ namespace Combat.Guns
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
             {
                 _enemyHolder.EnemyList.Add(other.gameObject);
             }
@@ -68,7 +69,7 @@ namespace Combat.Guns
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Enemy"))
+            if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
             {
                 _enemyHolder.EnemyList.Remove(other.gameObject);
             }
@@ -104,7 +105,10 @@ namespace Combat.Guns
         public void LockTarget()
         {
             _enemyHolder.CalculateClosestEnemy(transform.position);
-            if (_enemyHolder.EnemyList.Count > 0) head.transform.LookAt(_enemyHolder.peekEnemy.transform);
+            if (_enemyHolder.EnemyList.Count > 0)
+            {
+                head.transform.LookAt(_enemyHolder.peekEnemy.transform.position + Vector3.up / 2);
+            }
         }
 
         public void Upgrade(float amount)

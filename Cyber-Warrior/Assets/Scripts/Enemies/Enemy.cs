@@ -17,19 +17,12 @@ namespace Enemies
         private Transform _playerTransform;
         private PlayerHealth _playerHealth;
         private CancellationTokenSource _cancellationToken;
-        private Material _material;
+        private Animator _animator;
 
+        #region Unity Functions
         private void OnEnable()
         {
-            _agent = GetComponent<NavMeshAgent>();
-            _material = GetComponent<MeshRenderer>().material;
-            _agent.speed = enemy.moveSpeed;
-            var playerManager = FindFirstObjectByType<PlayerManager>();
-            if (playerManager != null)
-                _playerTransform = playerManager.transform;
-
-            _cancellationToken = new CancellationTokenSource();
-            StartDamagingAsync(_cancellationToken);
+            Initialize();
         }
 
         private void FixedUpdate()
@@ -38,7 +31,7 @@ namespace Enemies
                 _agent.SetDestination(_playerTransform.position);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
@@ -49,6 +42,7 @@ namespace Enemies
             if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
                 _playerHealth = playerHealth;
+                _animator.SetBool("IsAttached", true);
             }
         }
 
@@ -57,9 +51,12 @@ namespace Enemies
             if (other.CompareTag("Player"))
             {
                 _playerHealth = null;
+                _animator.SetBool("IsAttached", false);
             }
         }
+        #endregion
 
+        #region Custom Functions
         private async void StartDamagingAsync(CancellationTokenSource token)
         {
             while (!token.IsCancellationRequested)
@@ -74,7 +71,7 @@ namespace Enemies
 
         public void GetDamage(float amount)
         {
-            _material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Linear);
+            //_material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Linear);
         }
 
         public void Dead()
@@ -89,6 +86,21 @@ namespace Enemies
             Vector3 targetPos = transform.position + horizontalDirection * force;
             transform.DOMove(targetPos, 0.1f).SetEase(Ease.OutExpo);
         }
+
+        private void Initialize()
+        {
+            _agent = GetComponent<NavMeshAgent>();
+            _animator = GetComponent<Animator>();
+            _agent.speed = enemy.moveSpeed;
+            var playerManager = FindFirstObjectByType<PlayerManager>();
+            if (playerManager != null)
+                _playerTransform = playerManager.transform;
+
+            _cancellationToken = new CancellationTokenSource();
+            StartDamagingAsync(_cancellationToken);
+        }
+        #endregion
+
     }
 }
 

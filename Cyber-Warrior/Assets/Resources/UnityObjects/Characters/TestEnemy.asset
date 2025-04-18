@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   attackInterval: 0.5
-  moveSpeed: 8
+  moveSpeed: 5

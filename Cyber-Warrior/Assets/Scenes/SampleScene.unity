@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 445555856}
   m_Layer: 0
   m_Name: Player_1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5244,7 +5244,7 @@ Animator:
   m_GameObject: {fileID: 919132147577130795}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f2b7d555db81ee4418a89d212952a128, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d7430e16ab499644928d5f74206dd60, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5306,7 +5306,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

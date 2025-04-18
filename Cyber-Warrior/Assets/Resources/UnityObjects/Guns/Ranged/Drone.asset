@@ -18,4 +18,4 @@ MonoBehaviour:
   bulletForce: 40
   capacity: 20
   bulletPrefab: {fileID: 2371418669018796513, guid: 4d095b9a53208194aa263487eff2c0c1, type: 3}
-  knockBackForce: 0.521
+  knockBackForce: 0.1
