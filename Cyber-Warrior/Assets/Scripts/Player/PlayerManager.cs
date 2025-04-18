@@ -5,6 +5,11 @@ namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
+        #region Public Fields
+
+        public float MoveVectorMagnitude => _moveVector.magnitude;
+
+        #endregion
         #region Serilized Fields
 
         [SerializeField] private PlayerStats playerStats;
