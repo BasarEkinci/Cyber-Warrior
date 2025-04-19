@@ -1107,6 +1107,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1793124726064209362, guid: 2646e806e69e36349aa813821e623501, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1793124726064209362, guid: 2646e806e69e36349aa813821e623501, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6841581671241021686, guid: 2646e806e69e36349aa813821e623501, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.2700002

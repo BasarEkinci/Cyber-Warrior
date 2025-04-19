@@ -65,7 +65,7 @@ namespace Player
         #region My Methods
         private void LookAtMoveDirection()
         {
-            if (_moveVector.magnitude > 0.01f)
+            if (_moveVector.magnitude > 0.01f && _canMove)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);
