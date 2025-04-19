@@ -15,3 +15,5 @@ MonoBehaviour:
   damage: 5
   attackInterval: 0.5
   moveSpeed: 5
+  maxHealth: 20
+  damageResistance: 1

@@ -9,7 +9,7 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    public class Enemy : MonoBehaviour, IDamagable, IKnockbackable
+    public class Enemy : MonoBehaviour, IDamagable
     {
         [SerializeField] private ScriptableObjects.Enemy enemy;
 
@@ -18,6 +18,9 @@ namespace Enemies
         private PlayerHealth _playerHealth;
         private CancellationTokenSource _cancellationToken;
         private Animator _animator;
+        private Collider _collider;
+        private float _currentHealth;
+        private float _damageResistance;
 
         #region Unity Functions
         private void OnEnable()
@@ -27,6 +30,7 @@ namespace Enemies
 
         private void FixedUpdate()
         {
+            if (_currentHealth <= 0f) return;
             if (_playerTransform != null)
                 _agent.SetDestination(_playerTransform.position);
         }
@@ -72,26 +76,34 @@ namespace Enemies
         public void GetDamage(float amount)
         {
             //_material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Linear);
+            float damage;
+            if (amount > enemy.damageResistance)
+                damage = amount - enemy.damageResistance;
+            else
+                damage = amount;
+
+            _currentHealth -= damage;
+            Debug.Log(_currentHealth);
+            if (_currentHealth <= 0f)
+            {
+                Dead();
+            }
         }
 
         public void Dead()
         {
-            throw new NotImplementedException();
+            _collider.enabled = false;
+            _agent.enabled = false;
+            _animator.Play("Death1");
         }
-
-        public void Knockback(Vector3 direction, float force)
-        {
-            Debug.Log("Knockback");
-            Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-            Vector3 targetPos = transform.position + horizontalDirection * force;
-            transform.DOMove(targetPos, 0.1f).SetEase(Ease.OutExpo);
-        }
-
         private void Initialize()
         {
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
+            _collider = GetComponent<Collider>();
             _agent.speed = enemy.moveSpeed;
+            _currentHealth = enemy.maxHealth;
+            _damageResistance = enemy.damageResistance;
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
                 _playerTransform = playerManager.transform;

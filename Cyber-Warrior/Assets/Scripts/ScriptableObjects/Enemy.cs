@@ -8,6 +8,8 @@ namespace ScriptableObjects
         public float damage;
         public float attackInterval;
         public float moveSpeed;
+        public float maxHealth;
+        public float damageResistance;
     }
 }
 
