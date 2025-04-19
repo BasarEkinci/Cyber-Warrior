@@ -6,13 +6,14 @@ using ScriptableObjects;
 using UnityEngine;
 using Combat.Components;
 using Combat.Interfaces;
+using Enemies;
 
 namespace Combat.Guns
 {
     public class Drone : MonoBehaviour, IRangedGun, IUpgradeable
     {
         #region Serialized Fields
-
+        [SerializeField] private EnemyDeathEvent enemyDeathEvent;
         [Header("Components")]
         [SerializeField] private GameObject head;
         [SerializeField] private Transform attackPoint;
@@ -32,12 +33,18 @@ namespace Combat.Guns
         private void OnEnable()
         {
             _enemyHolder = new EnemyHolder();
+            enemyDeathEvent.OnEnemyDeath += OnEnemyDeath;
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
             _collider.size = new Vector3(_drone.range, 1, _drone.range);
             _player = GameObject.FindAnyObjectByType<PlayerManager>().transform;
+        }
+
+        private void OnEnemyDeath(GameObject enemy)
+        {
+            _enemyHolder.EnemyList.Remove(enemy);
         }
 
         private void FixedUpdate()
@@ -52,6 +59,7 @@ namespace Combat.Guns
         {
             Fire();
             LockTarget();
+
         }
         private async void ReturnBulletToPool(GameObject bullet, float extraTime)
         {
@@ -61,15 +69,15 @@ namespace Combat.Guns
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
+            if (other.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                _enemyHolder.EnemyList.Add(other.gameObject);
+                if (enemy.CurrentHealth > 0f)
+                    _enemyHolder.EnemyList.Add(other.gameObject);
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
+            if (other.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 _enemyHolder.EnemyList.Remove(other.gameObject);
             }

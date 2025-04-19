@@ -2392,6 +2392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  deathEvent: {fileID: 0}
 --- !u!1 &639483531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,6 +3405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  deathEvent: {fileID: 0}
 --- !u!1 &893361306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,6 +3816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0a9c49347bbfb459ac1b4675090949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDeathEvent: {fileID: 11400000, guid: 3c32a64903e2f30419724b30407bef1b, type: 2}
   head: {fileID: 517831302}
   attackPoint: {fileID: 1205887511}
   followOffset: {x: 0.5, y: 1.5, z: -0.5}
@@ -4081,6 +4084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  deathEvent: {fileID: 11400000, guid: 3c32a64903e2f30419724b30407bef1b, type: 2}
 --- !u!95 &1087720346
 Animator:
   serializedVersion: 7
@@ -4476,6 +4480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  deathEvent: {fileID: 11400000, guid: 3c32a64903e2f30419724b30407bef1b, type: 2}
 --- !u!95 &1209422393
 Animator:
   serializedVersion: 7
@@ -10255,6 +10260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  deathEvent: {fileID: 11400000, guid: 3c32a64903e2f30419724b30407bef1b, type: 2}
 --- !u!136 &5866666020272836590
 CapsuleCollider:
   m_ObjectHideFlags: 0

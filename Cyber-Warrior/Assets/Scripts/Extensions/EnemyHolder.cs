@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Extensions
 {
@@ -7,7 +8,6 @@ namespace Extensions
     {
         public List<GameObject> EnemyList;
         public GameObject peekEnemy;
-
         public EnemyHolder()
         {
             EnemyList = new List<GameObject>();
@@ -29,6 +29,11 @@ namespace Extensions
                     }
                 }
             }
+        }
+
+        public void SetPeekedEnemy()
+        {
+            peekEnemy = EnemyList[0];
         }
     }
 }

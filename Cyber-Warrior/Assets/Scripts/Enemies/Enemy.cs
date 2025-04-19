@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using ScriptableObjects;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,8 +11,9 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamagable
     {
-        [SerializeField] private ScriptableObjects.Enemy enemy;
-
+        public float CurrentHealth => _currentHealth;
+        [SerializeField] private EnemySO enemy;
+        [SerializeField] private EnemyDeathEvent deathEvent;
         private NavMeshAgent _agent;
         private Transform _playerTransform;
         private PlayerHealth _playerHealth;
@@ -95,6 +96,7 @@ namespace Enemies
             _collider.enabled = false;
             _agent.enabled = false;
             _animator.Play("Death1");
+            deathEvent.Invoke(gameObject);
         }
         private void Initialize()
         {
