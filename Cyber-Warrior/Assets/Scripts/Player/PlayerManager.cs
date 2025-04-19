@@ -1,4 +1,6 @@
+using System;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 
 namespace Player
@@ -11,9 +13,8 @@ namespace Player
 
         #endregion
         #region Serilized Fields
-
         [SerializeField] private PlayerStats playerStats;
-
+        [SerializeField] private PlayerDeathEvent playerDeathEvent;
         #endregion
         #region Private Fields
 
@@ -21,6 +22,7 @@ namespace Player
         private Rigidbody _rb;
         private Vector3 _moveVector;
         private Vector2 _inputVector;
+        private bool _canMove;
 
         #endregion
         #region Unity Methods
@@ -34,6 +36,13 @@ namespace Player
         private void OnEnable()
         {
             _inputActions.Player.Enable();
+            playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
+            _canMove = true;
+        }
+
+        private void OnPlayerDeath()
+        {
+            _canMove = false;
         }
 
         private void Update()
@@ -65,6 +74,7 @@ namespace Player
 
         private void Move()
         {
+            if (!_canMove) return;
             Vector3 targetVelocity = _moveVector * playerStats.moveSpeed;
             Vector3 velocity = _rb.linearVelocity;
             velocity.x = targetVelocity.x;

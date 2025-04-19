@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e48fd9b8ca33e408ae621defd44816, type: 3}
-  m_Name: TestEnemy
+  m_Script: {fileID: 11500000, guid: 8e294cf7a5c488d41aabc0394f1d6559, type: 3}
+  m_Name: PlayerDeathEvent
   m_EditorClassIdentifier: 
-  damage: 20
-  attackInterval: 0.5
-  moveSpeed: 5
-  maxHealth: 20
-  damageResistance: 1

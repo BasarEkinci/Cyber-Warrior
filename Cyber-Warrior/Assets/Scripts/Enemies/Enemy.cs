@@ -6,12 +6,15 @@ using ScriptableObjects;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
+using ScriptableObjects.Events;
 
 namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamagable
     {
         public float CurrentHealth => _currentHealth;
+        [Header("Scriptables")]
+        [SerializeField] private PlayerDeathEvent playerDeathEvent;
         [SerializeField] private EnemySO enemy;
         [SerializeField] private EnemyDeathEvent deathEvent;
         private NavMeshAgent _agent;
@@ -22,6 +25,7 @@ namespace Enemies
         private Collider _collider;
         private float _currentHealth;
         private float _damageResistance;
+        private bool _isPLayerDead;
 
         #region Unity Functions
         private void OnEnable()
@@ -32,7 +36,7 @@ namespace Enemies
         private void FixedUpdate()
         {
             if (_currentHealth <= 0f) return;
-            if (_playerTransform != null)
+            if (_playerTransform != null || !_isPLayerDead)
                 _agent.SetDestination(_playerTransform.position);
         }
 
@@ -98,11 +102,18 @@ namespace Enemies
             _animator.Play("Death1");
             deathEvent.Invoke(gameObject);
         }
+        private void OnPlayerDeath()
+        {
+            _isPLayerDead = true;
+            _animator.Play("idle");
+            _playerHealth = null;
+        }
         private void Initialize()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider>();
+            playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
             _agent.speed = enemy.moveSpeed;
             _currentHealth = enemy.maxHealth;
             _damageResistance = enemy.damageResistance;

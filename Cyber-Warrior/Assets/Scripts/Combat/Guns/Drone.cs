@@ -115,7 +115,7 @@ namespace Combat.Guns
             _enemyHolder.CalculateClosestEnemy(transform.position);
             if (_enemyHolder.EnemyList.Count > 0)
             {
-                head.transform.LookAt(_enemyHolder.peekEnemy.transform.position + Vector3.up / 2);
+                head.transform.LookAt(_enemyHolder.peekEnemy.transform.position + Vector3.up * 1.5f);
             }
         }
 

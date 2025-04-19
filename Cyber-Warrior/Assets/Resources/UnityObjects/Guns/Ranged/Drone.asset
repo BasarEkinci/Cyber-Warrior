@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff93b177c0a7474ba6732009911e7b9, type: 3}
   m_Name: Drone
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 2
   range: 80
-  fireRate: 1
+  fireRate: 2
   bulletForce: 40
   capacity: 20
   bulletPrefab: {fileID: 2371418669018796513, guid: 4d095b9a53208194aa263487eff2c0c1, type: 3}

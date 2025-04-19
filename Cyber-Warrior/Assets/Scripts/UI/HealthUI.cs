@@ -1,4 +1,4 @@
-using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +6,7 @@ namespace UI
 {
     public class HealthUI : MonoBehaviour
     {
-        
+
         [SerializeField] private Image healthBar;
         [SerializeField] private Image healthBarBackground;
         [SerializeField] private HealthEvent healthEvent;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ScriptableObjects
+namespace ScriptableObjects.Events
 {
     [CreateAssetMenu(fileName = "HealthEvent", menuName = "Scriptable Objects/Events/HealthEvent")]
     public class HealthEvent : ScriptableObject
