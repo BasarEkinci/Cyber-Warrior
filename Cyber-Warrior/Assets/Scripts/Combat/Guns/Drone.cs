@@ -5,8 +5,8 @@ using Player;
 using ScriptableObjects;
 using UnityEngine;
 using Combat.Components;
-using Combat.Interfaces;
 using Enemies;
+using ScriptableObjects.Events;
 
 namespace Combat.Guns
 {
@@ -14,6 +14,7 @@ namespace Combat.Guns
     {
         #region Serialized Fields
         [SerializeField] private EnemyDeathEvent enemyDeathEvent;
+        [SerializeField] private PlayerDeathEvent playerDeathEvent;
         [Header("Components")]
         [SerializeField] private GameObject head;
         [SerializeField] private Transform attackPoint;
@@ -34,12 +35,19 @@ namespace Combat.Guns
         {
             _enemyHolder = new EnemyHolder();
             enemyDeathEvent.OnEnemyDeath += OnEnemyDeath;
+            playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
             _collider.size = new Vector3(_drone.range, 1, _drone.range);
             _player = GameObject.FindAnyObjectByType<PlayerManager>().transform;
+            _canFire = true;
+        }
+
+        private void OnPlayerDeath()
+        {
+            _canFire = false;
         }
 
         private void OnEnemyDeath(GameObject enemy)
@@ -74,6 +82,7 @@ namespace Combat.Guns
                 if (enemy.CurrentHealth > 0f)
                     _enemyHolder.EnemyList.Add(other.gameObject);
             }
+            _enemyHolder.CalculateClosestEnemy(transform.position);
         }
         private void OnTriggerExit(Collider other)
         {
@@ -81,18 +90,13 @@ namespace Combat.Guns
             {
                 _enemyHolder.EnemyList.Remove(other.gameObject);
             }
+            _enemyHolder.CalculateClosestEnemy(transform.position);
         }
 
         public void Fire()
         {
-            _canFire = _enemyHolder.EnemyList.Count > 0;
+            if (_enemyHolder.EnemyList.Count <= 0 || !_canFire) return;
 
-
-            if (!_canFire)
-            {
-                _fireTiming = 0;
-                return;
-            }
             _fireTiming += Time.deltaTime;
 
             if (_fireTiming >= _drone.fireRate)
