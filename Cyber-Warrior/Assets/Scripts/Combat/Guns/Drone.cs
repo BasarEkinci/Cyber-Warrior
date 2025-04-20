@@ -41,7 +41,7 @@ namespace Combat.Guns
             _bulletPool = new ObjectPool();
             _bulletPool.Initialize(_drone.bulletPrefab, _drone.capacity, attackPoint);
             _collider.size = new Vector3(_drone.range, 1, _drone.range);
-            _player = GameObject.FindAnyObjectByType<PlayerManager>().transform;
+            _player = FindAnyObjectByType<PlayerManager>().transform;
             _canFire = true;
         }
 
