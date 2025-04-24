@@ -20,9 +20,16 @@ namespace Player
 
         private InputActions _inputActions;
         private Rigidbody _rb;
+        private Animator _animator;
+        private Camera _cam;
+        
         private Vector3 _moveVector;
         private Vector2 _inputVector;
+        
         private bool _canMove;
+        
+        private static readonly int MoveX = Animator.StringToHash("MoveX");
+        private static readonly int MoveY = Animator.StringToHash("MoveY");
 
         #endregion
         #region Unity Methods
@@ -31,6 +38,7 @@ namespace Player
         {
             _inputActions = new InputActions();
             _rb = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -38,17 +46,14 @@ namespace Player
             _inputActions.Player.Enable();
             playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
             _canMove = true;
-        }
-
-        private void OnPlayerDeath()
-        {
-            _canMove = false;
+            _cam = Camera.main;
         }
 
         private void Update()
         {
             GetMovementData();
             LookAtMoveDirection();
+            UpdateAnimations();
         }
 
         private void FixedUpdate()
@@ -63,11 +68,15 @@ namespace Player
 
         #endregion
         #region My Methods
+        private void OnPlayerDeath()
+        {
+            _canMove = false;
+        }
         private void LookAtMoveDirection()
         {
             if (_canMove)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
@@ -104,6 +113,29 @@ namespace Player
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
             }
             
+        }
+
+        private void UpdateAnimations()
+        {
+            if (_moveVector.sqrMagnitude < 0.01f)
+            {
+                _animator.SetFloat(MoveX, 0f);
+                _animator.SetFloat(MoveY, 0f);
+                return;
+            }
+            Vector3 moveDir = Vector3.forward * _moveVector.z + Vector3.right * _moveVector.x;
+            moveDir.Normalize();
+            Debug.Log(transform.right.x);
+            if (transform.right.x > 0)
+            {
+                _animator.SetFloat(MoveX, moveDir.x);
+                _animator.SetFloat(MoveY, moveDir.z);   
+            }
+            else
+            {
+                _animator.SetFloat(MoveX, -moveDir.x);
+                _animator.SetFloat(MoveY, moveDir.z);
+            } 
         }
 
         private void GetMovementData()

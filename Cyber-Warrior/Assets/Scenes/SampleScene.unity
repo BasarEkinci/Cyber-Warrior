@@ -7044,6 +7044,10 @@ PrefabInstance:
       propertyPath: groundLayerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 827028866475497509, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6222879182373596369, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
       propertyPath: m_Name
       value: Player_1
