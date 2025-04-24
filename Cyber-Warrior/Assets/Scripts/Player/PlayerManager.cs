@@ -1,4 +1,3 @@
-using System;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace Player
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private PlayerDeathEvent playerDeathEvent;
+        [SerializeField] private LayerMask groundLayerMask;
         #endregion
         #region Private Fields
 
@@ -65,27 +65,45 @@ namespace Player
         #region My Methods
         private void LookAtMoveDirection()
         {
-            if (_moveVector.magnitude > 0.01f && _canMove)
+            if (_canMove)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(_moveVector);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * playerStats.rotateSpeed);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
+                {
+                    Vector3 targetPoint = hit.point;
+                    Vector3 direction = (targetPoint - transform.position).normalized;
+
+                    direction.y = 0;
+
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion lookRotation = Quaternion.LookRotation(direction);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation,
+                            playerStats.rotateSpeed * Time.deltaTime);
+                    }
+                }
             }
         }
 
         private void Move()
         {
             if (!_canMove) return;
-            Vector3 targetVelocity = _moveVector * playerStats.moveSpeed;
-            Vector3 velocity = _rb.linearVelocity;
-            velocity.x = targetVelocity.x;
-            velocity.y = _rb.linearVelocity.y;
-            velocity.z = targetVelocity.z;
-            _rb.linearVelocity = velocity;
 
-            if (_moveVector.magnitude == 0)
+            Vector3 forward = transform.forward;
+            Vector3 right = Vector3.right;
+
+            Vector3 moveDirection = forward * _moveVector.z + right * _moveVector.x; 
+            Vector3 moveVector = moveDirection.normalized * playerStats.moveSpeed;
+
+            _rb.linearVelocity = new Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.z);
+
+            if (moveVector.magnitude < 0.1f)
             {
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
             }
+            
         }
 
         private void GetMovementData()
