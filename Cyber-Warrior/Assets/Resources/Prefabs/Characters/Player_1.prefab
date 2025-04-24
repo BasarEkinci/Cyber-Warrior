@@ -289,6 +289,7 @@ Transform:
   - {fileID: 6015955206199509263}
   - {fileID: 9094411026841817801}
   - {fileID: 2962350767868772049}
+  - {fileID: 8360021528135012093}
   m_Father: {fileID: 782222205602522375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896813200721031354
@@ -1864,6 +1865,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  playerGun: {fileID: 0}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &2000213883468793892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1885,7 +1890,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6222879182373596369}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad6f686f157ef9344bb19744ca8124cd, type: 3}
   m_Name: 
@@ -2639,7 +2644,7 @@ Transform:
   m_LocalRotation: {x: 0.05658412, y: -0.001507687, z: -0.0265929, w: 0.9980425}
   m_LocalPosition: {x: -0.019107759, y: 0.07463901, z: -0.01013}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8242350826871460435}
   m_Father: {fileID: 4010293555568071443}
@@ -2708,3 +2713,65 @@ Transform:
   - {fileID: 3223685556611822412}
   m_Father: {fileID: 858165568598447254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &7681207760994378528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4010293555568071443}
+    m_Modifications:
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.071
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1641
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0065
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.41969725
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.40125284
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7034098
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.40995744
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -114
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 147.193
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      propertyPath: m_Name
+      value: PlayerGun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+--- !u!4 &8360021528135012093 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+  m_PrefabInstance: {fileID: 7681207760994378528}
+  m_PrefabAsset: {fileID: 0}

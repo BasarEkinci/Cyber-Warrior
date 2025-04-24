@@ -51,6 +51,10 @@ namespace Player
 
         private void Update()
         {
+            if (!_canMove)
+            {
+                return;
+            }
             GetMovementData();
             LookAtMoveDirection();
             UpdateAnimations();
@@ -74,8 +78,6 @@ namespace Player
         }
         private void LookAtMoveDirection()
         {
-            if (_canMove)
-            {
                 Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
@@ -93,7 +95,6 @@ namespace Player
                             playerStats.rotateSpeed * Time.deltaTime);
                     }
                 }
-            }
         }
 
         private void Move()
