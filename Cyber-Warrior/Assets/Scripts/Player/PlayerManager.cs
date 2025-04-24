@@ -125,7 +125,6 @@ namespace Player
             }
             Vector3 moveDir = Vector3.forward * _moveVector.z + Vector3.right * _moveVector.x;
             moveDir.Normalize();
-            Debug.Log(transform.right.x);
             if (transform.right.x > 0)
             {
                 _animator.SetFloat(MoveX, moveDir.x);
