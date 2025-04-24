@@ -1,17 +1,21 @@
-using Player;
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+namespace Player
 {
-    private PlayerManager _playerManager;
-    private Animator _animator;
-    private void Awake()
+    public class PlayerAnimationController : MonoBehaviour
     {
-        _playerManager = GetComponent<PlayerManager>();
-        _animator = GetComponent<Animator>();
-    }
-    private void Update()
-    {
-        _animator.SetFloat("Input", _playerManager.MoveVectorMagnitude);
+        private PlayerManager _playerManager;
+        private Animator _animator;
+        private static readonly int Input1 = Animator.StringToHash("Input");
+
+        private void Awake()
+        {
+            _playerManager = GetComponent<PlayerManager>();
+            _animator = GetComponent<Animator>();
+        }
+        private void Update()
+        {
+            _animator.SetFloat(Input1, _playerManager.MoveVectorMagnitude);
+        }
     }
 }
