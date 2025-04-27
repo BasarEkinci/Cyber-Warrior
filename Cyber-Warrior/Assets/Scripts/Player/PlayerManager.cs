@@ -14,6 +14,8 @@ namespace Player
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private PlayerDeathEvent playerDeathEvent;
+        [SerializeField] private GameObject playerHead;
+        [SerializeField] private GameObject crosshair;
         [SerializeField] private LayerMask groundLayerMask;
         #endregion
         #region Private Fields
@@ -25,6 +27,7 @@ namespace Player
         
         private Vector3 _moveVector;
         private Vector2 _inputVector;
+        private Vector3 _mousePosition;
         
         private bool _canMove;
         
@@ -78,42 +81,34 @@ namespace Player
         }
         private void LookAtMoveDirection()
         {
-                Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask))
-                {
-                    Vector3 targetPoint = hit.point;
-                    Vector3 direction = (targetPoint - transform.position).normalized;
-
-                    direction.y = 0;
-
-                    if (direction != Vector3.zero)
-                    {
-                        Quaternion lookRotation = Quaternion.LookRotation(direction);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation,
-                            playerStats.rotateSpeed * Time.deltaTime);
-                    }
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition); 
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) 
+            { 
+                _mousePosition = hit.point;
+                crosshair.transform.position = new Vector3(_mousePosition.x,1.5f,_mousePosition.z);
+                playerHead.transform.LookAt(crosshair.transform.position);
+                Vector3 direction = (_mousePosition - transform.position).normalized;
+                direction.y = 0;
+                if (direction != Vector3.zero) 
+                { 
+                    Quaternion lookRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 
+                        playerStats.rotateSpeed * Time.deltaTime);
                 }
+            }
         }
 
         private void Move()
         {
             if (!_canMove) return;
-
-            Vector3 forward = transform.forward;
-            Vector3 right = Vector3.right;
-
-            Vector3 moveDirection = forward * _moveVector.z + right * _moveVector.x; 
-            Vector3 moveVector = moveDirection.normalized * playerStats.moveSpeed;
-
-            _rb.linearVelocity = new Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.z);
-
-            if (moveVector.magnitude < 0.1f)
+            if (_moveVector.sqrMagnitude < 0.01f)
             {
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+                return;
             }
-            
+
+            _rb.linearVelocity = new Vector3(_moveVector.x * playerStats.moveSpeed, _rb.linearVelocity.y, _moveVector.z * playerStats.moveSpeed);
         }
 
         private void UpdateAnimations()
@@ -124,18 +119,41 @@ namespace Player
                 _animator.SetFloat(MoveY, 0f);
                 return;
             }
-            Vector3 moveDir = Vector3.forward * _moveVector.z + Vector3.right * _moveVector.x;
-            moveDir.Normalize();
-            if (transform.right.x > 0)
+            Vector3 moveDirection = new Vector3(_moveVector.x, 0, _moveVector.z).normalized;
+            Vector3 aimDirection = (_mousePosition - transform.position).normalized;
+
+
+            aimDirection.y = 0;
+            aimDirection.Normalize();
+
+            float dot = Vector3.Dot(moveDirection, aimDirection);
+            Vector3 cross = Vector3.Cross(aimDirection, moveDirection);
+
+            if (dot > 0.5f)
             {
-                _animator.SetFloat(MoveX, moveDir.x);
-                _animator.SetFloat(MoveY, moveDir.z);   
+                _animator.SetFloat(MoveY,1f);
+                _animator.SetFloat(MoveX,0f);
+                Debug.Log("Moving Forward");
+            }
+            else if (dot < -0.5f)
+            {
+                _animator.SetFloat(MoveY,-1f);
+                _animator.SetFloat(MoveX,0f);
+                Debug.Log("Moving Backward");
             }
             else
             {
-                _animator.SetFloat(MoveX, -moveDir.x);
-                _animator.SetFloat(MoveY, moveDir.z);
-            } 
+                if (cross.y > 0)
+                {
+                    _animator.SetFloat(MoveY,0f);
+                    _animator.SetFloat(MoveX,1f);
+                }
+                else if (cross.y < 0)
+                {
+                    _animator.SetFloat(MoveY,0f);
+                    _animator.SetFloat(MoveX,-1f);
+                }
+            }
         }
 
         private void GetMovementData()
