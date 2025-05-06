@@ -1,5 +1,7 @@
+using DG.Tweening;
 using ScriptableObjects;
 using ScriptableObjects.Events;
+using UnityEditor;
 using UnityEngine;
 
 namespace Player
@@ -29,9 +31,10 @@ namespace Player
         private Vector3 _mousePosition;
         
         private bool _canMove;
-        
+        private bool _isFacingForward = true;
+        private float _lastDegree;
         private static readonly int MoveX = Animator.StringToHash("MoveX");
-        private static readonly int MoveY = Animator.StringToHash("MoveY");
+        private static readonly int MoveZ = Animator.StringToHash("MoveZ");
 
         #endregion
         #region Unity Methods
@@ -78,20 +81,33 @@ namespace Player
         }
         private void LookAtMoveDirection()
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition); 
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayerMask)) 
-            { 
-                _mousePosition = hit.point;
-                crosshair.transform.position = new Vector3(_mousePosition.x,1f,_mousePosition.z);
+            Vector3 moveInput = GetMovementData();
+            Vector3 direction = (crosshair.transform.position - transform.position).normalized;
+            float dot = Vector3.Dot(transform.forward, direction);
+            if (dot < 0.6f && _isFacingForward)
+            {
+                transform.Rotate(0f,90f,0f);
             }
-            
+            else if (dot >= 0.6f && !_isFacingForward)
+            {
+                transform.Rotate(0f, 90f, 0f);
+                _isFacingForward = true;
+            }
+            if (moveInput.magnitude < 0.01f)
+            {
+                _animator.SetFloat(MoveX, 0);
+                _animator.SetFloat(MoveZ, 0);
+                return;
+            }
+            Vector3 localInput = transform.InverseTransformDirection(moveInput);
+            _animator.SetFloat(MoveX, localInput.x);
+            _animator.SetFloat(MoveZ, localInput.z);
         }
 
         private void Move()
         {
             if (!_canMove) return;
-            if (_moveVector.sqrMagnitude < 0.01f)
+            if (GetMovementData().sqrMagnitude < 0.01f)
             {
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
                 return;
