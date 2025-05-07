@@ -1,18 +1,12 @@
-using DG.Tweening;
 using ScriptableObjects;
 using ScriptableObjects.Events;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
-        #region Public Fields
-
-        public float MoveVectorMagnitude => _moveVector.magnitude;
-
-        #endregion
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private PlayerDeathEvent playerDeathEvent;
@@ -25,14 +19,10 @@ namespace Player
         private Rigidbody _rb;
         private Animator _animator;
         private Camera _cam;
-        
-        private Vector3 _moveVector;
-        private Vector2 _inputVector;
         private Vector3 _mousePosition;
+        private Vector3 _inputVector;
         
         private bool _canMove;
-        private bool _isFacingForward = true;
-        private float _lastDegree;
         private static readonly int MoveX = Animator.StringToHash("MoveX");
         private static readonly int MoveZ = Animator.StringToHash("MoveZ");
 
@@ -52,6 +42,10 @@ namespace Player
             playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
             _canMove = true;
             _cam = Camera.main;
+            if (_cam == null)
+            {
+                Debug.LogError("Main Camera not found in scene!");
+            }
         }
 
         private void Update()
@@ -60,7 +54,10 @@ namespace Player
             {
                 return;
             }
-            LookAtMoveDirection();
+
+            _inputVector = GetMovementData();
+            SetAnimations();
+            LookAtAim();
         }
 
         private void FixedUpdate()
@@ -71,6 +68,7 @@ namespace Player
         private void OnDisable()
         {
             _inputActions.Player.Disable();
+            playerDeathEvent.OnPlayerDeath -= OnPlayerDeath;
         }
 
         #endregion
@@ -79,48 +77,68 @@ namespace Player
         {
             _canMove = false;
         }
-        private void LookAtMoveDirection()
-        {
-            Vector3 moveInput = GetMovementData();
-            Vector3 direction = (crosshair.transform.position - transform.position).normalized;
-            float dot = Vector3.Dot(transform.forward, direction);
-            if (dot < 0.6f && _isFacingForward)
-            {
-                transform.Rotate(0f,90f,0f);
-            }
-            else if (dot >= 0.6f && !_isFacingForward)
-            {
-                transform.Rotate(0f, 90f, 0f);
-                _isFacingForward = true;
-            }
-            if (moveInput.magnitude < 0.01f)
-            {
-                _animator.SetFloat(MoveX, 0);
-                _animator.SetFloat(MoveZ, 0);
-                return;
-            }
-            Vector3 localInput = transform.InverseTransformDirection(moveInput);
-            _animator.SetFloat(MoveX, localInput.x);
-            _animator.SetFloat(MoveZ, localInput.z);
-        }
-
+        
         private void Move()
         {
             if (!_canMove) return;
-            if (GetMovementData().sqrMagnitude < 0.01f)
+            if (_inputVector.sqrMagnitude < 0.01f)
             {
                 _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
                 return;
             }
-            Vector3 moveVector = GetMovementData();
-            _rb.linearVelocity = new Vector3(moveVector.x * playerStats.moveSpeed, _rb.linearVelocity.y, moveVector.z * playerStats.moveSpeed);
+
+            Vector3 forward = transform.forward;
+            Vector3 right = transform.right;
+            Vector3 moveDirection = forward * _inputVector.z + right * _inputVector.x; 
+            Vector3 moveVector = moveDirection.normalized * playerStats.moveSpeed;
+            _rb.linearVelocity = new Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.z);
+        }
+
+        private void LookAtAim()
+        {
+            if (crosshair == null)
+            {
+                Debug.LogWarning("Crosshair reference is missing!");
+                return;
+            }
+            Vector3 lookDirection = crosshair.transform.position - transform.position;
+            lookDirection.y = 0;
+            lookDirection.Normalize();
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerStats.rotateSpeed * Time.deltaTime);
+        }
+        
+        private void SetAnimations()
+        {
+            if (_inputVector.magnitude > 0.1f && _cam != null)
+            {
+                
+                Vector3 cameraForward = _cam.transform.forward;
+                cameraForward.y = 0;
+                cameraForward.Normalize();
+
+                Vector3 cameraRight = _cam.transform.right;
+                cameraRight.y = 0;
+                cameraRight.Normalize();
+
+                Vector3 moveDir = cameraForward * _inputVector.z + cameraRight * _inputVector.x;
+                moveDir.Normalize();
+
+                _animator.SetFloat(MoveX, moveDir.x);
+                _animator.SetFloat(MoveZ, moveDir.z);
+            }
+            else
+            {
+                _animator.SetFloat(MoveX, 0);
+                _animator.SetFloat(MoveZ, 0);
+            }
         }
 
         private Vector3 GetMovementData()
         {
-            _inputVector = _inputActions.Player.Movement.ReadValue<Vector2>();
-            _moveVector = new Vector3(_inputVector.x, 0, _inputVector.y);
-            return _moveVector;
+            Vector2 inputVector = _inputActions.Player.Movement.ReadValue<Vector2>();
+            Vector3 moveVector = new Vector3(inputVector.x, 0, inputVector.y);
+            return moveVector;
         }
         #endregion
     }

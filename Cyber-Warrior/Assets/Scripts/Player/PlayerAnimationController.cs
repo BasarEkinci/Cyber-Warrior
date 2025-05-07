@@ -13,9 +13,5 @@ namespace Player
             _playerManager = GetComponent<PlayerManager>();
             _animator = GetComponent<Animator>();
         }
-        private void Update()
-        {
-            _animator.SetFloat(Input1, _playerManager.MoveVectorMagnitude);
-        }
     }
 }
