@@ -38,7 +38,7 @@ namespace Player
         private void OnEnable()
         {
             _crosshair = GameObject.FindWithTag("Crosshair");
-            _inputReader = new PlayerInputReader();
+            _inputReader = new InputReader();
             _mover = new Mover(_rb, playerStats.moveSpeed);
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
@@ -69,7 +69,7 @@ namespace Player
 
         private void OnDisable()
         {
-            if (_inputReader is PlayerInputReader disposableInput)
+            if (_inputReader is InputReader disposableInput)
             {
                 disposableInput.Dispose();
             }

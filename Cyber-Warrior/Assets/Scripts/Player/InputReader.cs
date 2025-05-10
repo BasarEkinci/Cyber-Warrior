@@ -3,11 +3,11 @@ using Inputs;
 
 namespace Player
 {
-    public class PlayerInputReader : IPlayerInput
+    public class InputReader : IPlayerInput,IDisposable
     {
         private readonly InputActions _inputActions;
 
-        public PlayerInputReader()
+        public InputReader()
         {
             _inputActions = new InputActions();
             _inputActions.Player.Enable();
