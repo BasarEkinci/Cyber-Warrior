@@ -1,17 +1,15 @@
-using ScriptableObjects;
 using UnityEngine;
 
-namespace Player
+namespace Movement
 {
-    public class PlayerMovement
+    public class Mover
     {
         private readonly Rigidbody _rigidbody;
-        private readonly PlayerStats _stats;
-
-        public PlayerMovement(Rigidbody rb, PlayerStats stats)
+        private readonly float _moveSpeed;
+        public Mover(Rigidbody rb, float moveSpeed)
         {
             _rigidbody = rb;
-            _stats = stats;
+            _moveSpeed = moveSpeed;
         }
 
         public void Move(Vector3 inputVector, bool canMove)
@@ -26,7 +24,7 @@ namespace Player
 
             Vector3 moveVector = inputVector.normalized;
             moveVector.y = _rigidbody.linearVelocity.y;
-            _rigidbody.linearVelocity = moveVector * _stats.moveSpeed;
+            _rigidbody.linearVelocity = moveVector * _moveSpeed;
         }
     }
 }

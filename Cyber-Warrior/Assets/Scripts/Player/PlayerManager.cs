@@ -1,4 +1,5 @@
 using Inputs;
+using Movement;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
@@ -13,9 +14,9 @@ namespace Player
         private GameObject _crosshair;
         #endregion
         #region Private Fields
-        private PlayerMovement _playerMovement;
-        private PlayerRotator _playerRotator;
-        private PlayerAnimator _playerAnimator;
+        private Mover _mover;
+        private Rotator _rotator;
+        private MovementAnimator _movementAnimator;
         private IPlayerInput _inputReader;
         private Rigidbody _rb;
         private Animator _animator;
@@ -38,9 +39,9 @@ namespace Player
         {
             _crosshair = GameObject.FindWithTag("Crosshair");
             _inputReader = new PlayerInputReader();
-            _playerMovement = new PlayerMovement(_rb, playerStats);
-            _playerRotator = new PlayerRotator(transform, _crosshair);
-            _playerAnimator = new PlayerAnimator(_animator);
+            _mover = new Mover(_rb, playerStats.moveSpeed);
+            _rotator = new Rotator(transform, _crosshair);
+            _movementAnimator = new MovementAnimator(_animator);
             playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
             _cam = Camera.main;
             _canMove = true;
@@ -57,13 +58,13 @@ namespace Player
                 return;
             }
             _inputVector = _inputReader.GetMovementVector();
-            _playerAnimator.SetAnimations(_inputVector, transform);
-            _playerRotator.LookAtAim();
+            _movementAnimator.SetAnimations(_inputVector, transform);
+            _rotator.LookAtTarget();
         }
 
         private void FixedUpdate()
         {
-            _playerMovement.Move(_inputVector, _canMove);
+            _mover.Move(_inputVector, _canMove);
         }
 
         private void OnDisable()

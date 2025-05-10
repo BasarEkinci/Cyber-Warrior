@@ -1,27 +1,27 @@
 using UnityEngine;
 
-namespace Player
+namespace Movement
 {
-    public class PlayerAnimator
+    public class MovementAnimator
     {
         private readonly Animator _animator;
 
         private static readonly int MoveX = Animator.StringToHash("MoveX");
         private static readonly int MoveZ = Animator.StringToHash("MoveZ");
 
-        public PlayerAnimator(Animator animator)
+        public MovementAnimator(Animator animator)
         {
             _animator = animator;
         }
 
-        public void SetAnimations(Vector3 inputVector, Transform pos)
+        public void SetAnimations(Vector3 moveDirection, Transform pos)
         {
-            Vector3 localInput = pos.InverseTransformDirection(inputVector);
+            Vector3 localInput = pos.InverseTransformDirection(moveDirection);
 
             float forwardDot = localInput.z;
             float rightDot = localInput.x;
 
-            if (inputVector.magnitude > 0.1f && pos != null)
+            if (moveDirection.magnitude > 0.1f && pos != null)
             {
                 _animator.SetFloat(MoveX, rightDot);
                 _animator.SetFloat(MoveZ, forwardDot);
