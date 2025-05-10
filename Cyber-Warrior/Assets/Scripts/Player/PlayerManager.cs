@@ -1,9 +1,7 @@
 using DG.Tweening;
 using ScriptableObjects;
 using ScriptableObjects.Events;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace Player
 {
@@ -13,7 +11,6 @@ namespace Player
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private PlayerDeathEvent playerDeathEvent;
         [SerializeField] private GameObject crosshair;
-        [SerializeField] private LayerMask groundLayerMask;
         #endregion
         #region Private Fields
 
