@@ -1,5 +1,7 @@
+using DG.Tweening;
 using ScriptableObjects;
 using ScriptableObjects.Events;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -19,7 +21,6 @@ namespace Player
         private Rigidbody _rb;
         private Animator _animator;
         private Camera _cam;
-        private Vector3 _mousePosition;
         private Vector3 _inputVector;
         
         private bool _canMove;
@@ -87,11 +88,10 @@ namespace Player
                 return;
             }
 
-            Vector3 forward = transform.forward;
-            Vector3 right = transform.right;
-            Vector3 moveDirection = forward * _inputVector.z + right * _inputVector.x; 
-            Vector3 moveVector = moveDirection.normalized * playerStats.moveSpeed;
-            _rb.linearVelocity = new Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.z);
+            Vector3 moveVector = _inputVector;
+            moveVector.y = _rb.linearVelocity.y;
+            moveVector.Normalize();
+            _rb.linearVelocity = moveVector * playerStats.moveSpeed;
         }
 
         private void LookAtAim()
@@ -101,31 +101,35 @@ namespace Player
                 Debug.LogWarning("Crosshair reference is missing!");
                 return;
             }
-            Vector3 lookDirection = crosshair.transform.position - transform.position;
-            lookDirection.y = 0;
-            lookDirection.Normalize();
-            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, playerStats.rotateSpeed * Time.deltaTime);
+            Vector3 aimPosition = crosshair.transform.position;
+            Vector3 playerPosition = transform.position;
+            Vector3 targetVector = (aimPosition - playerPosition).normalized;
+            Vector3 forward = transform.forward;
+            forward.y = 0;
+            targetVector.y = 0;
+            forward.Normalize();
+            targetVector.Normalize();
+            float angle = Vector3.SignedAngle(forward, targetVector, Vector3.up);
+            if (angle > 45)
+            {
+                transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 90f, 0), 0.1f);
+            }
+            else if (angle < -45f)
+            {
+                transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, -90f, 0), 0.1f);
+            }
         }
         
         private void SetAnimations()
         {
+            Vector3 localInput = transform.InverseTransformDirection(_inputVector);
+            
+            float forwardDot = localInput.z;
+            float rightDot = localInput.x;
             if (_inputVector.magnitude > 0.1f && _cam != null)
             {
-                
-                Vector3 cameraForward = _cam.transform.forward;
-                cameraForward.y = 0;
-                cameraForward.Normalize();
-
-                Vector3 cameraRight = _cam.transform.right;
-                cameraRight.y = 0;
-                cameraRight.Normalize();
-
-                Vector3 moveDir = cameraForward * _inputVector.z + cameraRight * _inputVector.x;
-                moveDir.Normalize();
-
-                _animator.SetFloat(MoveX, moveDir.x);
-                _animator.SetFloat(MoveZ, moveDir.z);
+              _animator.SetFloat(MoveX, rightDot);
+              _animator.SetFloat(MoveZ, forwardDot);
             }
             else
             {
