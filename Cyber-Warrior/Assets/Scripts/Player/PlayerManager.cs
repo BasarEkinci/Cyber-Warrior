@@ -96,28 +96,37 @@ namespace Player
 
         private void LookAtAim()
         {
-            if (crosshair == null)
+            if (crosshair == null) return;
+
+            Vector3 directionToAim = crosshair.transform.position - transform.position;
+            directionToAim.y = 0f;
+
+            Vector3 currentForward = transform.forward;
+            currentForward.y = 0f;
+
+            float angle = Vector3.SignedAngle(currentForward.normalized, directionToAim.normalized, Vector3.up);
+
+            if (angle > 45f)
             {
-                Debug.LogWarning("Crosshair reference is missing!");
-                return;
-            }
-            Vector3 aimPosition = crosshair.transform.position;
-            Vector3 playerPosition = transform.position;
-            Vector3 targetVector = (aimPosition - playerPosition).normalized;
-            Vector3 forward = transform.forward;
-            forward.y = 0;
-            targetVector.y = 0;
-            forward.Normalize();
-            targetVector.Normalize();
-            float angle = Vector3.SignedAngle(forward, targetVector, Vector3.up);
-            if (angle > 45)
-            {
-                transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, 90f, 0), 0.1f);
+                RotatePlayer(90f);
             }
             else if (angle < -45f)
             {
-                transform.DORotate(transform.rotation.eulerAngles + new Vector3(0, -90f, 0), 0.1f);
+                RotatePlayer(-90f);
             }
+        }
+
+        private void RotatePlayer(float yAngleDelta)
+        {
+            Vector3 newRotation = transform.rotation.eulerAngles + new Vector3(0f, yAngleDelta, 0f);
+            transform.DORotate(newRotation, 0.1f).OnComplete(() =>
+            {
+                float currentYRotation = transform.rotation.eulerAngles.y;
+                float normalizedY = Mathf.DeltaAngle(0f, currentYRotation);
+                float snapY = Mathf.Round(normalizedY / 90f) * 90f;
+                Vector3 newEuler = new Vector3(0f, snapY, 0f);
+                transform.rotation = Quaternion.Euler(newEuler); 
+            });
         }
         
         private void SetAnimations()
