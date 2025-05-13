@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace ScriptableObjects.Events
 {
     [CreateAssetMenu(fileName = "HealthEvent", menuName = "Scriptable Objects/Events/HealthEvent")]
-    public class HealthEvent : ScriptableObject
+    public class HealthEventChannelSO : ScriptableObject
     {
         public UnityAction<float> OnHealthChanged;
 

@@ -7,14 +7,15 @@ using UnityEngine;
 using Combat.Components;
 using Enemies;
 using ScriptableObjects.Events;
+using UnityEngine.Serialization;
 
 namespace Combat.Guns
 {
     public class Drone : MonoBehaviour, IRangedGun, IUpgradeable
     {
         #region Serialized Fields
-        [SerializeField] private EnemyDeathEvent enemyDeathEvent;
-        [SerializeField] private PlayerDeathEvent playerDeathEvent;
+        [FormerlySerializedAs("enemyDeathEvent")] [SerializeField] private EnemyDeathEventChannelSO enemyDeathEventChannelSo;
+        [FormerlySerializedAs("playerDeathEventChannel")] [FormerlySerializedAs("playerDeathEvent")] [SerializeField] private PlayerDeathEventChannelSO playerDeathEventChannelSo;
         [Header("Components")]
         [SerializeField] private GameObject head;
         [SerializeField] private Transform attackPoint;
@@ -34,8 +35,8 @@ namespace Combat.Guns
         private void OnEnable()
         {
             _enemyHolder = new EnemyHolder();
-            enemyDeathEvent.OnEnemyDeath += OnEnemyDeath;
-            playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
+            enemyDeathEventChannelSo.OnEnemyDeath += OnEnemyDeath;
+            playerDeathEventChannelSo.OnPlayerDeath += OnPlayerDeath;
             _drone = Resources.Load<RangedGun>("UnityObjects/Guns/Ranged/Drone");
             _collider = GetComponent<BoxCollider>();
             _bulletPool = new ObjectPool();

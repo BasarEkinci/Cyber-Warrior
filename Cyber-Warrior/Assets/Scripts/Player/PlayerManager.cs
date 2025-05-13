@@ -10,7 +10,7 @@ namespace Player
     {
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
-        [SerializeField] private PlayerDeathEvent playerDeathEvent;
+        [SerializeField] private PlayerDeathEventChannelSO playerDeathEventChannelSo;
         private GameObject _crosshair;
         #endregion
         #region Private Fields
@@ -41,7 +41,7 @@ namespace Player
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
-            playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
+            playerDeathEventChannelSo.OnPlayerDeath += OnPlayerDeath;
             _canMove = true;
         }
 
@@ -67,7 +67,7 @@ namespace Player
             {
                 disposableInput.Dispose();
             }
-            playerDeathEvent.OnPlayerDeath -= OnPlayerDeath;
+            playerDeathEventChannelSo.OnPlayerDeath -= OnPlayerDeath;
         }
 
         #endregion
