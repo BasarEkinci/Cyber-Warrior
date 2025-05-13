@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Player
+namespace Movement
 {
     public class Rotator
     {

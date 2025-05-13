@@ -20,7 +20,6 @@ namespace Player
         private IPlayerInput _inputReader;
         private Rigidbody _rb;
         private Animator _animator;
-        private Camera _cam;
         
         private Vector3 _inputVector;
         
@@ -37,18 +36,13 @@ namespace Player
 
         private void OnEnable()
         {
-            _crosshair = GameObject.FindWithTag("Crosshair");
             _inputReader = new InputReader();
             _mover = new Mover(_rb, playerStats.moveSpeed);
+            _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
             playerDeathEvent.OnPlayerDeath += OnPlayerDeath;
-            _cam = Camera.main;
             _canMove = true;
-            if (_cam == null)
-            {
-                Debug.LogError("Main Camera not found in scene!");
-            }
         }
 
         private void Update()

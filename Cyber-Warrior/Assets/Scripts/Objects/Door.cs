@@ -31,7 +31,6 @@ namespace Objects
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Door Closing");
                 leftDoor.transform.DOMove(_leftDoorFirstPos, 0.5f);
                 rightDoor.transform.DOMove(_rightDoorFirstPos, 0.5f);
             }
