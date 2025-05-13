@@ -5,6 +5,7 @@ using Inputs;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
+using IDisposable = System.IDisposable;
 
 namespace Combat.Components
 {
@@ -12,31 +13,30 @@ namespace Combat.Components
     {
         [SerializeField] private HoldInputChannelSO holdInputChannelSo;
         [SerializeField] private PlayerGunBaseStats playerGunBaseStats;
+        [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeField] private Transform gunBarrelTransform;
         [SerializeField] private LineRenderer lineRenderer;
         
         private IPlayerInput _inputReader;
         private GameObject _crosshair;
         private CancellationTokenSource _cancellationTokenSource;
-        private bool _isFiring;
         private void OnEnable()
         {
             _inputReader = new InputReader(holdInputChannelSo);
             _crosshair = GameObject.FindWithTag("Crosshair");
             holdInputChannelSo.OnFireStart += OnFireStart;
             holdInputChannelSo.OnFireEnd += OnFireEnd;
+            if(muzzleFlash.isPlaying) muzzleFlash.Stop();
         }
 
         private void OnFireEnd()
         {
-            _isFiring = false;
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
         }
 
         private void OnFireStart() 
         {
-            _isFiring = true;
             _cancellationTokenSource = new CancellationTokenSource();
             FireGunAsync(_cancellationTokenSource.Token).Forget();
         }
@@ -60,9 +60,18 @@ namespace Combat.Components
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                Debug.Log("Fire");
+                if (!muzzleFlash.isPlaying)
+                {
+                    muzzleFlash.Play();
+                }
+                //ADD VFX
+                //ADD SFX
                 await UniTask.Delay(TimeSpan.FromSeconds(playerGunBaseStats.attackInterval),
                     cancellationToken: cancellationToken);
+                if (muzzleFlash.isPlaying)
+                {
+                    muzzleFlash.Stop();
+                }
             }
         }
         
