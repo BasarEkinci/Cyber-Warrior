@@ -1,12 +1,13 @@
 using ScriptableObjects.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField] private PlayerDeathEventChannelSO playerDeath;
-        [SerializeField] private HealthEventChannelSO healthEventChannelSo;
+        [SerializeField] private VoidEventSO playerDeathEvent;
+        [SerializeField] private FloatEventChannelSO floatEventChannelSo;
         private float _currentHealth;
         private float _maxHealth = 100;
         private Animator _animator;
@@ -20,10 +21,10 @@ namespace Player
         {
             _currentHealth -= damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
-            healthEventChannelSo.Invoke(_currentHealth);
+            floatEventChannelSo.Invoke(_currentHealth);
             if (_currentHealth <= 0f)
             {
-                playerDeath.Invoke();
+                playerDeathEvent.Invoke();
                 _animator.Play("Death");
             }
         }
@@ -32,7 +33,7 @@ namespace Player
         {
             _currentHealth += healAmount;
             _currentHealth = Mathf.Min(_currentHealth, _maxHealth);
-            healthEventChannelSo.Invoke(_currentHealth);
+            floatEventChannelSo.Invoke(_currentHealth);
         }
 
         public void IncreaseMaxHealth(float amount)

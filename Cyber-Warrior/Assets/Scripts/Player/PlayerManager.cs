@@ -3,6 +3,7 @@ using Movement;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -10,7 +11,7 @@ namespace Player
     {
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
-        [SerializeField] private PlayerDeathEventChannelSO playerDeathEventChannelSo;
+        [FormerlySerializedAs("playerDeathEventChannelSo")] [SerializeField] private VoidEventSO voidEventSo;
         private GameObject _crosshair;
         #endregion
         #region Private Fields
@@ -41,7 +42,7 @@ namespace Player
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
-            playerDeathEventChannelSo.OnPlayerDeath += OnPlayerDeath;
+            voidEventSo.OnEventRaised += OnPlayerDeath;
             _canMove = true;
         }
 
@@ -67,7 +68,7 @@ namespace Player
             {
                 disposableInput.Dispose();
             }
-            playerDeathEventChannelSo.OnPlayerDeath -= OnPlayerDeath;
+            voidEventSo.OnEventRaised -= OnPlayerDeath;
         }
 
         #endregion

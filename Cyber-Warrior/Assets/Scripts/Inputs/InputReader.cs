@@ -7,14 +7,14 @@ namespace Inputs
     public class InputReader : IPlayerInput,IDisposable
     {
         private readonly InputActions _inputActions;
-        private readonly GunFireEventSO _fireEventSo;
+        private readonly HoldInputChannelSO _fireEventSo;
         public InputReader()
         {
             _inputActions = new InputActions();
             _inputActions.Player.Enable();
         }
 
-        public InputReader(GunFireEventSO fireEventSo)
+        public InputReader(HoldInputChannelSO fireEventSo)
         {
             _inputActions = new InputActions();
             _inputActions.Player.Fire.started += OnFireStarted;

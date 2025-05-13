@@ -1,19 +1,20 @@
 ﻿using Inputs;
 using ScriptableObjects.Events;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Combat.Components
 {
     public class PlayerGun : MonoBehaviour
     {
-        [SerializeField] private GunFireEventSO gunFireEventSo;
+        [FormerlySerializedAs("gunFireEventSo")] [SerializeField] private HoldInputChannelSO holdInputChannelSo;
         private IPlayerInput _inputReader;
         private bool _isFiring;
         private void OnEnable()
         {
-            _inputReader = new InputReader(gunFireEventSo);
-            gunFireEventSo.OnFireStart += OnFireStart;
-            gunFireEventSo.OnFireEnd += OnFireEnd;
+            _inputReader = new InputReader(holdInputChannelSo);
+            holdInputChannelSo.OnFireStart += OnFireStart;
+            holdInputChannelSo.OnFireEnd += OnFireEnd;
         }
 
         private void OnFireEnd()
@@ -35,8 +36,8 @@ namespace Combat.Components
 
         private void OnDisable()
         {
-            gunFireEventSo.OnFireStart -= OnFireStart;
-            gunFireEventSo.OnFireEnd -= OnFireEnd;
+            holdInputChannelSo.OnFireStart -= OnFireStart;
+            holdInputChannelSo.OnFireEnd -= OnFireEnd;
             if (_inputReader is InputReader disposableInput)
             {
                 disposableInput.Dispose();

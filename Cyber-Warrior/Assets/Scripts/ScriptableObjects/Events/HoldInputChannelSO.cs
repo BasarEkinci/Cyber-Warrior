@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 namespace ScriptableObjects.Events
 {
-    [CreateAssetMenu(fileName = "Gun Fire Event", menuName = "Scriptable Objects/Events/Gun Fire Event", order = 0)]
-    public class GunFireEventSO : ScriptableObject
+    [CreateAssetMenu(fileName = "Hold Input", menuName = "Scriptable Objects/Events/HoldInput", order = 0)]
+    public class HoldInputChannelSO : ScriptableObject
     {
         public UnityAction OnFireStart = delegate { };
         public UnityAction OnFireEnd = delegate { };

@@ -14,12 +14,10 @@ namespace Enemies
     public class Enemy : MonoBehaviour, IDamagable
     {
         public float CurrentHealth => _currentHealth;
-        [FormerlySerializedAs("playerDeathEventChannel")]
-        [FormerlySerializedAs("playerDeathEvent")]
         [Header("Scriptables")]
-        [SerializeField] private PlayerDeathEventChannelSO playerDeathEventChannelSo;
+        [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private EnemySO enemy;
-        [FormerlySerializedAs("deathEvent")] [SerializeField] private EnemyDeathEventChannelSO deathEventChannelSo;
+        [SerializeField] private GameobjectEventChannelSO deathEventChannelSo;
         private NavMeshAgent _agent;
         private Transform _playerTransform;
         private PlayerHealth _playerHealth;
@@ -116,7 +114,7 @@ namespace Enemies
             _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider>();
-            playerDeathEventChannelSo.OnPlayerDeath += OnPlayerDeath;
+            voidEventSo.OnEventRaised += OnPlayerDeath;
             _agent.speed = enemy.moveSpeed;
             _currentHealth = enemy.maxHealth;
             _damageResistance = enemy.damageResistance;
