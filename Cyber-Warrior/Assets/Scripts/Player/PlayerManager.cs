@@ -3,7 +3,6 @@ using Movement;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -11,24 +10,24 @@ namespace Player
     {
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
-        [FormerlySerializedAs("playerDeathEventChannelSo")] [SerializeField] private VoidEventSO voidEventSo;
-        private GameObject _crosshair;
+        [SerializeField] private VoidEventSO voidEventSo;
         #endregion
+
         #region Private Fields
         private Mover _mover;
         private Rotator _rotator;
         private MovementAnimator _movementAnimator;
         private IPlayerInput _inputReader;
+        
+        private GameObject _crosshair;
         private Rigidbody _rb;
         private Animator _animator;
         
         private Vector3 _inputVector;
-        
         private bool _canMove;
-
         #endregion
+        
         #region Unity Methods
-
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -73,10 +72,7 @@ namespace Player
 
         #endregion
         #region My Methods
-        private void OnPlayerDeath()
-        {
-            _canMove = false;
-        }
+        private void OnPlayerDeath() =>_canMove = false;
         #endregion
     }
 }
