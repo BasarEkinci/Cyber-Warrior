@@ -1,5 +1,4 @@
 using Combat.Interfaces;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Combat.Components
@@ -22,9 +21,9 @@ namespace Combat.Components
             if (other.TryGetComponent<IDamagable>(out IDamagable damagable))
             {
                 damagable.GetDamage(_damage);
-                if (other.TryGetComponent<IKnockbackable>(out IKnockbackable _knockBackable))
+                if (other.TryGetComponent<IKnockbackable>(out IKnockbackable knockBackable))
                 {
-                    _knockBackable.Knockback(-other.transform.forward, _knockBackForce);
+                    knockBackable.Knockback(-other.transform.forward, _knockBackForce);
                 }
                 _maxHitCount--;
                 if (_maxHitCount == 0)

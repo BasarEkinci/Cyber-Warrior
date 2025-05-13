@@ -1,6 +1,5 @@
 using ScriptableObjects.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -10,7 +9,8 @@ namespace UI
 
         [SerializeField] private Image healthBar;
         [SerializeField] private Image healthBarBackground;
-        [FormerlySerializedAs("healthEventChannelSo")] [FormerlySerializedAs("healthEvent")] [SerializeField] private FloatEventChannelSO floatEventChannelSo;
+        [SerializeField] private FloatEventChannelSO healthEvent;
+        
         private Camera _mainCamera;
 
         private void Awake()
@@ -23,7 +23,7 @@ namespace UI
         }
         private void OnEnable()
         {
-            floatEventChannelSo.OnEventRaise += UpdateHealthUI;
+            healthEvent.OnEventRaise += UpdateHealthUI;
         }
         private void LateUpdate()
         {
@@ -31,7 +31,7 @@ namespace UI
         }
         private void OnDisable()
         {
-            floatEventChannelSo.OnEventRaise -= UpdateHealthUI;
+            healthEvent.OnEventRaise -= UpdateHealthUI;
         }
         private void UpdateHealthUI(float newHealth)
         {

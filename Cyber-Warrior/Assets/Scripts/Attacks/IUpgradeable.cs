@@ -1,4 +1,7 @@
-public interface IUpgradeable
+namespace Attacks
 {
-    void Upgrade(float amount);
+    public interface IUpgradeable
+    {
+        void Upgrade(float amount);
+    }
 }

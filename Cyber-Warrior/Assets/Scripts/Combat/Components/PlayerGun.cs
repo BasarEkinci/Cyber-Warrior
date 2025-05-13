@@ -5,21 +5,23 @@ using Inputs;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
-using IDisposable = System.IDisposable;
 
 namespace Combat.Components
 {
     public class PlayerGun : MonoBehaviour
     {
+        [SerializeField] private Transform gunBarrelTransform;
+        
         [SerializeField] private HoldInputChannelSO holdInputChannelSo;
         [SerializeField] private PlayerGunBaseStats playerGunBaseStats;
-        [SerializeField] private ParticleSystem muzzleFlash;
-        [SerializeField] private Transform gunBarrelTransform;
+        
         [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private ParticleSystem muzzleFlash;
         
         private IPlayerInput _inputReader;
         private GameObject _crosshair;
         private CancellationTokenSource _cancellationTokenSource;
+        
         private void OnEnable()
         {
             _inputReader = new InputReader(holdInputChannelSo);
