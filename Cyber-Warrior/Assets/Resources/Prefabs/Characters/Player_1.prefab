@@ -1209,8 +1209,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 0.627451}
+      key1: {r: 1, g: 0, b: 0, a: 0.627451}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 8732431291722272718}
   healthBarBackground: {fileID: 6916114069319765045}
-  floatEventChannelSo: {fileID: 11400000, guid: 27576ba8f676068499c24c25d3725e51, type: 2}
+  healthEvent: {fileID: 11400000, guid: 27576ba8f676068499c24c25d3725e51, type: 2}
 --- !u!1 &5168243714318435277
 GameObject:
   m_ObjectHideFlags: 0
@@ -3425,11 +3425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455763cc08f143919c5c63864beebe6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunBarrelTransform: {fileID: 1094096495925985718}
   holdInputChannelSo: {fileID: 11400000, guid: a20255683653cb54385ddfb4b7a64281, type: 2}
   playerGunBaseStats: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
-  muzzleFlash: {fileID: 785484977058188780}
-  gunBarrelTransform: {fileID: 1094096495925985718}
   lineRenderer: {fileID: 3881941445091634797}
+  muzzleFlash: {fileID: 785484977058188780}
+  bulletPrefab: {fileID: 2371418669018796513, guid: 4d095b9a53208194aa263487eff2c0c1, type: 3}
 --- !u!4 &7356219005830625299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
