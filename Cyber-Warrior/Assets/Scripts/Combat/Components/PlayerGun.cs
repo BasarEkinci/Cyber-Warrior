@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Inputs;
 using ScriptableObjects;
 using ScriptableObjects.Events;
+using TMPro;
 using UnityEngine;
 
 namespace Combat.Components
@@ -27,7 +28,6 @@ namespace Combat.Components
         private IPlayerInput _inputReader;
         private GameObject _crosshair;
         private CancellationTokenSource _cancellationTokenSource;
-        private RaycastHit _hit;
         
         private void OnEnable()
         {
@@ -69,28 +69,21 @@ namespace Combat.Components
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                if (muzzleFlash.isPlaying)
-                {
-                    muzzleFlash.Stop();
-                }
-                await UniTask.Delay(TimeSpan.FromSeconds(0.2f),
-                    cancellationToken: cancellationToken);
-                
-                if (!muzzleFlash.isPlaying)
-                {
-                    muzzleFlash.Play();
-                }
-                if (Physics.Raycast(gunBarrelTransform.position, gunBarrelTransform.forward,out _hit,range))
-                {
-                    Debug.Log(_hit.collider.name);
-                }
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
+                muzzleFlash.Play();
+                Vector3 direction = (_crosshair.transform.position - gunBarrelTransform.position) * playerGunBaseStats.range;
+                if (Physics.Raycast(gunBarrelTransform.position, direction,out RaycastHit hit,playerGunBaseStats.range))
+                    Debug.Log(hit.collider.name);
             }
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawRay(gunBarrelTransform.position, gunBarrelTransform.forward * range);
+            if (_crosshair != null)
+            {
+                Gizmos.DrawRay(gunBarrelTransform.position, _crosshair.transform.position - gunBarrelTransform.position);
+            }
         }
 
         private void DrawLineToCrosshair()

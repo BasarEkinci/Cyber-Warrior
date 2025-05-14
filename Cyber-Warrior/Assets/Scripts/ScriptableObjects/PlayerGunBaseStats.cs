@@ -7,6 +7,6 @@ namespace ScriptableObjects
     {
         public float damage;
         public float attackInterval;
-        
+        public float range;
     }
 }
