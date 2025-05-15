@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.54901963}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.039215688, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.039215688, b: 0, a: 0.54901963}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2281,6 +2281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  rigBuilder: {fileID: 2225839465524455756}
 --- !u!114 &2000213883468793892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3452,6 +3453,8 @@ MonoBehaviour:
   lineRenderer: {fileID: 3881941445091634797}
   muzzleFlash: {fileID: 785484977058188780}
   bulletPrefab: {fileID: 2371418669018796513, guid: 4d095b9a53208194aa263487eff2c0c1, type: 3}
+  bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
+  playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
 --- !u!4 &7356219005830625299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}

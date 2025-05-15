@@ -2259,9 +2259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f06e29615e3354486a9ea79b2df939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
+  voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
-  deathEvent: {fileID: 11400000, guid: 3c32a64903e2f30419724b30407bef1b, type: 2}
 --- !u!1 &8287757190557319950
 GameObject:
   m_ObjectHideFlags: 0
