@@ -4,6 +4,7 @@ using Movement;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace Player
 {
@@ -12,6 +13,7 @@ namespace Player
         #region Serilized Fields
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private VoidEventSO voidEventSo;
+        [SerializeField] private RigBuilder rigBuilder;
         #endregion
 
         #region Private Fields
@@ -73,7 +75,13 @@ namespace Player
 
         #endregion
         #region My Methods
-        private void OnPlayerDeath() =>_canMove = false;
+        private void OnPlayerDeath()
+        {
+            Debug.Log("Player is dead");
+            rigBuilder.enabled = false;
+            _rb.linearVelocity = Vector3.zero;
+            _canMove = false;
+        }
         #endregion
     }
 }

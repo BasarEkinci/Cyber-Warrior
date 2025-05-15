@@ -26,10 +26,13 @@ namespace Combat.Components
         [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject bloodEffect;
+        [SerializeField] private VoidEventSO playerDeathEvent;
         
         private IPlayerInput _inputReader;
         private GameObject _crosshair;
         private CancellationTokenSource _cancellationTokenSource;
+        
+        private bool _isPlayerDead;
         
         private void OnEnable()
         {
@@ -38,6 +41,13 @@ namespace Combat.Components
             holdInputChannelSo.OnFireStart += OnFireStart;
             holdInputChannelSo.OnFireEnd += OnFireEnd;
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
+            playerDeathEvent.OnEventRaised += OnPlayerDeath;
+            _isPlayerDead = false;
+        }
+
+        private void OnPlayerDeath()
+        {
+            _isPlayerDead = true;
         }
 
         private void OnFireEnd()
@@ -61,6 +71,7 @@ namespace Combat.Components
         {
             holdInputChannelSo.OnFireStart -= OnFireStart;
             holdInputChannelSo.OnFireEnd -= OnFireEnd;
+            playerDeathEvent.OnEventRaised -= OnPlayerDeath;
             if (_inputReader is InputReader disposableInput)
             {
                 disposableInput.Dispose();
@@ -97,6 +108,11 @@ namespace Combat.Components
 
         private void DrawLineToCrosshair()
         {
+            if (_isPlayerDead)
+            {
+                lineRenderer.enabled = false;
+                return;
+            }
             lineRenderer.SetPosition(0, gunBarrelTransform.position);
             lineRenderer.SetPosition(1, _crosshair.transform.position);
         }

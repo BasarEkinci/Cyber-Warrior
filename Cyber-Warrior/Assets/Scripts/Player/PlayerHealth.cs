@@ -26,7 +26,7 @@ namespace Player
             floatEventChannelSo.Invoke(_currentHealth);
             if (_currentHealth <= 0f)
             {
-                playerDeathEvent.Invoke();
+                playerDeathEvent?.Invoke();
                 _animator.Play("Death");
             }
         }

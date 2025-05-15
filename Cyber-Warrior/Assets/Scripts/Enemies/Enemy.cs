@@ -52,7 +52,6 @@ namespace Enemies
                 StartDamagingAsync(_cancellationToken, playerHealth);
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -104,6 +103,8 @@ namespace Enemies
         {
             _isPLayerDead = true;
             _animator.Play("idle");
+            _cancellationToken.Cancel();
+            _cancellationToken.Dispose();
         }
         private void Initialize()
         {
