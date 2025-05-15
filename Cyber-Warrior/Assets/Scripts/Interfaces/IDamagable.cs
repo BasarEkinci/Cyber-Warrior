@@ -1,4 +1,4 @@
-namespace Combat.Interfaces
+namespace Interfaces
 {
     public interface IDamagable
     {

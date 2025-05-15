@@ -1,4 +1,5 @@
-﻿using ScriptableObjects.Events;
+﻿using Interfaces;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

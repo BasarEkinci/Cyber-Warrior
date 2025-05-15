@@ -1,4 +1,4 @@
-﻿namespace Inputs
+﻿namespace Interfaces
 {
     public interface IDisposable
     {

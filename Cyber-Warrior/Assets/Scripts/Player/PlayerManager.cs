@@ -1,4 +1,5 @@
 using Inputs;
+using Interfaces;
 using Movement;
 using ScriptableObjects;
 using ScriptableObjects.Events;

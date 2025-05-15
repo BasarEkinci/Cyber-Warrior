@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
-using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
 using Enemies;
 using Inputs;
+using Interfaces;
 using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Inputs
+namespace Interfaces
 {
     public interface IPlayerInput
     {

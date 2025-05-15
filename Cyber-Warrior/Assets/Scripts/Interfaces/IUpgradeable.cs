@@ -1,4 +1,4 @@
-namespace Attacks
+namespace Interfaces
 {
     public interface IUpgradeable
     {

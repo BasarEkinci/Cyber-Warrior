@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
-using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
+using Interfaces;
 using JetBrains.Annotations;
 using ScriptableObjects;
 using Player;

@@ -1,4 +1,4 @@
-using Combat.Interfaces;
+using Interfaces;
 using UnityEngine;
 
 namespace Combat.Components
