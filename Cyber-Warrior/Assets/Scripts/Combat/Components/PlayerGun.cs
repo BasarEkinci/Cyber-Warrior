@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
+using Combat.Interfaces;
 using Cysharp.Threading.Tasks;
+using Enemies;
 using Inputs;
 using ScriptableObjects;
 using ScriptableObjects.Events;
-using TMPro;
 using UnityEngine;
 
 namespace Combat.Components
@@ -24,6 +25,7 @@ namespace Combat.Components
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject bloodEffect;
         
         private IPlayerInput _inputReader;
         private GameObject _crosshair;
@@ -72,8 +74,15 @@ namespace Combat.Components
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
                 muzzleFlash.Play();
                 Vector3 direction = (_crosshair.transform.position - gunBarrelTransform.position) * playerGunBaseStats.range;
-                if (Physics.Raycast(gunBarrelTransform.position, direction,out RaycastHit hit,playerGunBaseStats.range))
-                    Debug.Log(hit.collider.name);
+                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, playerGunBaseStats.range))
+                {
+                    if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
+                    {
+                        damagable.GetDamage(playerGunBaseStats.damage);
+                        Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                        Debug.Log(hit.collider.GetComponent<Enemy>().CurrentHealth);
+                    }   
+                }
             }
         }
 
