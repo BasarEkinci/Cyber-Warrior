@@ -79,7 +79,6 @@ namespace Enemies
 
         public void GetDamage(float amount)
         {
-            //_material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Linear);
             float damage;
             if (amount > enemy.damageResistance)
                 damage = amount - enemy.damageResistance;

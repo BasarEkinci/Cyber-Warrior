@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Enemies;
 using Inputs;
 using Interfaces;
 using ScriptableObjects;
@@ -12,11 +11,6 @@ namespace Combat.Components
 {
     public class PlayerGun : MonoBehaviour
     {   
-        /// <summary>
-        /// Test value
-        /// </summary>
-        [SerializeField] private float range;
-        
         [SerializeField] private Transform gunBarrelTransform;
         
         [SerializeField] private HoldInputChannelSO holdInputChannelSo;
@@ -91,7 +85,6 @@ namespace Combat.Components
                     {
                         damagable.GetDamage(playerGunBaseStats.damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                        Debug.Log(hit.collider.GetComponent<Enemy>().CurrentHealth);
                     }   
                 }
             }
