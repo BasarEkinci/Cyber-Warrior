@@ -1,5 +1,6 @@
 using CompanionBot.Mode;
 using Inputs;
+using Interfaces;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,7 @@ namespace CompanionBot.Controller
 {
     public class CmpMovementController : MonoBehaviour
     {
+        [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private float speed;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Vector3 followOffset;
@@ -19,6 +21,7 @@ namespace CompanionBot.Controller
         
         private GameObject _crosshair; 
         private GameObject _target;
+        private Vector3 _firstFollowOffset;
 
         private Mover _mover;
         private Rotator _rotator;
@@ -36,6 +39,7 @@ namespace CompanionBot.Controller
 
         private void OnEnable()
         {
+            _firstFollowOffset = followOffset;
             _inputReader.InputActions.Player.CompanionMode.performed += OnCompanionModeChanged;
         }
         private void OnDisable()
@@ -47,13 +51,24 @@ namespace CompanionBot.Controller
         {
             _cmpBotModeManager.NextMode();
             _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
+            if (_cmpBotModeManager.CurrentBotMode is IAttackerCmp attackerCmp)
+            {
+               attackerCmp.SetAttackerProperties(transform,enemyLayer);
+               followOffset.x = 0;
+               followOffset.y = 2.5f;
+               followOffset.z = 0;
+            }
+            else
+            {
+                followOffset = _firstFollowOffset;
+            }
         }
 
         private void Update()
         {
             if (_target == null) return;
-            _cmpBotModeManager.CurrentBotMode.SetAimMode(_rotator,_crosshair, rotationSpeed);
-            _cmpBotModeManager.CurrentBotMode.ModeBehaviour();
+            _cmpBotModeManager.CurrentBotMode.Execute(_rotator,_crosshair, rotationSpeed);
+            
         }
         private void FixedUpdate()
         {

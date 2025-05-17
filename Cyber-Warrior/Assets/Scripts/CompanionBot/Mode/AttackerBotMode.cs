@@ -1,27 +1,77 @@
-﻿using CompanionBot.Mode;
+﻿using Interfaces;
 using Movement;
 using UnityEngine;
 
-namespace Companion.Mode
+namespace CompanionBot.Mode
 {
-    public class AttackerBotMode : ICmpBotModeStrategy
+    public class AttackerBotMode : ICmpBotModeStrategy,IAttackerCmp
     {
-        public void SetAimMode(Rotator rotator,GameObject target, float rotationSpeed)
-        {
-            rotator.RotateToTarget(target, rotationSpeed);
-            // Add attack logic here
-            // For example, check if the target is within a certain range and perform an attack
-            // This could involve dealing damage, playing an animation, etc.
-        }
+        private GameObject _target;
+        private Transform _companionTransform;
+        private Transform _currentTarget;
+        private LayerMask _enemyLayer;
 
+        private float _searchCooldown = 0.5f;
+        private float _lastSearchTime = -Mathf.Infinity;
+        private float _searchRadius = 20f;
+        
+        public void Execute(Rotator rotator,GameObject referance, float rotationSpeed)
+        {
+            Transform target = GetEnemyTarget();
+            if (target != null)
+            {
+                rotator.RotateToTarget(target.gameObject, rotationSpeed);
+            }
+            else
+            {
+                rotator.RotateToTarget(referance, rotationSpeed);
+            }
+        }
+        
         public void SetProperties(Material eyeMaterial)
         {
-            eyeMaterial.color = Color.red;             
+            eyeMaterial.color = Color.red;
+        }
+        public void SetAttackerProperties(Transform companionTransform, LayerMask layerMask)
+        {
+            _companionTransform = companionTransform;
+            _enemyLayer = layerMask;
         }
 
-        public void ModeBehaviour()
+        public Transform FindClosestEnemy()
         {
-            Debug.Log("Attacker mode behavior executed.");
+            Collider[] hits = Physics.OverlapSphere(_companionTransform.position, _searchRadius, _enemyLayer);
+
+            Transform closestEnemy = null;
+            float shortestDistance = Mathf.Infinity;
+
+            foreach (var hit in hits)
+            {
+                float distance = Vector3.Distance(_companionTransform.position, hit.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    closestEnemy = hit.transform;
+                }
+            }
+
+            return closestEnemy;
+        }
+
+        public Transform GetEnemyTarget()
+        {
+            if (Time.time >= _lastSearchTime + _searchCooldown)
+            {
+                _currentTarget = FindClosestEnemy();
+                _lastSearchTime = Time.time;
+            }
+
+            return _currentTarget;
+        }
+
+        private void Attack()
+        {
+            
         }
     }
 }

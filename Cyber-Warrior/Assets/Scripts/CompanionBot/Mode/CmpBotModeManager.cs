@@ -1,6 +1,4 @@
-﻿using Companion.Mode;
-
-namespace CompanionBot.Mode
+﻿namespace CompanionBot.Mode
 {
     public class CmpBotModeManager
     {

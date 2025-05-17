@@ -1,5 +1,4 @@
-﻿using Companion.Mode;
-using Movement;
+﻿using Movement;
 using Player;
 using UnityEngine;
 
@@ -16,28 +15,24 @@ namespace CompanionBot.Mode
             _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         }
 
-        public void SetAimMode(Rotator rotator,GameObject target, float rotationSpeed)
+        public void Execute(Rotator rotator,GameObject target, float rotationSpeed)
         {
             rotator.SetLookDirection();
-            //Heal Logic Here
+            HealBehaviour();   
         }
 
         public void SetProperties(Material eyeMaterial)
         {
             eyeMaterial.color = Color.green;             
-            // Set properties specific to the healer mode
-            // For example, change the color of the eye material to indicate healing mode
-            // This could also involve changing other visual elements or effects
         }
 
-        public void ModeBehaviour()
+        private void HealBehaviour()
         {
             _cooldownTimer += Time.deltaTime;
             if (_cooldownTimer >= _healCooldown)
             {
                 if (_playerHealth != null)
                 {
-                    Debug.Log("Healing player");
                     _playerHealth.Heal(_healAmount);
                 }
                 _cooldownTimer = 0f;

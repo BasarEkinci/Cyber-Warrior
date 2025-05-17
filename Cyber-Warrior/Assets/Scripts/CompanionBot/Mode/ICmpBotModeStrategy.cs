@@ -5,8 +5,7 @@ namespace CompanionBot.Mode
 {
     public interface ICmpBotModeStrategy
     {
-        void SetAimMode(Rotator rotator,GameObject target, float rotationSpeed);
+        void Execute(Rotator rotator,GameObject target, float rotationSpeed);
         void SetProperties(Material eyeMaterial);
-        void ModeBehaviour();
     }
 }
