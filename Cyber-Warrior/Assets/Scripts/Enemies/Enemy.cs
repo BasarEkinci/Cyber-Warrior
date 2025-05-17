@@ -13,6 +13,7 @@ namespace Enemies
 {
     public class Enemy : MonoBehaviour, IDamagable
     {
+        public bool IsDead => _currentHealth <= 0f;
         public float CurrentHealth => _currentHealth;
         
         [SerializeField] private GameObject bloodEffect;

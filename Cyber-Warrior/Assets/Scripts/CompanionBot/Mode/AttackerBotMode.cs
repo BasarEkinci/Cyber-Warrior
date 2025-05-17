@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Enemies;
+using Interfaces;
 using Movement;
 using UnityEngine;
 
@@ -51,6 +52,10 @@ namespace CompanionBot.Mode
                 if (distance < shortestDistance)
                 {
                     shortestDistance = distance;
+                    if (hit.transform.GetComponent<Enemy>().IsDead)
+                    {
+                        return null;
+                    }
                     closestEnemy = hit.transform;
                 }
             }
