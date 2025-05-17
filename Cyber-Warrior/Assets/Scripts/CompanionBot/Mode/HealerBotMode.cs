@@ -15,7 +15,7 @@ namespace CompanionBot.Mode
             _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         }
 
-        public void Execute(Rotator rotator,GameObject target, float rotationSpeed)
+        public void Execute(Rotator rotator,GameObject reference, float rotationSpeed)
         {
             rotator.SetLookDirection();
             HealBehaviour();   

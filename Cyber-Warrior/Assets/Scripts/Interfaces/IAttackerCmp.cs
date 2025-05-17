@@ -7,5 +7,6 @@ namespace Interfaces
         void SetAttackerProperties(Transform companionTransform,LayerMask layerMask);
         Transform FindClosestEnemy();
         Transform GetEnemyTarget();
+        void Attack(Transform bulletSpawnPoint, Transform target);
     }
 }

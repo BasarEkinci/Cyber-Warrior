@@ -12,11 +12,11 @@ namespace CompanionBot.Mode
         private Transform _currentTarget;
         private LayerMask _enemyLayer;
 
-        private float _searchCooldown = 0.5f;
+        private readonly float _searchCooldown = 0.5f;
+        private readonly float _searchRadius = 20f;
         private float _lastSearchTime = -Mathf.Infinity;
-        private float _searchRadius = 20f;
         
-        public void Execute(Rotator rotator,GameObject referance, float rotationSpeed)
+        public void Execute(Rotator rotator,GameObject reference, float rotationSpeed)
         {
             Transform target = GetEnemyTarget();
             if (target != null)
@@ -25,7 +25,7 @@ namespace CompanionBot.Mode
             }
             else
             {
-                rotator.RotateToTarget(referance, rotationSpeed);
+                rotator.RotateToTarget(reference, rotationSpeed);
             }
         }
         
@@ -74,9 +74,9 @@ namespace CompanionBot.Mode
             return _currentTarget;
         }
 
-        private void Attack()
+        public void Attack(Transform bulletSpawnPoint, Transform target)
         {
-            
+            //Attack Logic Here
         }
     }
 }
