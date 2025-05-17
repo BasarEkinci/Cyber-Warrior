@@ -56,7 +56,7 @@ namespace Player
             }
             _inputVector = _inputReader.GetMovementVector();
             _movementAnimator.SetAnimations(_inputVector, transform);
-            _rotator.LookAtTarget();
+            _rotator.SetLookDirection();
         }
 
         private void FixedUpdate()

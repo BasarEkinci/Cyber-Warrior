@@ -13,7 +13,19 @@ namespace Movement
             _currentTransform = currentTransform;
             _target = target;
         }
-        public void LookAtTarget()
+
+        public void RotateToTarget(GameObject aimTarget,float rotationSpeed)
+        {
+            Vector3 directionToAim = aimTarget.transform.position - _currentTransform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToAim);
+            Quaternion newRotation = Quaternion.RotateTowards(_currentTransform.rotation, targetRotation, rotationSpeed);
+            _currentTransform.rotation = newRotation;
+        }
+        
+        /// <summary>
+        /// Sets the object's look direction towards the target.
+        /// </summary>
+        public void SetLookDirection()
         {
             if (_target == null) return;
 
@@ -34,7 +46,10 @@ namespace Movement
                 RotateObject(-90f);
             }
         }
-
+        /// <summary>
+        /// To fix the rotation of the object, sets the rotation to the nearest 90 degrees.
+        /// </summary>
+        /// <param name="yAngleDelta"></param>
         private void RotateObject(float yAngleDelta)
         {
             Vector3 newRotation = _currentTransform.rotation.eulerAngles + new Vector3(0f, yAngleDelta, 0f);
