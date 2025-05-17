@@ -13,7 +13,6 @@ namespace Movement
             _currentTransform = currentTransform;
             _target = target;
         }
-
         public void LookAtTarget()
         {
             if (_target == null) return;

@@ -61,7 +61,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            _mover.Move(_inputVector, _canMove);
+            _mover.MoveWithRb(_inputVector, _canMove);
         }
 
         private void OnDisable()

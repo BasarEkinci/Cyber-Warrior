@@ -68,6 +68,7 @@ namespace Combat.Components
             playerDeathEvent.OnEventRaised -= OnPlayerDeath;
             if (_inputReader is InputReader disposableInput)
             {
+                disposableInput.UnsubscribeFromFireEvents();
                 disposableInput.Dispose();
             }
         }

@@ -7,6 +7,7 @@ namespace Inputs
 {
     public class InputReader : IPlayerInput,IDisposable
     {
+        public InputActions InputActions => _inputActions;
         private readonly InputActions _inputActions;
         private readonly HoldInputChannelSO _fireEventSo;
         public InputReader()
@@ -41,10 +42,18 @@ namespace Inputs
             Vector3 moveVector = new Vector3(input.x, 0, input.y);
             return new Vector3(moveVector.x, 0, moveVector.z);
         }
-        public void Dispose()
+        
+        public bool IsCompanionModeChanged()
+        {
+            return _inputActions.Player.CompanionMode.IsPressed();
+        }
+        public void UnsubscribeFromFireEvents()
         {
             _inputActions.Player.Fire.started -= OnFireStarted;
             _inputActions.Player.Fire.canceled -= OnFireCanceled;
+        }
+        public void Dispose()
+        {
             _inputActions.Player.Disable();
         }
     }
