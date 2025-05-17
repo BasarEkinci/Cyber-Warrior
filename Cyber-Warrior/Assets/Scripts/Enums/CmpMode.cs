@@ -2,9 +2,9 @@
 {
     public enum CmpMode
     {
+        Base,
         Healer,
         Attacker,
-        Base,
         Upgrade
     }
 }

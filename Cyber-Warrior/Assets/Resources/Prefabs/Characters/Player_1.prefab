@@ -3446,7 +3446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455763cc08f143919c5c63864beebe6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 50
   gunBarrelTransform: {fileID: 1094096495925985718}
   holdInputChannelSo: {fileID: 11400000, guid: a20255683653cb54385ddfb4b7a64281, type: 2}
   playerGunBaseStats: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}

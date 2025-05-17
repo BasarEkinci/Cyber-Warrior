@@ -6,6 +6,8 @@ namespace Player
 {
     public class PlayerHealth : MonoBehaviour
     {
+        public float CurrentHealth => _currentHealth;
+
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private FloatEventChannelSO floatEventChannelSo;
         [SerializeField] private PlayerStats playerStats;
