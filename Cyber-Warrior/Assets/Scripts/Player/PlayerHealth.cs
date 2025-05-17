@@ -7,7 +7,7 @@ namespace Player
     public class PlayerHealth : MonoBehaviour
     {
         public float CurrentHealth => _currentHealth;
-
+        public float MaxHealth => playerStats.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private FloatEventChannelSO floatEventChannelSo;
         [SerializeField] private PlayerStats playerStats;

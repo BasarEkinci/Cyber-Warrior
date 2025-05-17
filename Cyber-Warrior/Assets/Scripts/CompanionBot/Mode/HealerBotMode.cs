@@ -28,6 +28,10 @@ namespace CompanionBot.Mode
 
         private void HealBehaviour()
         {
+            if (_playerHealth.CurrentHealth  >= _playerHealth.MaxHealth)
+            {
+                return;
+            }
             _cooldownTimer += Time.deltaTime;
             if (_cooldownTimer >= _healCooldown)
             {
