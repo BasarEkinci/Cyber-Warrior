@@ -1,9 +1,10 @@
-﻿using Movement;
+﻿using Companion.Mode;
+using Movement;
 using UnityEngine;
 
-namespace Companion.Mode
+namespace CompanionBot.Mode
 {
-    public class BaseMode : ICmpModeStrategy
+    public class BaseBotMode : ICmpBotModeStrategy
     {
         public void SetAimMode(Rotator rotator,GameObject target, float rotationSpeed)
         {

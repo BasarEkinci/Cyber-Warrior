@@ -1,12 +1,10 @@
-using System;
-using Companion.Mode;
-using Enums;
+using CompanionBot.Mode;
 using Inputs;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Companion.Controller
+namespace CompanionBot.Controller
 {
     public class CmpMovementController : MonoBehaviour
     {
@@ -17,7 +15,7 @@ namespace Companion.Controller
         [SerializeField] private Material eyeMaterial;
         
         private InputReader _inputReader;
-        private CmpModeManager _cmpModeManager;
+        private CmpBotModeManager _cmpBotModeManager;
         
         private GameObject _crosshair; 
         private GameObject _target;
@@ -29,7 +27,7 @@ namespace Companion.Controller
         {
             _target = GameObject.FindWithTag("Player");
             _crosshair = GameObject.FindWithTag("Crosshair");
-            _cmpModeManager = new CmpModeManager();
+            _cmpBotModeManager = new CmpBotModeManager();
             _mover = new Mover(transform, speed);
             _rotator = new Rotator(transform, _target);
             _inputReader = new InputReader();
@@ -47,15 +45,15 @@ namespace Companion.Controller
 
         private void OnCompanionModeChanged(InputAction.CallbackContext obj)
         {
-            _cmpModeManager.NextMode();
-            _cmpModeManager.CurrentMode.SetProperties(eyeMaterial);
+            _cmpBotModeManager.NextMode();
+            _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
         }
 
         private void Update()
         {
             if (_target == null) return;
-            _cmpModeManager.CurrentMode.SetAimMode(_rotator,_crosshair, rotationSpeed);
-            _cmpModeManager.CurrentMode.ModeBehaviour();
+            _cmpBotModeManager.CurrentBotMode.SetAimMode(_rotator,_crosshair, rotationSpeed);
+            _cmpBotModeManager.CurrentBotMode.ModeBehaviour();
         }
         private void FixedUpdate()
         {

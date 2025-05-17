@@ -1,16 +1,17 @@
-﻿using Movement;
+﻿using Companion.Mode;
+using Movement;
 using Player;
 using UnityEngine;
 
-namespace Companion.Mode
+namespace CompanionBot.Mode
 {
-    public class HealerMode : ICmpModeStrategy
+    public class HealerBotMode : ICmpBotModeStrategy
     {
         private float _healCooldown = 1f;
         private float _cooldownTimer;
         private float _healAmount = 1f;
         private PlayerHealth _playerHealth;
-        public HealerMode()
+        public HealerBotMode()
         {
             _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         }

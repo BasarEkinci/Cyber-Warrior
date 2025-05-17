@@ -1,13 +1,12 @@
 ﻿using Movement;
 using UnityEngine;
 
-namespace Companion.Mode
+namespace CompanionBot.Mode
 {
-    public interface ICmpModeStrategy
+    public interface ICmpBotModeStrategy
     {
         void SetAimMode(Rotator rotator,GameObject target, float rotationSpeed);
         void SetProperties(Material eyeMaterial);
-
         void ModeBehaviour();
     }
 }
