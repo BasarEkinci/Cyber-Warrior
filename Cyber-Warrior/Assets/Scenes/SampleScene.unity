@@ -4766,6 +4766,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7615220583014043773, guid: 3dca833f14577fc46870b3ffe4a313ea, type: 3}
   m_PrefabInstance: {fileID: 713555429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &715033428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715033430}
+  - component: {fileID: 715033429}
+  m_Layer: 0
+  m_Name: ScarpAmountController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &715033429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715033428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90db69934dff6f46a3c57ef563a077d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrapCollectEvent: {fileID: 11400000, guid: 9c859d174ea8ef443b8f31f40c119146, type: 2}
+--- !u!4 &715033430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715033428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &745813620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7265,6 +7310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1199359585}
+  - component: {fileID: 1199359586}
   m_Layer: 0
   m_Name: UpgradeArea
   m_TagString: Untagged
@@ -7292,6 +7338,20 @@ Transform:
   - {fileID: 622020998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1199359586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199359584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750975303c0f15c40be98e568eb134f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeCost: 200
+  upgradeEvent: {fileID: 11400000, guid: 1d1c2fcddf3c31c45b428ac17752595c, type: 2}
 --- !u!1001 &1205235507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13650,3 +13710,4 @@ SceneRoots:
   - {fileID: 640719956}
   - {fileID: 5270933456566423000}
   - {fileID: 1199359585}
+  - {fileID: 715033430}

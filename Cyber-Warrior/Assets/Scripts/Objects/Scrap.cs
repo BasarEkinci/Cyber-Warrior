@@ -21,26 +21,20 @@ namespace Objects
             if (other.CompareTag("Player"))
             {
                 scrapCollectEvent.Invoke();
+                Debug.Log("Collecting scrap");
                 CollectAnimation(other.transform);
             }
         }
 
         private void CollectAnimation(Transform playerTransform)
         {
+            _tween.Kill();
             transform.DOMove(playerTransform.position, 0.1f).SetEase(Ease.OutQuart).OnComplete(() =>
             {
                 //SFX
                 //VFX
-                //Destroy
+                Destroy(gameObject);
             });
-        }
-
-        private void OnDisable()
-        {
-            if (_tween.IsActive())
-            {
-                _tween.Kill();
-            }
         }
     }
 }
