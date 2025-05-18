@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 5
   damage: 5
-  moveSpeed: 0
-  rotationSpeed: 0
+  moveSpeed: 8
+  rotationSpeed: 360
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
-  eyeMaterial: {fileID: 0}
+    m_Bits: 64
+  eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   followOffset: {x: 0, y: 2, z: -1.5}
   attackOffset: {x: 0, y: 2.5, z: 0}
