@@ -9,12 +9,12 @@ namespace CompanionBot.Controller
 {
     public class CmpMovementController : MonoBehaviour
     {
+        [SerializeField] private Material eyeMaterial;
         [SerializeField] private LayerMask enemyLayer;
-        [SerializeField] private float speed;
-        [SerializeField] private float rotationSpeed;
         [SerializeField] private Vector3 followOffset;
         
-        [SerializeField] private Material eyeMaterial;
+        [SerializeField] private float speed;
+        [SerializeField] private float rotationSpeed;
         
         private InputReader _inputReader;
         private CmpBotModeManager _cmpBotModeManager;
@@ -41,6 +41,7 @@ namespace CompanionBot.Controller
         {
             _firstFollowOffset = followOffset;
             _inputReader.InputActions.Player.CompanionMode.performed += OnCompanionModeChanged;
+            _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
         }
         private void OnDisable()
         {
