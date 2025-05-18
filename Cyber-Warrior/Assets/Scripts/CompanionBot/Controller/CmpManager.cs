@@ -1,50 +1,44 @@
 using CompanionBot.Mode;
 using Inputs;
+using Interfaces;
 using Movement;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CompanionBot.Controller
 {
-    public class CmpManager : MonoBehaviour
+    public class CmpManager : MonoBehaviour,IUpgradeable
     {
-        [SerializeField] private float attackCooldown;
-        [SerializeField] private float damage;
         [SerializeField] private ParticleSystem attackEffect;
-        
-        [SerializeField] private Material eyeMaterial;
-        [SerializeField] private LayerMask enemyLayer;
-        [SerializeField] private Vector3 followOffset;
-        
-        [SerializeField] private float speed;
-        [SerializeField] private float rotationSpeed;
-        
+        private CompanionBotSO _cmpSo;
         private InputReader _inputReader;
         private CmpBotModeManager _cmpBotModeManager;
         
         private GameObject _crosshair; 
         private GameObject _target;
-        private Vector3 _firstFollowOffset;
-
+        private Vector3 _followOffset;
         private Mover _mover;
         private Rotator _rotator;
+    
+        private int _cmpBotLevel = 0;
         
         private void Awake()
         {
             _target = GameObject.FindWithTag("Player");
             _crosshair = GameObject.FindWithTag("Crosshair");
+            _cmpSo = Resources.Load<CompanionBotSO>("UnityObjects/Characters/CmpBot/CmpBot_" + _cmpBotLevel);
             _cmpBotModeManager = new CmpBotModeManager();
-            _mover = new Mover(transform, speed);
+            _mover = new Mover(transform, _cmpSo.moveSpeed);
             _rotator = new Rotator(transform, _target);
             _inputReader = new InputReader();
-            eyeMaterial.color = Color.green;
         }
 
         private void OnEnable()
         {
-            _firstFollowOffset = followOffset;
             _inputReader.InputActions.Player.CompanionMode.performed += OnCompanionModeChanged;
-            _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
+            _cmpBotModeManager.CurrentBotMode.SetProperties(_cmpSo.eyeMaterial);
+            _followOffset = _cmpSo.followOffset;
         }
         private void OnDisable()
         {
@@ -54,30 +48,34 @@ namespace CompanionBot.Controller
         private void OnCompanionModeChanged(InputAction.CallbackContext obj)
         {
             _cmpBotModeManager.NextMode();
-            _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
+            _cmpBotModeManager.CurrentBotMode.SetProperties(_cmpSo.eyeMaterial);
             if (_cmpBotModeManager.CurrentBotMode is IAttackerCmp attackerCmp)
             {
-               attackerCmp.SetAttackerProperties(transform,enemyLayer,damage,attackCooldown);
+               attackerCmp.SetAttackerProperties(transform,_cmpSo.enemyLayer,_cmpSo.damage,_cmpSo.attackCooldown);
                attackerCmp.SetAttackEffect(attackEffect);
-               followOffset.x = 0;
-               followOffset.y = 2.5f;
-               followOffset.z = 0;
+               _followOffset = _cmpSo.attackOffset;
             }
             else
             {
-                followOffset = _firstFollowOffset;
+                _followOffset = _cmpSo.followOffset;
             }
         }
 
         private void Update()
         {
             if (_target == null) return;
-            _cmpBotModeManager.CurrentBotMode.Execute(_rotator,_crosshair, rotationSpeed);
+            _cmpBotModeManager.CurrentBotMode.Execute(_rotator,_crosshair, _cmpSo.rotationSpeed);
         }
         private void FixedUpdate()
         {
             if (_target == null) return;
-            _mover.FollowTargetWithTransformPosition(transform, _target.transform, speed * Time.fixedDeltaTime, followOffset);
+            _mover.FollowTargetWithTransformPosition(transform, _target.transform, _cmpSo.moveSpeed * Time.fixedDeltaTime, _followOffset);
+        }
+
+        public void Upgrade(float amount)
+        {
+            _cmpBotLevel += Mathf.RoundToInt(amount);
+            _cmpSo = Resources.Load<CompanionBotSO>("UnityObjects/Characters/CmpBot/CmpBot_" + _cmpBotLevel);
         }
     }
 }
