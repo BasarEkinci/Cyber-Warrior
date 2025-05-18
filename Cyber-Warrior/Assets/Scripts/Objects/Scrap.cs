@@ -12,7 +12,8 @@ namespace Objects
 
         private void OnEnable()
         {
-            _tween = transform.DORotate(Vector3.up * 45,0.5f).SetLoops(-1,LoopType.Incremental).SetEase(Ease.Linear);    
+            transform.DOScale(Vector3.zero, 0.2f).From();
+            _tween = transform.DORotate(transform.up * 45f,0.5f).SetLoops(-1,LoopType.Incremental).SetEase(Ease.Linear);
         }
 
         private void OnTriggerEnter(Collider other)

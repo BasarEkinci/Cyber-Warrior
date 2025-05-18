@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be652651949744b58d68fa5516aeacc3, type: 3}
+  m_Name: ScarpTypes
+  m_EditorClassIdentifier: 
+  scarpList:
+  - {fileID: 7441582744261930169, guid: 0be927668235b3747b82d4046ee06f0c, type: 3}
+  - {fileID: 8768878511919383760, guid: e7946709eff131b4e82d23972db280f2, type: 3}
+  - {fileID: 889837950983315858, guid: 22e4eac5549cd384fa14f2a230604b4d, type: 3}
+  - {fileID: 7450642647219146996, guid: ba52ed6faebd4904689e3a900ffc83d5, type: 3}
+  - {fileID: 205382581757347148, guid: 5f053c6e2b34684479467fcf016f453a, type: 3}
+  scrapParticle: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}

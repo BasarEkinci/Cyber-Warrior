@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Interfaces;
 using JetBrains.Annotations;
 using ScriptableObjects;
@@ -21,6 +22,7 @@ namespace Enemies
         [Header("Scriptables")]
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private EnemySO enemy;
+        [SerializeField] private ScarpTypesSO scarpTypesSo;
         
         private NavMeshAgent _agent;
         private Transform _playerTransform;
@@ -97,6 +99,7 @@ namespace Enemies
             _collider.enabled = false;
             _agent.enabled = false;
             _animator.Play("Death1");
+            CreateScarp();
         }
         private void OnPlayerDeath()
         {
@@ -117,6 +120,15 @@ namespace Enemies
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
                 _playerTransform = playerManager.transform;
+        }
+
+        private void CreateScarp()
+        {
+            GameObject scarp = scarpTypesSo.GetRandomScrap();
+            GameObject scarpInstance = Instantiate(scarp, transform.position, Quaternion.identity);
+            scarpInstance.transform.DOJump(transform.position + Vector3.up * 1f, 1f, 2, 2f).SetEase(Ease.OutBounce);
+            GameObject effect = Instantiate(scarpTypesSo.scrapParticle, transform.position, scarpTypesSo.scrapParticle.transform.rotation);
+            Destroy(effect,2f);
         }
         #endregion
     }

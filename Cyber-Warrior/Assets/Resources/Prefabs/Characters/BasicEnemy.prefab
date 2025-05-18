@@ -2262,6 +2262,7 @@ MonoBehaviour:
   bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
   voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   enemy: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
+  scarpTypesSo: {fileID: 11400000, guid: e471b37dc98729f4eb227795aa44b012, type: 2}
 --- !u!1 &8287757190557319950
 GameObject:
   m_ObjectHideFlags: 0
