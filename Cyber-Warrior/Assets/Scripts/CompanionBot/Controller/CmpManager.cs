@@ -1,14 +1,17 @@
 using CompanionBot.Mode;
 using Inputs;
-using Interfaces;
 using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CompanionBot.Controller
 {
-    public class CmpMovementController : MonoBehaviour
+    public class CmpManager : MonoBehaviour
     {
+        [SerializeField] private float attackCooldown;
+        [SerializeField] private float damage;
+        [SerializeField] private ParticleSystem attackEffect;
+        
         [SerializeField] private Material eyeMaterial;
         [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private Vector3 followOffset;
@@ -54,7 +57,8 @@ namespace CompanionBot.Controller
             _cmpBotModeManager.CurrentBotMode.SetProperties(eyeMaterial);
             if (_cmpBotModeManager.CurrentBotMode is IAttackerCmp attackerCmp)
             {
-               attackerCmp.SetAttackerProperties(transform,enemyLayer);
+               attackerCmp.SetAttackerProperties(transform,enemyLayer,damage,attackCooldown);
+               attackerCmp.SetAttackEffect(attackEffect);
                followOffset.x = 0;
                followOffset.y = 2.5f;
                followOffset.z = 0;
@@ -69,7 +73,6 @@ namespace CompanionBot.Controller
         {
             if (_target == null) return;
             _cmpBotModeManager.CurrentBotMode.Execute(_rotator,_crosshair, rotationSpeed);
-            
         }
         private void FixedUpdate()
         {

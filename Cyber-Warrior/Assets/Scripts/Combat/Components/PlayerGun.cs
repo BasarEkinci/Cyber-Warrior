@@ -84,7 +84,7 @@ namespace Combat.Components
                 {
                     if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
                     {
-                        damagable.GetDamage(playerGunBaseStats.damage);
+                        damagable.TakeDamage(playerGunBaseStats.damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }

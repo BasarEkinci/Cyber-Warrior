@@ -25,7 +25,7 @@ namespace Combat.Components
         {
             if (other.TryGetComponent<IDamagable>(out var damagable))
             {
-                damagable.GetDamage(_damage);
+                damagable.TakeDamage(_damage);
                 if (other.TryGetComponent<IKnockbackable>(out var knockBackable))
                 {
                     knockBackable.Knockback(-other.transform.forward, _knockBackForce);

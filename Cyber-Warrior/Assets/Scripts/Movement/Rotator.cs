@@ -14,9 +14,9 @@ namespace Movement
             _target = target;
         }
 
-        public void RotateToTarget(GameObject aimTarget,float rotationSpeed)
+        public void RotateToTarget(GameObject aimTarget,float rotationSpeed,Vector3 offset = default)
         {
-            Vector3 directionToAim = aimTarget.transform.position - _currentTransform.position;
+            Vector3 directionToAim = aimTarget.transform.position + offset - _currentTransform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToAim);
             Quaternion newRotation = Quaternion.RotateTowards(_currentTransform.rotation, targetRotation, rotationSpeed);
             _currentTransform.rotation = newRotation;

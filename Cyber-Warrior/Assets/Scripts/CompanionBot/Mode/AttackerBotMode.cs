@@ -5,11 +5,15 @@ using UnityEngine;
 
 namespace CompanionBot.Mode
 {
-    public class AttackerBotMode : ICmpBotModeStrategy,IAttackerCmp
+    public class AttackerBotMode : ICmpBotModeStrategy,IAttackerCmp,IAttackEffect
     {
+        private float _attackCooldown;
+        private float _timer;
+        private float _damage;
         private GameObject _target;
         private Transform _companionTransform;
         private Transform _currentTarget;
+        private ParticleSystem _attackEffect;
         private LayerMask _enemyLayer;
 
         private readonly float _searchCooldown = 0.5f;
@@ -21,7 +25,8 @@ namespace CompanionBot.Mode
             Transform target = GetEnemyTarget();
             if (target != null)
             {
-                rotator.RotateToTarget(target.gameObject, rotationSpeed);
+                rotator.RotateToTarget(target.gameObject, rotationSpeed,Vector3.up * 1.5f);
+                Attack(target);
             }
             else
             {
@@ -33,10 +38,13 @@ namespace CompanionBot.Mode
         {
             eyeMaterial.color = Color.red;
         }
-        public void SetAttackerProperties(Transform companionTransform, LayerMask layerMask)
+        public void SetAttackerProperties(Transform companionTransform, LayerMask layerMask,float damage,float attackCooldown = 1f)
         {
+            _attackCooldown = attackCooldown;
             _companionTransform = companionTransform;
             _enemyLayer = layerMask;
+            _damage = damage;
+            _timer = _attackCooldown;
         }
 
         public Transform FindClosestEnemy()
@@ -70,13 +78,30 @@ namespace CompanionBot.Mode
                 _currentTarget = FindClosestEnemy();
                 _lastSearchTime = Time.time;
             }
-
             return _currentTarget;
         }
 
-        public void Attack(Transform bulletSpawnPoint, Transform target)
+        public void Attack(Transform target)
         {
-            //Attack Logic Here
+            if (target == null) return;
+
+            if (Time.time >= _attackCooldown)
+            {
+                target.gameObject.GetComponent<IDamagable>().TakeDamage(_damage);
+                PlayAttackEffect();
+                _attackCooldown = Time.time + _timer;
+            }
+        }
+
+        public void SetAttackEffect(ParticleSystem effect)
+        {
+            _attackEffect = effect;
+        }
+
+        public void PlayAttackEffect()
+        {
+            if (_attackEffect == null) return;
+            _attackEffect.Play();
         }
     }
 }

@@ -78,16 +78,15 @@ namespace Enemies
             }
         }
 
-        public void GetDamage(float amount)
+        public void TakeDamage(float amount)
         {
             float damage;
             if (amount > enemy.damageResistance)
                 damage = amount - enemy.damageResistance;
             else
                 damage = amount;
-
+            Instantiate(bloodEffect, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(transform.forward));
             _currentHealth -= damage;
-            Debug.Log(_currentHealth);
             if (_currentHealth <= 0f)
             {
                 Dead();

@@ -2,7 +2,7 @@ namespace Interfaces
 {
     public interface IDamagable
     {
-        void GetDamage(float amount);
+        void TakeDamage(float amount);
         void Dead();
     }
 }
