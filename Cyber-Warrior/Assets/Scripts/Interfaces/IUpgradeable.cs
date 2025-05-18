@@ -2,6 +2,6 @@ namespace Interfaces
 {
     public interface IUpgradeable
     {
-        void Upgrade(float amount);
+        void Upgrade(int amount);
     }
 }

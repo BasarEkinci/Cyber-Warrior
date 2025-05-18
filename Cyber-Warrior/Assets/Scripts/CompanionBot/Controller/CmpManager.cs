@@ -72,9 +72,9 @@ namespace CompanionBot.Controller
             _mover.FollowTargetWithTransformPosition(transform, _target.transform, _cmpSo.moveSpeed * Time.fixedDeltaTime, _followOffset);
         }
 
-        public void Upgrade(float amount)
+        public void Upgrade(int amount)
         {
-            _cmpBotLevel += Mathf.RoundToInt(amount);
+            _cmpBotLevel += 1;
             _cmpSo = Resources.Load<CompanionBotSO>("UnityObjects/Characters/CmpBot/CmpBot_" + _cmpBotLevel);
         }
     }
