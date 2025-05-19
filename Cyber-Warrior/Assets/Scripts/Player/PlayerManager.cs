@@ -47,7 +47,6 @@ namespace Player
             _movementAnimator = new MovementAnimator(_animator);
             voidEventSo.OnEventRaised += OnPlayerDeath;
             inputReader.OnMove += HandleMove;
-            inputReader.OnInteract += HandleInteract;
             _canMove = true;
         }
 
@@ -65,28 +64,10 @@ namespace Player
         {
             _mover.MoveWithRb(_moveVector, _canMove);
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.TryGetComponent<IInteractable>(out var interactable))
-            {
-                _interactable = interactable;
-            }
-        }
-        
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.TryGetComponent<IInteractable>(out var interactable))
-            {
-                _interactable = null;
-            }
-        }
-
         private void OnDisable()
         {
             voidEventSo.OnEventRaised -= OnPlayerDeath;
             inputReader.OnMove -= HandleMove;
-            inputReader.OnInteract -= HandleInteract;
         }
 
         #endregion
@@ -98,10 +79,10 @@ namespace Player
             _rb.linearVelocity = Vector3.zero;
             _canMove = false;
         }
-        private void HandleInteract()
+        private void HandleInteractPressed()
         {
             if (_interactable == null) return;
-            _interactable.Interact();
+            _interactable.OnInteract();
         }
 
         private void HandleMove(Vector2 input)

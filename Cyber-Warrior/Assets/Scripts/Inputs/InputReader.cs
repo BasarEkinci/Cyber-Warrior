@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,11 +11,11 @@ namespace Inputs
     public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     {
         public event Action<Vector2> OnMove;
-        public event Action OnInteract;
+        public event Action OnInteractPressed;
         public event Action OnSwitchMode;
         public event Action OnFireStarted;
         public event Action OnFireCanceled;
-
+        public event Action OnInteractCanceled;
         private InputActions _inputActions;
 
         private void Awake()
@@ -54,8 +58,14 @@ namespace Inputs
 
         public void OnInteraction(InputAction.CallbackContext context)
         {
-            if (context.performed)
-                OnInteract?.Invoke();
+            if (context.started)
+            {
+                OnInteractPressed?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                OnInteractCanceled?.Invoke();
+            }
         }
     }
 }

@@ -3898,6 +3898,8 @@ MonoBehaviour:
   screenBackgroundImage: {fileID: 1498228994}
   cmpBotLevelData: {fileID: 11400000, guid: 8e0361dc59dad7d48ab1d8f9ce8f68d6, type: 2}
   scrapData: {fileID: 11400000, guid: f3fca0699d081274c94b29fe53e24c26, type: 2}
+  interactableData: {fileID: 11400000, guid: a8356cff15f9a13408f86503e0fe8988, type: 2}
+  inputReader: {fileID: 1483146460}
   defaultColor: {r: 1, g: 1, b: 1, a: 0}
   errorColor: {r: 0, g: 1, b: 0.06282711, a: 0.5686275}
   successColor: {r: 1, g: 0, b: 0, a: 0.5686275}
