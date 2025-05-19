@@ -13,7 +13,6 @@ namespace Combat.Components
     {   
         [SerializeField] private Transform gunBarrelTransform;
         
-        [SerializeField] private HoldInputChannelSO holdInputChannelSo;
         [SerializeField] private PlayerGunBaseStats playerGunBaseStats;
         
         [SerializeField] private LineRenderer lineRenderer;
@@ -21,8 +20,8 @@ namespace Combat.Components
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject bloodEffect;
         [SerializeField] private VoidEventSO playerDeathEvent;
+        [SerializeField] private InputReader inputReader;
         
-        private IPlayerInput _inputReader;
         private GameObject _crosshair;
         private CancellationTokenSource _cancellationTokenSource;
         
@@ -30,13 +29,12 @@ namespace Combat.Components
         
         private void OnEnable()
         {
-            _inputReader = new InputReader(holdInputChannelSo);
             _crosshair = GameObject.FindWithTag("Crosshair");
-            holdInputChannelSo.OnFireStart += OnFireStart;
-            holdInputChannelSo.OnFireEnd += OnFireEnd;
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;
+            inputReader.OnFireStarted += OnFireStart;
+            inputReader.OnFireCanceled += OnFireEnd;
         }
 
         private void OnPlayerDeath()
@@ -63,14 +61,9 @@ namespace Combat.Components
         
         private void OnDisable()
         {
-            holdInputChannelSo.OnFireStart -= OnFireStart;
-            holdInputChannelSo.OnFireEnd -= OnFireEnd;
             playerDeathEvent.OnEventRaised -= OnPlayerDeath;
-            if (_inputReader is InputReader disposableInput)
-            {
-                disposableInput.UnsubscribeFromFireEvents();
-                disposableInput.Dispose();
-            }
+            inputReader.OnFireStarted -= OnFireStart;
+            inputReader.OnFireCanceled -= OnFireEnd;
         }
 
         private async UniTaskVoid FireGunAsync(CancellationToken cancellationToken)
@@ -91,6 +84,7 @@ namespace Combat.Components
             }
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
@@ -99,7 +93,7 @@ namespace Combat.Components
                 Gizmos.DrawRay(gunBarrelTransform.position, _crosshair.transform.position - gunBarrelTransform.position);
             }
         }
-
+#endif
         private void DrawLineToCrosshair()
         {
             if (_isPlayerDead)

@@ -14,19 +14,21 @@ namespace Player
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private RigBuilder rigBuilder;
+        [SerializeField] private InputReader inputReader;
         #endregion
 
         #region Private Fields
         private Mover _mover;
         private Rotator _rotator;
         private MovementAnimator _movementAnimator;
-        private IPlayerInput _inputReader;
         
+        private IInteractable _interactable;
         private GameObject _crosshair;
         private Rigidbody _rb;
         private Animator _animator;
         
-        private Vector3 _inputVector;
+        private Vector2 _inputVector;
+        private Vector3 _moveVector;
         private bool _canMove;
         #endregion
         
@@ -39,12 +41,13 @@ namespace Player
 
         private void OnEnable()
         {
-            _inputReader = new InputReader();
             _mover = new Mover(_rb, playerStats.moveSpeed);
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
             voidEventSo.OnEventRaised += OnPlayerDeath;
+            inputReader.OnMove += HandleMove;
+            inputReader.OnInteract += HandleInteract;
             _canMove = true;
         }
 
@@ -54,23 +57,36 @@ namespace Player
             {
                 return;
             }
-            _inputVector = _inputReader.GetMovementVector();
-            _movementAnimator.SetAnimations(_inputVector, transform);
+            _movementAnimator.SetAnimations(_moveVector, transform);
             _rotator.SetLookDirection();
         }
 
         private void FixedUpdate()
         {
-            _mover.MoveWithRb(_inputVector, _canMove);
+            _mover.MoveWithRb(_moveVector, _canMove);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.TryGetComponent<IInteractable>(out var interactable))
+            {
+                _interactable = interactable;
+            }
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<IInteractable>(out var interactable))
+            {
+                _interactable = null;
+            }
         }
 
         private void OnDisable()
         {
-            if (_inputReader is InputReader disposableInput)
-            {
-                disposableInput.Dispose();
-            }
             voidEventSo.OnEventRaised -= OnPlayerDeath;
+            inputReader.OnMove -= HandleMove;
+            inputReader.OnInteract -= HandleInteract;
         }
 
         #endregion
@@ -81,6 +97,17 @@ namespace Player
             rigBuilder.enabled = false;
             _rb.linearVelocity = Vector3.zero;
             _canMove = false;
+        }
+        private void HandleInteract()
+        {
+            if (_interactable == null) return;
+            _interactable.Interact();
+        }
+
+        private void HandleMove(Vector2 input)
+        {
+            _inputVector = input;
+            _moveVector = new Vector3(_inputVector.x, 0, _inputVector.y);
         }
         #endregion
     }

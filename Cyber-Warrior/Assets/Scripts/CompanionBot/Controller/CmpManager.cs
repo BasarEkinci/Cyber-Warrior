@@ -11,9 +11,9 @@ namespace CompanionBot.Controller
     {
         public int CmpBotLevel => _cmpBotLevel;
         [SerializeField] private ParticleSystem attackEffect;
+        [SerializeField] private InputReader inputReader;
         
         private CompanionBotSO _cmpSo;
-        private InputReader _inputReader;
         private CmpBotModeManager _cmpBotModeManager;
         
         private GameObject _crosshair; 
@@ -32,21 +32,21 @@ namespace CompanionBot.Controller
             _cmpBotModeManager = new CmpBotModeManager();
             _mover = new Mover(transform, _cmpSo.moveSpeed);
             _rotator = new Rotator(transform, _target);
-            _inputReader = new InputReader();
         }
 
         private void OnEnable()
         {
-            _inputReader.InputActions.Player.CompanionMode.performed += OnCompanionModeChanged;
+            inputReader.OnSwitchMode += OnCompanionModeChanged;
             _cmpBotModeManager.CurrentBotMode.SetProperties(_cmpSo.eyeMaterial);
             _followOffset = _cmpSo.followOffset;
         }
         private void OnDisable()
         {
-            _inputReader.InputActions.Player.CompanionMode.performed -= OnCompanionModeChanged;
+            inputReader.OnSwitchMode -= OnCompanionModeChanged;
+            _cmpBotModeManager.CurrentBotMode.SetProperties(_cmpSo.eyeMaterial);
         }
 
-        private void OnCompanionModeChanged(InputAction.CallbackContext obj)
+        private void OnCompanionModeChanged()
         {
             _cmpBotModeManager.NextMode();
             _cmpBotModeManager.CurrentBotMode.SetProperties(_cmpSo.eyeMaterial);
