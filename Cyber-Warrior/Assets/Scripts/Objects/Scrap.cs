@@ -1,12 +1,12 @@
 using DG.Tweening;
-using ScriptableObjects.Events;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Objects
 {
     public class Scrap : MonoBehaviour
     {
-        [SerializeField] private VoidEventSO scrapCollectEvent;
+        [SerializeField] private ScrapData scrapData;
         [SerializeField] private GameObject scrapVFX;
         private Tween _tween;
         private GameObject _vfx;
@@ -21,7 +21,7 @@ namespace Objects
         {
             if (other.CompareTag("Player"))
             {
-                scrapCollectEvent.Invoke();
+                scrapData.AddScarp(1);
                 Destroy(_vfx);
                 CollectAnimation(other.transform);
             }

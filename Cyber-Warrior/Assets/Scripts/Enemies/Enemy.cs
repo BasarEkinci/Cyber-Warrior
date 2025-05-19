@@ -9,6 +9,7 @@ using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using ScriptableObjects.Events;
+using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -22,7 +23,7 @@ namespace Enemies
         [Header("Scriptables")]
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private EnemySO enemy;
-        [SerializeField] private ScarpTypesSO scarpTypesSo;
+        [SerializeField] private ScrapTypesSO scrapTypesSo;
         
         private NavMeshAgent _agent;
         private Transform _playerTransform;
@@ -124,7 +125,7 @@ namespace Enemies
 
         private void CreateScarp()
         {
-            GameObject scarp = scarpTypesSo.GetRandomScrap();
+            GameObject scarp = scrapTypesSo.GetRandomScrap();
             Instantiate(scarp, transform.position, Quaternion.identity);
         }
         #endregion

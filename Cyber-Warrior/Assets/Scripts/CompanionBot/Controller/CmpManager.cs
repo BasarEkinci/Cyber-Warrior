@@ -1,6 +1,5 @@
 using CompanionBot.Mode;
 using Inputs;
-using Interfaces;
 using Movement;
 using ScriptableObjects;
 using UnityEngine;
@@ -8,9 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace CompanionBot.Controller
 {
-    public class CmpManager : MonoBehaviour,IUpgradeable
+    public class CmpManager : MonoBehaviour
     {
+        public int CmpBotLevel => _cmpBotLevel;
         [SerializeField] private ParticleSystem attackEffect;
+        
         private CompanionBotSO _cmpSo;
         private InputReader _inputReader;
         private CmpBotModeManager _cmpBotModeManager;
@@ -72,7 +73,7 @@ namespace CompanionBot.Controller
             _mover.FollowTargetWithTransformPosition(transform, _target.transform, _cmpSo.moveSpeed * Time.fixedDeltaTime, _followOffset);
         }
 
-        public void Upgrade(int amount)
+        public void Upgrade()
         {
             _cmpBotLevel += 1;
             _cmpSo = Resources.Load<CompanionBotSO>("UnityObjects/Characters/CmpBot/CmpBot_" + _cmpBotLevel);

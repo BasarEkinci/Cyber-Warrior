@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "ScarpTypes", menuName = "Scriptable Objects/ScarpTypes", order = 0)]
-    public class ScarpTypesSO : ScriptableObject
+    public class ScrapTypesSO : ScriptableObject
     {
         public List<GameObject> scarpList;
         public GameObject GetRandomScrap()
