@@ -5,7 +5,6 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "Companion Bot", menuName = "Scriptable Objects/Companion Bot", order = 0)]
     public class CompanionBotSO : ScriptableObject
     {
-        public int upgradePrice;
         public float attackCooldown;
         public float damage;
         public float moveSpeed;

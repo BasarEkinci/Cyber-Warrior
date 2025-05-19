@@ -7,7 +7,6 @@ namespace Economy
     public class ScrapAmountController : MonoBehaviour
     {
         public int ScarpAmount => _scrapAmount;
-        [SerializeField] private TMP_Text scrapAmountText;
         [SerializeField] private VoidEventSO scrapCollectEvent;
         
         private int _scrapAmount;
@@ -25,7 +24,6 @@ namespace Economy
         private void OnCollectScarp()
         {
             _scrapAmount++;
-            scrapAmountText.text = _scrapAmount.ToString();
         }
 
         public void SpendScarp(int amount)
