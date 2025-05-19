@@ -16,6 +16,8 @@ namespace Inputs
         public event Action OnFireStarted;
         public event Action OnFireCanceled;
         public event Action OnInteractCanceled;
+        public event Action OnHoldCompleted;
+        
         private InputActions _inputActions;
 
         private void Awake()

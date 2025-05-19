@@ -30,8 +30,10 @@ namespace Objects
         
         private CmpManager _companionManager;
         private float _holdStartTime;
+        private float _heldTime;
         private bool _canInteractable;
         private bool _interactionTriggered;
+        private bool _isPressed;
         private void Awake()
         {
             _companionManager = FindObjectOfType<CmpManager>();
@@ -68,25 +70,40 @@ namespace Objects
             interactableData.onHold.RemoveListener(OnHold);
         }
 
+        private void Update()
+        {
+            if (_interactionTriggered)
+            {
+                _heldTime = Time.time - _holdStartTime;
+                if (_heldTime >= interactableData.interactDuration)
+                {
+                    interactableData.onHold?.Invoke();
+                    _interactionTriggered = false;
+                }
+                else
+                {
+                    if (!_isPressed)
+                    {
+                        interactableData.onPress?.Invoke();
+                        _isPressed = true;
+                    }
+                }
+            }
+        }
+
         private void HandleInteractCanceled()
         {
-
+            if (!_canInteractable) return;
+            _interactionTriggered = false;
         }
 
         private void HandleInteractPressed()
         {
-            _holdStartTime = Time.time;
             if (!_canInteractable) return;
-
-            float heldTime = Time.time - _holdStartTime;
-
-            if (heldTime >= interactableData.interactDuration)
-                interactableData.onHold?.Invoke();
-            else
-                interactableData.onPress?.Invoke();
+            _interactionTriggered = true;
+            _isPressed = false;
+            _holdStartTime = Time.time;
         }
-
-
         private void OnHold()
         {
             Debug.Log("Hold Interact with UpgradeManager");
