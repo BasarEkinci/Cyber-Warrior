@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrapCollectEvent: {fileID: 11400000, guid: 9c859d174ea8ef443b8f31f40c119146, type: 2}
+  scrapVFX: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
 --- !u!135 &1084047328439532418
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -125,10 +125,7 @@ namespace Enemies
         private void CreateScarp()
         {
             GameObject scarp = scarpTypesSo.GetRandomScrap();
-            GameObject scarpInstance = Instantiate(scarp, transform.position, Quaternion.identity);
-            scarpInstance.transform.DOJump(transform.position + Vector3.up * 1f, 1f, 2, 2f).SetEase(Ease.OutBounce);
-            GameObject effect = Instantiate(scarpTypesSo.scrapParticle, transform.position, scarpTypesSo.scrapParticle.transform.rotation);
-            Destroy(effect,2f);
+            Instantiate(scarp, transform.position, Quaternion.identity);
         }
         #endregion
     }

@@ -7,7 +7,6 @@ namespace ScriptableObjects
     public class ScarpTypesSO : ScriptableObject
     {
         public List<GameObject> scarpList;
-        public GameObject scrapParticle;
         public GameObject GetRandomScrap()
         {
             if (scarpList.Count == 0) return null;
