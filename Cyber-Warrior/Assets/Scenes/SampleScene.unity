@@ -13287,6 +13287,18 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1483146460}
+    - target: {fileID: 1094096495925985718, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094096495925985718, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.865
+      objectReference: {fileID: 0}
+    - target: {fileID: 1094096495925985718, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.841
+      objectReference: {fileID: 0}
     - target: {fileID: 2000213883468793892, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
       propertyPath: healEffect
       value: 
@@ -13370,6 +13382,10 @@ PrefabInstance:
     - target: {fileID: 8732431291722272718, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153557286780108825, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
