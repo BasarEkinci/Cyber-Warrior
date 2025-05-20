@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5635d5add93042ef87a96c3cb29b94e6, type: 3}
   m_Name: PlayerGun
   m_EditorClassIdentifier: 
-  damage: 5
-  attackInterval: 0.5
+  damage: 20
+  attackInterval: 0.2
   range: 50

@@ -21,7 +21,7 @@ namespace Objects
         {
             if (other.CompareTag("Player"))
             {
-                scrapData.AddScarp(1);
+                //scrapData.AddScarp(1);
                 Destroy(_vfx);
                 CollectAnimation(other.transform);
             }
