@@ -59,7 +59,15 @@ The game begins at a safe base area. The player's mission is to explore dangerou
    - Can collect scrap dropped by enemies.
    - Can get damage by enemies
 
-## Player Actions
+## Core Assets - 🎨
+<p align="Left">
+  <img src="ReadmeFiles/Images/Gun.png" alt="gun_png" width="200" style="margin: 20px;"/>
+  <img src="ReadmeFiles/Images/Enemy.png" alt="enemy_png" width="200" style="margin: 20px;"/>
+  <img src="ReadmeFiles/Images/Player.png" alt="player_png" width="200" style="margin: 20px;"/>
+  <img src="ReadmeFiles/Images/CmpBot.png" alt="cmpbot_png" width="200" style="margin: 20px;"/>
+</p>
+
+## Player Actions - 🔄
 <p align="Left">
   <img src="ReadmeFiles/Gifs/8DMove.gif" alt="Player 8D Movement" width="250" height="200" style="margin: 20px;"/>
   <img src="ReadmeFiles/Gifs/Turning.gif" alt="Turning" width="250" height = "200"/>
