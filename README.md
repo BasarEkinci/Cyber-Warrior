@@ -63,9 +63,9 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 <p align="Left">
   <img src="ReadmeFiles/Gifs/8DMove.gif" alt="Player 8D Movement" width="250" height="200" style="margin: 20px;"/>
   <img src="ReadmeFiles/Gifs/Turning.gif" alt="Turning" width="250" height = "200"/>
-  <img src="ReadmeFiles/Gifs/GetDamage_Die.gif" alt="Turning" width="250" height = "200"/>
-  <img src="ReadmeFiles/Gifs/Kill_Collect.gif" alt="Turning" width="250" height = "200"/>
-  <img src="ReadmeFiles/Gifs/Fire.gif" alt="Turning" width="250" height = "200"/>
+  <img src="ReadmeFiles/Gifs/Die.gif" alt="Die" width="250" height = "200"/>
+  <img src="ReadmeFiles/Gifs/Kill_Collect.gif" alt="Kill_Collect" width="250" height = "200"/>
+  <img src="ReadmeFiles/Gifs/Firing.gif" alt="Firing" width="250" height = "200"/>
 </p>
 
 ## Companion Modes - 🟢🔵🔴
