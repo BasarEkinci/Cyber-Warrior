@@ -14,7 +14,7 @@ namespace CompanionBot.Mode
 
         public void SetProperties(Material eyeMaterial)
         {
-            eyeMaterial.color = Color.yellow;            
+            eyeMaterial.color = Color.cyan;            
         }
 
         public void ModeBehaviour()
