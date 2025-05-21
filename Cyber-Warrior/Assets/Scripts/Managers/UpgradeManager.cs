@@ -20,7 +20,10 @@ namespace Managers
         {
             _upgradeable = upgradeTarget as IUpgradeable;
             if (_upgradeable == null)
+            {
                 Debug.LogError("upgradeTarget must implement IUpgradeable!");
+                Debug.Log(transform.name + " does not implement IUpgradeable.");
+            }
         }
 
         private void OnEnable()
