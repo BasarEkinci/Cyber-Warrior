@@ -1,6 +1,5 @@
 using Data.UnityObjects;
 using DG.Tweening;
-using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
