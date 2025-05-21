@@ -6,7 +6,6 @@ namespace Objects
 {
     public class Scrap : MonoBehaviour
     {
-        [SerializeField] private ScarpAmountManager _scarpAmountManager;
         [SerializeField] private GameObject scrapVFX;
         private Tween _tween;
         private GameObject _vfx;
@@ -21,7 +20,7 @@ namespace Objects
         {
             if (other.CompareTag("Player"))
             {
-                _scarpAmountManager.AddScarp(1);
+                ScarpAmountManager.Instance.AddScarp(1);
                 Destroy(_vfx);
                 CollectAnimation(other.transform);
             }
