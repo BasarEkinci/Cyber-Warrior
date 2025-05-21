@@ -2,7 +2,7 @@
 using Enums;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "Control Panel Event Channel", menuName = "Scriptable Objects/Events/Objects", order = 0)]
     public class ControlPanelEvetSO : ScriptableObject

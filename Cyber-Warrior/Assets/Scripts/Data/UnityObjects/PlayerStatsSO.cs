@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "PlayerStats", menuName = "Scriptable Objects/PlayerStats")]
-    public class PlayerStats : ScriptableObject
+    public class PlayerStatsSO : ScriptableObject
     {
         public float moveSpeed;
         public float rotateSpeed;

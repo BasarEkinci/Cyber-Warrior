@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ScriptableObjects.Events
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "FloatEvent", menuName = "Scriptable Objects/Events/FloatEvent")]
     public class FloatEventChannelSO : ScriptableObject

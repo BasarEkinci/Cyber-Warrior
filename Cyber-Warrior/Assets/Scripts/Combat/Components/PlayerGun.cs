@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Data.UnityObjects;
 using Inputs;
 using Interfaces;
-using ScriptableObjects;
-using ScriptableObjects.Events;
 using UnityEngine;
 
 namespace Combat.Components
@@ -13,7 +12,7 @@ namespace Combat.Components
     {   
         [SerializeField] private Transform gunBarrelTransform;
         
-        [SerializeField] private PlayerGunBaseStats playerGunBaseStats;
+        [SerializeField] private PlayerGunStatsSO playerGunStatsSo;
         
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private ParticleSystem muzzleFlash;
@@ -72,12 +71,12 @@ namespace Combat.Components
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
                 muzzleFlash.Play();
-                Vector3 direction = (_crosshair.transform.position - gunBarrelTransform.position) * playerGunBaseStats.range;
-                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, playerGunBaseStats.range))
+                Vector3 direction = (_crosshair.transform.position - gunBarrelTransform.position) * playerGunStatsSo.range;
+                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, playerGunStatsSo.range))
                 {
                     if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
                     {
-                        damagable.TakeDamage(playerGunBaseStats.damage);
+                        damagable.TakeDamage(playerGunStatsSo.damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }

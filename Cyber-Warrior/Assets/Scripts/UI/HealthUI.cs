@@ -1,5 +1,5 @@
+using Data.UnityObjects;
 using DG.Tweening;
-using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,4 +1,5 @@
 using CompanionBot.Mode;
+using Data.UnityObjects;
 using Inputs;
 using Movement;
 using ScriptableObjects;

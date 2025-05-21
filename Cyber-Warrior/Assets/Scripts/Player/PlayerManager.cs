@@ -1,17 +1,17 @@
+using Data.UnityObjects;
 using Inputs;
 using Interfaces;
 using Movement;
-using ScriptableObjects;
-using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
         #region Serilized Fields
-        [SerializeField] private PlayerStats playerStats;
+        [FormerlySerializedAs("playerStats")] [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private RigBuilder rigBuilder;
         [SerializeField] private InputReader inputReader;
@@ -41,7 +41,7 @@ namespace Player
 
         private void OnEnable()
         {
-            _mover = new Mover(_rb, playerStats.moveSpeed);
+            _mover = new Mover(_rb, playerStatsSo.moveSpeed);
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);

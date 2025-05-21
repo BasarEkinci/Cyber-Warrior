@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "Scriptable Objects/Enemy")]
     public class EnemySO : ScriptableObject

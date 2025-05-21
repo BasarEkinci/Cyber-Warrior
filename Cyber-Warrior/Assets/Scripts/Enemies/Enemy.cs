@@ -1,15 +1,12 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using Data.UnityObjects;
 using Interfaces;
 using JetBrains.Annotations;
-using ScriptableObjects;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
-using ScriptableObjects.Events;
-using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -22,7 +19,7 @@ namespace Enemies
         
         [Header("Scriptables")]
         [SerializeField] private VoidEventSO voidEventSo;
-        [SerializeField] private EnemySO enemy;
+        [SerializeField] private EnemySO enemySo;
         [SerializeField] private ScrapTypesSO scrapTypesSo;
         
         private NavMeshAgent _agent;
@@ -72,10 +69,10 @@ namespace Enemies
         {
             while (!token.IsCancellationRequested)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(enemy.attackInterval));
+                await UniTask.Delay(TimeSpan.FromSeconds(enemySo.attackInterval));
                 if (playerHealth != null)
                 {
-                    playerHealth.TakeDamage(enemy.damage);
+                    playerHealth.TakeDamage(enemySo.damage);
                     Instantiate(bloodEffect, playerHealth.transform.position, Quaternion.LookRotation(playerHealth.transform.forward));
                 }
             }
@@ -84,8 +81,8 @@ namespace Enemies
         public void TakeDamage(float amount)
         {
             float damage;
-            if (amount > enemy.damageResistance)
-                damage = amount - enemy.damageResistance;
+            if (amount > enemySo.damageResistance)
+                damage = amount - enemySo.damageResistance;
             else
                 damage = amount;
             Instantiate(bloodEffect, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(transform.forward));
@@ -115,9 +112,9 @@ namespace Enemies
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider>();
             voidEventSo.OnEventRaised += OnPlayerDeath;
-            _agent.speed = enemy.moveSpeed;
-            _currentHealth = enemy.maxHealth;
-            _damageResistance = enemy.damageResistance;
+            _agent.speed = enemySo.moveSpeed;
+            _currentHealth = enemySo.maxHealth;
+            _damageResistance = enemySo.damageResistance;
             var playerManager = FindFirstObjectByType<PlayerManager>();
             if (playerManager != null)
                 _playerTransform = playerManager.transform;

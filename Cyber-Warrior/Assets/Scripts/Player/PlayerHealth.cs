@@ -1,16 +1,16 @@
-using ScriptableObjects;
-using ScriptableObjects.Events;
+using Data.UnityObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerHealth : MonoBehaviour
     {
         public float CurrentHealth => _currentHealth;
-        public float MaxHealth => playerStats.maxHealth;
+        public float MaxHealth => playerStatsSo.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private FloatEventChannelSO floatEventChannelSo;
-        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private PlayerStatsSO playerStatsSo;
         
         
         private float _currentHealth;
@@ -18,7 +18,7 @@ namespace Player
         private void OnEnable()
         {
             _animator = GetComponent<Animator>();
-            _currentHealth = playerStats.maxHealth;
+            _currentHealth = playerStatsSo.maxHealth;
         }
 
         public void TakeDamage(float damage)
@@ -36,7 +36,7 @@ namespace Player
         public void Heal(float healAmount)
         {
             _currentHealth += healAmount;
-            _currentHealth = Mathf.Min(_currentHealth, playerStats.maxHealth);
+            _currentHealth = Mathf.Min(_currentHealth, playerStatsSo.maxHealth);
             floatEventChannelSo.Invoke(_currentHealth);
         }
 

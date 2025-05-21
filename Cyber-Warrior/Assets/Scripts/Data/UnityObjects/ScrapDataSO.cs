@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ScriptableObjects
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "ScarpData", menuName = "Scriptable Objects/ScarpData")]
-    public class ScrapData : ScriptableObject
+    public class ScrapDataSO : ScriptableObject
     {
         public int currentScarp;
 

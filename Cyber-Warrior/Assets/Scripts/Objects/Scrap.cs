@@ -1,12 +1,14 @@
+using Data.UnityObjects;
 using DG.Tweening;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Objects
 {
     public class Scrap : MonoBehaviour
     {
-        [SerializeField] private ScrapData scrapData;
+        [FormerlySerializedAs("scrapData")] [SerializeField] private ScrapDataSO scrapDataSo;
         [SerializeField] private GameObject scrapVFX;
         private Tween _tween;
         private GameObject _vfx;

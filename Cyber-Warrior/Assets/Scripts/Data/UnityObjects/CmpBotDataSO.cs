@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Data.UnityObjects
 {
     [CreateAssetMenu(fileName = "Companion Bot", menuName = "Scriptable Objects/Companion Bot", order = 0)]
     public class CmpBotDataSO : ScriptableObject
