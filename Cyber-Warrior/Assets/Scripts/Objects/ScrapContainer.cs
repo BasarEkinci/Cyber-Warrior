@@ -1,6 +1,5 @@
 using Data.UnityObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Objects
 {
@@ -8,30 +7,29 @@ namespace Objects
     {
         [SerializeField] private float scarpHeightBound;
         [SerializeField] private GameObject scrapStack;
-        [FormerlySerializedAs("scrapData")] [SerializeField] private ScrapDataSO scrapDataSo;
         private int _previousScrapAmount;
         private void OnEnable()
         {
-            _previousScrapAmount = scrapDataSo.currentScarp;   
-            scrapDataSo.OnScrapAmountChanged += UpdateStackLevel;
+            _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;   
+            ScarpAmountManager.Instance.onScrapAmountChanged.AddListener(UpdateStackLevel);
         }
         
         private void UpdateStackLevel()
         {
             Vector3 scrapStackPos = scrapStack.transform.position;
-            if (_previousScrapAmount > scrapDataSo.currentScarp)
+            if (_previousScrapAmount > ScarpAmountManager.Instance.currentScarp)
                 scrapStackPos -= Vector3.up / 10f;
             else
                 scrapStackPos += Vector3.up / 10f;
 
             scrapStackPos = new Vector3(scrapStackPos.x,Mathf.Clamp(scrapStack.transform.position.y,-0.25f,0.25f),scrapStackPos.z);
             scrapStack.transform.position = scrapStackPos;
-            _previousScrapAmount = scrapDataSo.currentScarp;
+            _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;
         }
         
         private void OnDisable()
         {
-            scrapDataSo.OnScrapAmountChanged -= UpdateStackLevel;
+            ScarpAmountManager.Instance.onScrapAmountChanged.RemoveListener(UpdateStackLevel);
         }
     }
 }

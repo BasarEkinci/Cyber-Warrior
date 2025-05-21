@@ -2093,6 +2093,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2083594345842299043, guid: 2646e806e69e36349aa813821e623501, type: 3}
+      propertyPath: enemySo
+      value: 
+      objectReference: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
     - target: {fileID: 6841581671241021686, guid: 2646e806e69e36349aa813821e623501, type: 3}
       propertyPath: m_LocalPosition.x
       value: -49.65
@@ -9458,7 +9462,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scarpHeightBound: 0.25
   scrapStack: {fileID: 598628321}
-  scrapData: {fileID: 11400000, guid: f3fca0699d081274c94b29fe53e24c26, type: 2}
 --- !u!1001 &1569743613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13364,6 +13367,10 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1483146460}
+    - target: {fileID: 3877007227997996256, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
+      propertyPath: playerGunStatsSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
     - target: {fileID: 6222879182373596369, guid: 08615e717fc896a41846fd9415bf92b8, type: 3}
       propertyPath: m_Name
       value: Player_1
@@ -14069,6 +14076,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: cmpSo
+      value: 
+      objectReference: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
+    - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: cmpDataSo
       value: 
       objectReference: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
     - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
