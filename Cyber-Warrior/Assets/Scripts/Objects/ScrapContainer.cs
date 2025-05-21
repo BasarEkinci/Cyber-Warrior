@@ -6,27 +6,41 @@ namespace Objects
 {
     public class ScrapContainer : MonoBehaviour
     {
-        [SerializeField] private float scarpHeightBound;
-        [SerializeField] private GameObject scrapStack;
-        private int _previousScrapAmount;
+        [SerializeField] private Transform scrapStack;    
+        [SerializeField] private float minStackYPos;      
+        [SerializeField] private float maxStackYPos;      
+        [SerializeField] private float tweenDuration = 0.3f;
+        private Tween _tween;
+        
         private void OnEnable()
         {
-            _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;   
-            ScarpAmountManager.Instance.onScrapAmountChanged += UpdateStackLevel;
+            ScarpAmountManager.Instance.onScrapSpend += OnScrapSpend;
+            ScarpAmountManager.Instance.OnScrapEarned += OnScrapEarned;
         }
-        
-        private void UpdateStackLevel(int amount)
-        {
-            if (_previousScrapAmount > amount)
-                scrapStack.transform.DOMove(scrapStack.transform.position + Vector3.down * (amount / 10f), 0.1f).SetEase(Ease.OutBounce);
-            else
-                scrapStack.transform.DOMove(scrapStack.transform.position + Vector3.up * (amount / 10f), 0.1f).SetEase(Ease.OutBounce);
-            _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;
-        }
-        
         private void OnDisable()
         {
-            ScarpAmountManager.Instance.onScrapAmountChanged -= UpdateStackLevel;
+            ScarpAmountManager.Instance.onScrapSpend -= OnScrapSpend;
+            ScarpAmountManager.Instance.OnScrapEarned -= OnScrapEarned;
+        }
+        private void OnScrapEarned(int amount)
+        { 
+            if (scrapStack.transform.position.y > maxStackYPos)
+            {
+                return;
+            }
+            _tween?.Kill();
+            Vector3 targetPos = scrapStack.transform.position + Vector3.up * 0.1f;
+            _tween = scrapStack.DOMove(targetPos, tweenDuration).SetEase(Ease.OutBounce);
+        }
+        private void OnScrapSpend(int amount)
+        {
+            if (scrapStack.transform.position.y < minStackYPos)
+            {
+                return;
+            }
+            _tween?.Kill();
+            Vector3 targetPos = scrapStack.transform.position + Vector3.down * 0.1f;
+            _tween = scrapStack.DOMove(targetPos, tweenDuration).SetEase(Ease.OutBounce);
         }
     }
 }

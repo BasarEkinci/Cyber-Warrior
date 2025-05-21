@@ -6,8 +6,8 @@ namespace Objects.ControlPanelScreens
 {
     public class PanelScreenBase : MonoBehaviour
     {
-        public ControlPanelScreenType Type => type;
-        [SerializeField] private ControlPanelScreenType type;
+        public UpgradeItemType Type => type;
+        [SerializeField] private UpgradeItemType type;
 
         private void OnEnable()
         {

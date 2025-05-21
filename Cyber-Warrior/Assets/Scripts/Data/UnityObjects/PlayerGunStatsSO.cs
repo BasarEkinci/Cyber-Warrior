@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data.ValueObjects;
 using UnityEngine;
 
 namespace Data.UnityObjects
@@ -8,14 +9,5 @@ namespace Data.UnityObjects
     {
         public int MaxLevel => GunStatsList.Count - 1;
         public List<GunStats> GunStatsList;
-    }
-    
-    [System.Serializable]
-    public struct GunStats
-    {
-        public float Damage;
-        public float Range;
-        public float AttackInterval;
-        public int Price;
     }
 }

@@ -1,4 +1,5 @@
 using Data.UnityObjects;
+using Data.ValueObjects;
 using UnityEngine;
 
 namespace Player
@@ -8,8 +9,8 @@ namespace Player
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _playerStatsData.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
-        [SerializeField] private FloatEventChannelSO floatEventChannelSo;
         [SerializeField] private PlayerStatsSO playerStatsSo;
+        [SerializeField] private EventChannelSO<float> healthEventSO;
         
         private int _currentLevel;
         private float _currentHealth;
@@ -26,7 +27,7 @@ namespace Player
         {
             _currentHealth -= damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
-            floatEventChannelSo.Invoke(_currentHealth);
+            healthEventSO.OnEventRaised(_currentHealth);
             if (_currentHealth <= 0f)
             {
                 playerDeathEvent?.Invoke();
@@ -38,7 +39,7 @@ namespace Player
         {
             _currentHealth += healAmount;
             _currentHealth = Mathf.Min(_currentHealth, _playerStatsData.maxHealth);
-            floatEventChannelSo.Invoke(_currentHealth);
+            healthEventSO.OnEventRaised(_currentHealth);
         }
 
         public void Upgrade(int amount)

@@ -9,7 +9,7 @@ namespace UI
     {
         [SerializeField] private Image healthBar;
         [SerializeField] private Image healthBarBackground;
-        [SerializeField] private FloatEventChannelSO healthEvent;
+        [SerializeField] private EventChannelSO<float> healthEventSO;
         
         private Camera _mainCamera;
         private float _previousHealth;
@@ -23,7 +23,7 @@ namespace UI
         }
         private void OnEnable()
         {
-            healthEvent.OnEventRaise += UpdateHealthUI;
+            healthEventSO.OnEventRaised += UpdateHealthUI;
         }
         private void LateUpdate()
         {
@@ -31,7 +31,7 @@ namespace UI
         }
         private void OnDisable()
         {
-            healthEvent.OnEventRaise -= UpdateHealthUI;
+            healthEventSO.OnEventRaised -= UpdateHealthUI;
         }
         private void UpdateHealthUI(float newHealth)
         {

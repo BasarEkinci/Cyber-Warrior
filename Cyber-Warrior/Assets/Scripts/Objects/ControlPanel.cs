@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using Data.UnityObjects;
+using Enums;
 using Inputs;
 using Interfaces;
-using Objects.ControlPanelScreens;
 using UnityEngine;
 
 namespace Objects
 {
     public class ControlPanel : MonoBehaviour,IInteractable
     {
+        [SerializeField] private UpgradeItemType type;
+
         [Header("Panels")] 
         [SerializeField] private List<GameObject> panelList;
         
         [Header("Control Panel Event Channel")]
-        [SerializeField] private ControlPanelEvetSO controlPanelEventSO;
+        [SerializeField] private EventChannelSO<UpgradeItemType> upgradeItemEventSO;
         
         [Header("Class References")]
         [SerializeField] private InputReader inputReader;
@@ -23,11 +25,16 @@ namespace Objects
 
         private void OnEnable()
         {
+            upgradeItemEventSO.OnEventRaised += OnUpgradeItemChange;
             for (int i = 0; i < panelList.Count; i++)
             {
                 panelList[i].SetActive(false);
             }
             inputReader.OnInteractPressed += OnInteract;
+        }
+
+        private void OnUpgradeItemChange(UpgradeItemType arg0)
+        {
         }
 
         private void OnTriggerEnter(Collider other)
@@ -36,7 +43,6 @@ namespace Objects
             {
                 panelList[_currentPanelIndex].SetActive(true);
                 _isPlayerInRange = true;
-                controlPanelEventSO.IsPlayerInRangeInvoke(_isPlayerInRange);
             }
         }
         
@@ -46,7 +52,7 @@ namespace Objects
             {
                 _isPlayerInRange = false;
                 panelList[_currentPanelIndex].SetActive(false);
-                controlPanelEventSO.IsPlayerInRangeInvoke(_isPlayerInRange);
+                _currentPanelIndex = 0;
             }
         }
         
@@ -66,9 +72,6 @@ namespace Objects
                 if (_currentPanelIndex == panelList.Count - 1)
                 {
                     _currentPanelIndex = 0;
-                    PanelScreenBase panel = ChangePanel(panelList[^1], 
-                        panelList[_currentPanelIndex]).GetComponent<PanelScreenBase>();
-                    controlPanelEventSO.OnPanelChangeInvoke(panel.Type);
                     return;
                 }
                 _currentPanelIndex++;
@@ -76,11 +79,10 @@ namespace Objects
             }
         }
         
-        private GameObject ChangePanel(GameObject previousPanel, GameObject newPanel)
+        private void ChangePanel(GameObject previousPanel, GameObject newPanel)
         {
             previousPanel.SetActive(false);
             newPanel.SetActive(true);
-            return newPanel;
         }
     }
 }

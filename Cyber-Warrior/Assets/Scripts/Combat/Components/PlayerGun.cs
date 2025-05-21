@@ -2,8 +2,10 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
+using Data.ValueObjects;
 using Inputs;
 using Interfaces;
+using Managers;
 using UnityEngine;
 
 namespace Combat.Components
@@ -23,18 +25,20 @@ namespace Combat.Components
         [SerializeField] private InputReader inputReader;
         [SerializeField] private Transform gunBarrelTransform;
         
+        private LevelManager _levelManager;
         
         private GameObject _crosshair;
         private GunStats _currentGunStats;
-        private int _currentGunLevel = 0;
         private CancellationTokenSource _cancellationTokenSource;
         
         private bool _isPlayerDead;
         
         private void OnEnable()
         {
+            _levelManager = GetComponent<LevelManager>();
+            _levelManager.SetLevel(0);
             _crosshair = GameObject.FindWithTag("Crosshair");
-            _currentGunStats = playerGunStatsSo.GunStatsList[_currentGunLevel];
+            _currentGunStats = playerGunStatsSo.GunStatsList[_levelManager.CurrentLevel];
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;
