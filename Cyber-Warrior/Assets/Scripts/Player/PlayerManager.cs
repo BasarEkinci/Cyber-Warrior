@@ -1,17 +1,15 @@
 using Data.UnityObjects;
 using Inputs;
-using Interfaces;
 using Movement;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
         #region Serilized Fields
-        [FormerlySerializedAs("playerStats")] [SerializeField] private PlayerStatsSO playerStatsSo;
+        [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private RigBuilder rigBuilder;
         [SerializeField] private InputReader inputReader;
@@ -22,7 +20,7 @@ namespace Player
         private Rotator _rotator;
         private MovementAnimator _movementAnimator;
         
-        private IInteractable _interactable;
+        private PlayerStatsData _playerStatsData;
         private GameObject _crosshair;
         private Rigidbody _rb;
         private Animator _animator;
@@ -30,6 +28,7 @@ namespace Player
         private Vector2 _inputVector;
         private Vector3 _moveVector;
         private bool _canMove;
+        private int _currentLevel;
         #endregion
         
         #region Unity Methods
@@ -41,7 +40,8 @@ namespace Player
 
         private void OnEnable()
         {
-            _mover = new Mover(_rb, playerStatsSo.moveSpeed);
+            _playerStatsData = playerStatsSo.playerStatsDataList[_currentLevel];
+            _mover = new Mover(_rb, _playerStatsData.moveSpeed);
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
@@ -74,15 +74,9 @@ namespace Player
         #region My Methods
         private void OnPlayerDeath()
         {
-            Debug.Log("Player is dead");
             rigBuilder.enabled = false;
             _rb.linearVelocity = Vector3.zero;
             _canMove = false;
-        }
-        private void HandleInteractPressed()
-        {
-            if (_interactable == null) return;
-            _interactable.OnInteract();
         }
 
         private void HandleMove(Vector2 input)

@@ -1,24 +1,25 @@
 using Data.UnityObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerHealth : MonoBehaviour
     {
         public float CurrentHealth => _currentHealth;
-        public float MaxHealth => playerStatsSo.maxHealth;
+        public float MaxHealth => _playerStatsData.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private FloatEventChannelSO floatEventChannelSo;
         [SerializeField] private PlayerStatsSO playerStatsSo;
         
-        
+        private int _currentLevel;
         private float _currentHealth;
         private Animator _animator;
+        private PlayerStatsData _playerStatsData;
         private void OnEnable()
         {
             _animator = GetComponent<Animator>();
-            _currentHealth = playerStatsSo.maxHealth;
+            _playerStatsData = playerStatsSo.playerStatsDataList[_currentLevel];
+            _currentHealth = _playerStatsData.maxHealth;
         }
 
         public void TakeDamage(float damage)
@@ -36,13 +37,17 @@ namespace Player
         public void Heal(float healAmount)
         {
             _currentHealth += healAmount;
-            _currentHealth = Mathf.Min(_currentHealth, playerStatsSo.maxHealth);
+            _currentHealth = Mathf.Min(_currentHealth, _playerStatsData.maxHealth);
             floatEventChannelSo.Invoke(_currentHealth);
         }
 
-        public void IncreaseMaxHealth(float amount)
+        public void Upgrade(int amount)
         {
-            //_maxHealth += amount;
+            if (_currentLevel >= playerStatsSo.MaxLevel)
+            {
+                return;
+            }
+            _currentLevel += amount;
         }
     }
 }
