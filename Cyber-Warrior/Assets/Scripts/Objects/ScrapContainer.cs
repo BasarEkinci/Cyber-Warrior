@@ -1,4 +1,5 @@
 using Data.UnityObjects;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Objects
@@ -11,25 +12,21 @@ namespace Objects
         private void OnEnable()
         {
             _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;   
-            ScarpAmountManager.Instance.onScrapAmountChanged.AddListener(UpdateStackLevel);
+            ScarpAmountManager.Instance.onScrapAmountChanged += UpdateStackLevel;
         }
         
-        private void UpdateStackLevel()
+        private void UpdateStackLevel(int amount)
         {
-            Vector3 scrapStackPos = scrapStack.transform.position;
-            if (_previousScrapAmount > ScarpAmountManager.Instance.currentScarp)
-                scrapStackPos -= Vector3.up / 10f;
+            if (_previousScrapAmount > amount)
+                scrapStack.transform.DOMove(scrapStack.transform.position + Vector3.down * (amount / 10f), 0.1f).SetEase(Ease.OutBounce);
             else
-                scrapStackPos += Vector3.up / 10f;
-
-            scrapStackPos = new Vector3(scrapStackPos.x,Mathf.Clamp(scrapStack.transform.position.y,-0.25f,0.25f),scrapStackPos.z);
-            scrapStack.transform.position = scrapStackPos;
+                scrapStack.transform.DOMove(scrapStack.transform.position + Vector3.up * (amount / 10f), 0.1f).SetEase(Ease.OutBounce);
             _previousScrapAmount = ScarpAmountManager.Instance.currentScarp;
         }
         
         private void OnDisable()
         {
-            ScarpAmountManager.Instance.onScrapAmountChanged.RemoveListener(UpdateStackLevel);
+            ScarpAmountManager.Instance.onScrapAmountChanged -= UpdateStackLevel;
         }
     }
 }

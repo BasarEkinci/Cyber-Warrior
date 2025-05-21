@@ -9,7 +9,7 @@ namespace Data.UnityObjects
 
         [Header("Scrap Info")]
         public int currentScarp;
-        public UnityEvent onScrapAmountChanged;
+        public UnityAction<int> onScrapAmountChanged;
 
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace Data.UnityObjects
         public void AddScarp(int amount)
         {
             currentScarp += amount;
-            onScrapAmountChanged?.Invoke();
+            onScrapAmountChanged?.Invoke(currentScarp);
         }
 
         public bool TrySpendScarp(int amount)
@@ -36,7 +36,7 @@ namespace Data.UnityObjects
             }
 
             currentScarp -= amount;
-            onScrapAmountChanged?.Invoke();
+            onScrapAmountChanged?.Invoke(currentScarp);
             return true;
         }
     }
