@@ -1,4 +1,5 @@
 using Data.UnityObjects;
+using Data.UnityObjects.Events;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace UI
     {
         [SerializeField] private Image healthBar;
         [SerializeField] private Image healthBarBackground;
-        [SerializeField] private EventChannelSO<float> healthEventSO;
+        [SerializeField] private FloatEventChannel healthEventSO;
         
         private Camera _mainCamera;
         private float _previousHealth;

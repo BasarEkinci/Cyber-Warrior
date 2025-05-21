@@ -1,4 +1,5 @@
 using Data.UnityObjects;
+using Data.UnityObjects.Events;
 using Data.ValueObjects;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Player
         public float MaxHealth => _playerStatsData.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private PlayerStatsSO playerStatsSo;
-        [SerializeField] private EventChannelSO<float> healthEventSO;
+        [SerializeField] private FloatEventChannel healthEventSO;
         
         private int _currentLevel;
         private float _currentHealth;

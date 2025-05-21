@@ -10,6 +10,7 @@ namespace Managers
     public class CmpManager : MonoBehaviour
     {
         [SerializeField] private CmpBotDataSO cmpDataSo;
+        [SerializeField] private VoidEventSO onUpgradeEvent;
         [SerializeField] private ParticleSystem attackEffect;
         [SerializeField] private InputReader inputReader;
         
@@ -35,6 +36,7 @@ namespace Managers
         private void OnEnable()
         {
             _currentData = cmpDataSo.statDataList[_levelManager.CurrentLevel];
+            onUpgradeEvent.OnEventRaised += Upgrade;
             inputReader.OnSwitchMode += OnCompanionModeChanged;
             _cmpBotModeManager.CurrentBotMode.SetProperties(_currentData.VisualData.EyeMaterial);
             _followOffset = _currentData.CombatData.FollowOffset;
@@ -42,6 +44,7 @@ namespace Managers
         private void OnDisable()
         {
             inputReader.OnSwitchMode -= OnCompanionModeChanged;
+            onUpgradeEvent.OnEventRaised -= Upgrade;
             _currentData = cmpDataSo.statDataList[_levelManager.CurrentLevel];
             _cmpBotModeManager.CurrentBotMode.SetProperties(_currentData.VisualData.EyeMaterial);
         }
@@ -82,6 +85,8 @@ namespace Managers
             if (_levelManager.CurrentLevel >= cmpDataSo.MaxLevel) 
                 return;
             _levelManager.Upgrade();
+            Debug.Log("Companion Bot Upgraded to level: " + _levelManager.CurrentLevel);
+            _currentData = cmpDataSo.statDataList[_levelManager.CurrentLevel];
         }
     }
 }
