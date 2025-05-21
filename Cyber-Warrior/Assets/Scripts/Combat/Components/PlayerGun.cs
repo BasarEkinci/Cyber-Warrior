@@ -10,18 +10,23 @@ namespace Combat.Components
 {
     public class PlayerGun : MonoBehaviour
     {   
-        [SerializeField] private Transform gunBarrelTransform;
-        
+        [Header("Data")]
         [SerializeField] private PlayerGunStatsSO playerGunStatsSo;
+        [SerializeField] private VoidEventSO playerDeathEvent;
         
+        [Header("Visuals")]
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private ParticleSystem muzzleFlash;
-        [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject bloodEffect;
-        [SerializeField] private VoidEventSO playerDeathEvent;
+
+        [Header("Components")]
         [SerializeField] private InputReader inputReader;
+        [SerializeField] private Transform gunBarrelTransform;
+        
         
         private GameObject _crosshair;
+        private GunStats _currentGunStats;
+        private int _currentGunLevel = 0;
         private CancellationTokenSource _cancellationTokenSource;
         
         private bool _isPlayerDead;
@@ -29,6 +34,7 @@ namespace Combat.Components
         private void OnEnable()
         {
             _crosshair = GameObject.FindWithTag("Crosshair");
+            _currentGunStats = playerGunStatsSo.GunStatsList[_currentGunLevel];
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;
@@ -71,12 +77,12 @@ namespace Combat.Components
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
                 muzzleFlash.Play();
-                Vector3 direction = (_crosshair.transform.position - gunBarrelTransform.position) * playerGunStatsSo.range;
-                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, playerGunStatsSo.range))
+                Vector3 direction = _crosshair.transform.position - gunBarrelTransform.position;
+                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.Range))
                 {
                     if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
                     {
-                        damagable.TakeDamage(playerGunStatsSo.damage);
+                        damagable.TakeDamage(_currentGunStats.Damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }
