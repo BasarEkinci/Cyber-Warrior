@@ -14068,6 +14068,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: cmpSo
+      value: 
+      objectReference: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
+    - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1483146460}
