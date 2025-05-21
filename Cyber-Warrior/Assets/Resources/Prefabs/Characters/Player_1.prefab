@@ -1498,7 +1498,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 8732431291722272718}
   healthBarBackground: {fileID: 6916114069319765045}
-  healthEvent: {fileID: 11400000, guid: 27576ba8f676068499c24c25d3725e51, type: 2}
+  healthEventSO: {fileID: 11400000, guid: 6b4f7157a046fef479e057aeb103a5b0, type: 2}
 --- !u!1 &5168243714318435277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,6 +2171,8 @@ GameObject:
   - component: {fileID: 566422947013747526}
   - component: {fileID: 2000213883468793892}
   - component: {fileID: 2225839465524455756}
+  - component: {fileID: 3224943044565684602}
+  - component: {fileID: 3639051640544028157}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Player
@@ -2279,9 +2281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6657b76d4d38c408c52c23a471037e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  playerStatsSo: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   rigBuilder: {fileID: 2225839465524455756}
+  inputReader: {fileID: 0}
 --- !u!114 &2000213883468793892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,8 +2298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
-  floatEventChannelSo: {fileID: 11400000, guid: 27576ba8f676068499c24c25d3725e51, type: 2}
-  playerStats: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  playerStatsSo: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  healthEventSO: {fileID: 11400000, guid: 6b4f7157a046fef479e057aeb103a5b0, type: 2}
 --- !u!114 &2225839465524455756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2313,6 +2316,34 @@ MonoBehaviour:
   - m_Rig: {fileID: 8538009311957822273}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &3224943044565684602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222879182373596369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeItemType: 2
+--- !u!114 &3639051640544028157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222879182373596369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc6cb41b4e6452bb2aefdbe22c4a466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  levelManager: {fileID: 3224943044565684602}
+  playerID: Player
 --- !u!1 &6308452077753898172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3100,7 @@ Transform:
   m_GameObject: {fileID: 8579996436397317224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.08, z: 0.809}
+  m_LocalPosition: {x: -0.008, y: 0.865, z: 0.841}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3276,7 +3307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1972487910709877232, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.112
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1972487910709877232, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3371,7 +3402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.183
+      value: -0.086
       objectReference: {fileID: 0}
     - target: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3428,6 +3459,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3877007227997996256}
+    - targetCorrespondingSourceObject: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7453163747484620518}
+    - targetCorrespondingSourceObject: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2523334685814715415}
   m_SourcePrefab: {fileID: 100100000, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
 --- !u!1 &423744939500418658 stripped
 GameObject:
@@ -3446,14 +3483,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455763cc08f143919c5c63864beebe6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunBarrelTransform: {fileID: 1094096495925985718}
-  holdInputChannelSo: {fileID: 11400000, guid: a20255683653cb54385ddfb4b7a64281, type: 2}
-  playerGunBaseStats: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
+  playerGunStatsSo: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
+  playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   lineRenderer: {fileID: 3881941445091634797}
   muzzleFlash: {fileID: 785484977058188780}
-  bulletPrefab: {fileID: 2371418669018796513, guid: 4d095b9a53208194aa263487eff2c0c1, type: 3}
   bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
-  playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  inputReader: {fileID: 0}
+  gunBarrelTransform: {fileID: 1094096495925985718}
+--- !u!114 &7453163747484620518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423744939500418658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeItemType: 1
+--- !u!114 &2523334685814715415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423744939500418658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2ab5fd71ed4544a028837f4a5df7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
+  levelManager: {fileID: 7453163747484620518}
+  weaponID: Weapon
 --- !u!4 &7356219005830625299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2206168476208344541, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}

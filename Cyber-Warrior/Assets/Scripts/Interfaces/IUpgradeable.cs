@@ -2,6 +2,9 @@ namespace Interfaces
 {
     public interface IUpgradeable
     {
-        void Upgrade(int amount);
+        int CurrentLevel { get; }
+        int MaxLevel { get; }
+        int GetLevelPrice(int level);
+        void Upgrade();
     }
 }

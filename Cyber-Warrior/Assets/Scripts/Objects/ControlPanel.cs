@@ -1,28 +1,24 @@
-using Managers;
 using UnityEngine;
 
 namespace Objects
 {
     public class ControlPanel : MonoBehaviour
     {
-        [SerializeField] private LevelManager levelManager;
-        [SerializeField] private GameObject cmpInfoPanel;
+        [SerializeField] private GameObject infoPanel;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                cmpInfoPanel.SetActive(true);
+                infoPanel.SetActive(true);
             }    
         }
-        
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                cmpInfoPanel.SetActive(false);
+                infoPanel.SetActive(false);
             }    
         }
-        
     }
 }

@@ -1,6 +1,7 @@
 using Data.UnityObjects;
 using Data.ValueObjects;
 using Inputs;
+using Managers;
 using Movement;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -10,6 +11,7 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         #region Serilized Fields
+        [SerializeField] private LevelManager levelManager;
         [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private RigBuilder rigBuilder;
@@ -29,7 +31,6 @@ namespace Player
         private Vector2 _inputVector;
         private Vector3 _moveVector;
         private bool _canMove;
-        private int _currentLevel;
         #endregion
         
         #region Unity Methods
@@ -41,7 +42,7 @@ namespace Player
 
         private void OnEnable()
         {
-            _playerStatsData = playerStatsSo.playerStatsDataList[_currentLevel];
+            _playerStatsData = playerStatsSo.playerStatsDataList[levelManager.CurrentLevel];
             _mover = new Mover(_rb, _playerStatsData.moveSpeed);
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);
