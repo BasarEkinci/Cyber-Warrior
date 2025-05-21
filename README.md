@@ -59,6 +59,15 @@ The game begins at a safe base area. The player's mission is to explore dangerou
    - Can collect scrap dropped by enemies.
    - Can get damage by enemies
 
+ - The Enemy; 
+   - Has die, idle, run and attack animation
+   - Enemy can drop scarp to collect
+
+ -The Companion;
+   -Has 3 Modes: Healer, Attacer, Base
+   -Follows the player
+   -Can attack nearest enemy
+
 ## Core Assets - 🎨
 <p align="Left">
   <img src="ReadmeFiles/Images/Gun.png" alt="gun_png" width="200" style="margin: 20px;"/>
@@ -77,6 +86,30 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 </p>
 
 ## Companion Modes - 🟢🔵🔴
-<p align="Left">
+<p align="Center">
   <img src="ReadmeFiles/Gifs/CompanionModes.gif" alt="Player 8D Movement" width="500" height="350" style="margin: 20px;"/>
 </p>
+
+
+## 05.21.2025 Updates 🔄
+
+- Character, companion and gun datas edited. 📝
+- The number of upgrade areas has been increased. Separate upgrade areas were created for player, weapons and Companion 🔼🔼🔼
+- Upgrade System Added 🛠️
+- Save System Added 📝
+---
+<div style="display: flex; align-items: center; gap: 20px;">
+  <img src="ReadmeFiles/Images/BotData.png" alt="BotData" width="250" />
+  <img src="ReadmeFiles/Images/PlayerData.png" alt="PlayerData" width="250" />
+  <img src="ReadmeFiles/Images/WeaponData.png" alt="WeaponData" width="250" />
+</div>
+
+---
+
+<div style="display: flex; align-items: center; gap: 20px;">
+  <img src="ReadmeFiles/Images/CmpUpgradeArea.png" alt="CmpUpgradeArea" width="250" />
+  <img src="ReadmeFiles/Images/WeaponUpgradeArea.png" alt="WeaponUpgradeArea" width="250" />
+  <img src="ReadmeFiles/Images/PlayerUpgradeArea.png" alt="PlayerUpgradeArea" width="250" />
+</div>
+
+
