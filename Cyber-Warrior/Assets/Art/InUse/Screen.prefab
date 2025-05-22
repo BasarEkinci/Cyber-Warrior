@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2336665039141538257}
   - component: {fileID: 8383899731055569805}
   m_Layer: 5
-  m_Name: PlayerStats
+  m_Name: PlayerStatsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: 0.7071063, z: -0, w: 0.70710737}
   m_LocalPosition: {x: 0, y: 0, z: 0.093}
   m_LocalScale: {x: 0.24999997, y: 0.25, z: 0.24999997}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 834156540675867912}
   m_Father: {fileID: 847744072373817869}
@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30aaa18af0b747a0ba9ed552cee32103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
 --- !u!65 &6171738809760315267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,8 +182,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4029835, y: 1, z: 0.9911617}
-  m_Center: {x: -0.2014916, y: 0, z: -0.004418792}
+  m_Size: {x: 1.3705473, y: 1, z: 1.911557}
+  m_Center: {x: -0.8318574, y: 0, z: 0.4557793}
 --- !u!1 &2918544125265779274
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +195,7 @@ GameObject:
   - component: {fileID: 2469855193292789449}
   - component: {fileID: 5508959392960845295}
   - component: {fileID: 4948146157799319156}
+  - component: {fileID: 2606698489266827559}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -271,6 +271,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2606698489266827559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918544125265779274}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.44577494, y: 0.99850667, z: 0.94761735}
+  m_Center: {x: -0.00009254372, y: 0.0012957611, z: -0.004590469}
 --- !u!1 &6028746926309254103
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CmpStats
+  m_text: 'PlayerStats
 
 '
   m_isRightToLeft: 0
@@ -498,4 +519,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1cda065594472381aa0440db9b751f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0

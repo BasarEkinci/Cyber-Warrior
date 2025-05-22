@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet
   - Crosshair
+  - UpgradeArea
   layers:
   - Default
   - TransparentFX
