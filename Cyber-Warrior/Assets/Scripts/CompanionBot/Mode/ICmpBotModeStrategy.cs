@@ -7,5 +7,6 @@ namespace CompanionBot.Mode
     {
         void Execute(Rotator rotator,GameObject reference, float rotationSpeed);
         void SetProperties(Material eyeMaterial);
+        void ModeBehaviour();
     }
 }

@@ -103,5 +103,8 @@ namespace CompanionBot.Mode
             if (_attackEffect == null) return;
             _attackEffect.Play();
         }
+        public void ModeBehaviour()
+        {
+        }
     }
 }

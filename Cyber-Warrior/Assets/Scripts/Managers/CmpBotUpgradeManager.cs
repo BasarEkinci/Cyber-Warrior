@@ -34,7 +34,6 @@ namespace Managers
                     {
                         onUpgradeEvent.Invoke();
                         _currentHoldTime = 0f;
-                        
                     }
                     else
                     {

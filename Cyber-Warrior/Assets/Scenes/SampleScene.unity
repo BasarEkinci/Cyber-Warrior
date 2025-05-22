@@ -1130,6 +1130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7adf68d22f53b4f9a06353b3678672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
 --- !u!4 &104508535
 Transform:
   m_ObjectHideFlags: 0
@@ -14276,6 +14278,14 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1483146460}
+    - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: currentState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: gameStateEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
     - target: {fileID: 8076204608118414222, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: onUpgradeEvent
       value: 

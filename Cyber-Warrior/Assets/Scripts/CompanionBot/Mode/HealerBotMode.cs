@@ -26,6 +26,11 @@ namespace CompanionBot.Mode
             eyeMaterial.color = Color.green;             
         }
 
+        public void ModeBehaviour()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void HealBehaviour()
         {
             if (_playerHealth.CurrentHealth  >= _playerHealth.MaxHealth)
