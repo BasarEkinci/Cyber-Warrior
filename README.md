@@ -90,27 +90,45 @@ The game begins at a safe base area. The player's mission is to explore dangerou
   <img src="ReadmeFiles/Gifs/CompanionModes.gif" alt="Player 8D Movement" width="500" height="350" style="margin: 20px;"/>
 </p>
 
+---
 
 ## 05.21.2025 Updates 🔄
 
 - Character, companion and gun datas edited. 📝
 - The number of upgrade areas has been increased. Separate upgrade areas were created for player, weapons and Companion 🔼🔼🔼
-- Upgrade System Added 🛠️
-- Save System Added 📝
----
-<div style="display: flex; align-items: center; gap: 20px;">
-  <img src="ReadmeFiles/Images/BotData.png" alt="BotData" width="250" />
-  <img src="ReadmeFiles/Images/PlayerData.png" alt="PlayerData" width="250" />
-  <img src="ReadmeFiles/Images/WeaponData.png" alt="WeaponData" width="250" />
-</div>
+  
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/CmpUpgradeArea.png" alt="CmpUpgradeArea" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/WeaponUpgradeArea.png" alt="WeaponUpgradeArea" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/PlayerUpgradeArea.png" alt="PlayerUpgradeArea" width="250"/>
+    </td>
+  </tr>
+</table>
+
+ - Upgrade System Added 🛠️
+ - Save System Added 📝
+
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/BotData.png" alt="BotData" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/PlayerData.png" alt="PlayerData" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/WeaponData.png" alt="WeaponData" width="250"/>
+    </td>
+  </tr>
+</table>
 
 ---
-
-<div style="display: flex; align-items: center; gap: 20px;">
-  <img src="ReadmeFiles/Images/CmpUpgradeArea.png" alt="CmpUpgradeArea" width="250" />
-  <img src="ReadmeFiles/Images/WeaponUpgradeArea.png" alt="WeaponUpgradeArea" width="250" />
-  <img src="ReadmeFiles/Images/PlayerUpgradeArea.png" alt="PlayerUpgradeArea" width="250" />
-</div>
 
 ## 05.22.2025 Updates 🔄
 
@@ -118,8 +136,14 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 - I changed the companion's mod switching feature. Now, mod switching is locked while inside the base.
 - During action, we can switch between healer and attacker modes.
 - Inside the base, the companion automatically switches to base mode and it cannot be changed.
-
-<p align="Left">
-  <img src="ReadmeFiles/Gifs/CmpBaseMode.gif" alt="CmpBaseMode" width="250" style="margin: 20px;"/>
-  <img src="ReadmeFiles/Gifs/Cmp_Attacker_Healer.gif" alt="Cmp_Attacker_Healer" width="250"/>
-</p>
+  
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Gifs/CmpBaseMode.gif" alt="CmpBaseMode" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Gifs/Cmp_Attacker_Healer.gif" alt="Cmp_Attacker_Healer" width="250"/>
+    </td>
+  </tr>
+</table>
