@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField] private int scarpToAdd = 300;
+    [SerializeField] private int scarpToSpend = 100;
+    
     [SerializeField] private GameState gameState;
     [SerializeField] private GameStateEvent gameStateEvent;
     
@@ -14,16 +17,16 @@ public class Test : MonoBehaviour
     {
         gameStateEvent.RaiseEvent(gameState);
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ScarpAmountManager.Instance.AddScarp(300);
-        }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            ScarpAmountManager.Instance.TrySpendScarp(120);
-        }
+    [Button]
+    public void AddScarp()
+    {
+        ScarpAmountManager.Instance.AddScarp(scarpToAdd);
+    }
+
+    [Button]
+    public void SpendScarp()
+    {
+        ScarpAmountManager.Instance.TrySpendScarp(scarpToSpend);
     }
 }
