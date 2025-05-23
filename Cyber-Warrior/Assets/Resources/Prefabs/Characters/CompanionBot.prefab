@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7896260988278129711}
-  - component: {fileID: 8076204608118414222}
+  - component: {fileID: 6881531321085355516}
+  - component: {fileID: 105965401091470366}
   m_Layer: 0
   m_Name: CompanionBot
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   - {fileID: 5021939047723051239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8076204608118414222
+--- !u!114 &6881531321085355516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +43,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2909494619995276644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c73a6a0af577014aaa25d8b7575c88a, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cmpDataSo: {fileID: 0}
-  onUpgradeEvent: {fileID: 0}
-  attackEffect: {fileID: 8411259060251988761}
-  inputReader: {fileID: 0}
-  currentState: 0
+  upgradeItemType: 0
+--- !u!114 &105965401091470366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909494619995276644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8026a9370044ea480838f25846e6cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
+  levelManager: {fileID: 6881531321085355516}
+  companionID: CmpBot
 --- !u!1 &3117732062735877566
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,10 +815,5 @@ PrefabInstance:
 --- !u!4 &3952268725953363102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7541750129371384559, guid: 4f5fc4bbd01b03a4499a6ed77f175fc7, type: 3}
-  m_PrefabInstance: {fileID: 6805197146215020145}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8411259060251988761 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: -6140058637718067864, guid: 4f5fc4bbd01b03a4499a6ed77f175fc7, type: 3}
   m_PrefabInstance: {fileID: 6805197146215020145}
   m_PrefabAsset: {fileID: 0}

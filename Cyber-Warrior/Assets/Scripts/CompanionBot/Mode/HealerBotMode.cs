@@ -18,7 +18,6 @@ namespace CompanionBot.Mode
         public void Execute(Rotator rotator,GameObject reference, float rotationSpeed)
         {
             rotator.SetLookDirection();
-            HealBehaviour();   
         }
 
         public void SetProperties(Material eyeMaterial)
@@ -27,11 +26,6 @@ namespace CompanionBot.Mode
         }
 
         public void ModeBehaviour()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void HealBehaviour()
         {
             if (_playerHealth.CurrentHealth  >= _playerHealth.MaxHealth)
             {
