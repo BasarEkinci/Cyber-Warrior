@@ -13,4 +13,11 @@ namespace Data.ValueObjects
         public Vector3 AttackOffset;
         public LayerMask EnemyLayer;
     }
+    
+    [System.Serializable]
+    public struct CmpHealerData
+    {
+        public float HealCooldown;
+        public float HealAmount;
+    }
 }

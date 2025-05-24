@@ -5,6 +5,7 @@
     {
         public CmpCombatData CombatData;
         public CmpVisualData VisualData;
+        public CmpHealerData HealerData;
         public int LevelPrice;
     }
 }

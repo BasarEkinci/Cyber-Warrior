@@ -26,32 +26,7 @@ MonoBehaviour:
     VisualData:
       EyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       Mesh: {fileID: 0}
-    LevelPrice: 0
-  - CombatData:
-      AttackCooldown: 5
-      Damage: 5
-      MoveSpeed: 8
-      RotationSpeed: 360
-      FollowOffset: {x: 0, y: 2, z: -1.5}
-      AttackOffset: {x: 0, y: 2.5, z: 0}
-      EnemyLayer:
-        serializedVersion: 2
-        m_Bits: 64
-    VisualData:
-      EyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
-      Mesh: {fileID: 0}
-    LevelPrice: 0
-  - CombatData:
-      AttackCooldown: 5
-      Damage: 5
-      MoveSpeed: 8
-      RotationSpeed: 360
-      FollowOffset: {x: 0, y: 2, z: -1.5}
-      AttackOffset: {x: 0, y: 2.5, z: 0}
-      EnemyLayer:
-        serializedVersion: 2
-        m_Bits: 64
-    VisualData:
-      EyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
-      Mesh: {fileID: 0}
+    HealerData:
+      HealCooldown: 1
+      HealAmount: 1
     LevelPrice: 0

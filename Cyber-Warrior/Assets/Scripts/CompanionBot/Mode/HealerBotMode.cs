@@ -1,44 +1,29 @@
-﻿using Movement;
+﻿using Data.ValueObjects;
 using Player;
 using UnityEngine;
 
 namespace CompanionBot.Mode
 {
-    public class HealerBotMode : ICmpBotModeStrategy
+    public class HealerBotMode : CmpBotMode
     {
-        private float _healCooldown = 1f;
-        private float _cooldownTimer;
-        private float _healAmount = 1f;
-        private PlayerHealth _playerHealth;
-        public HealerBotMode()
-        {
-            _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-        }
+        [SerializeField] private Transform followTarget;
+        [SerializeField] private PlayerHealth playerHealth;
 
-        public void Execute(Rotator rotator,GameObject reference, float rotationSpeed)
+        private CmpBotStatData _botData;
+        private float _timer;
+        public override void Initialize()
         {
-            rotator.SetLookDirection();
+            eyeMaterial.color = modeColor;
+            _botData = botData.statDataList[levelManager.CurrentLevel];
         }
-
-        public void SetProperties(Material eyeMaterial)
+        
+        public override void Execute()
         {
-            eyeMaterial.color = Color.green;             
-        }
-
-        public void ModeBehaviour()
-        {
-            if (_playerHealth.CurrentHealth  >= _playerHealth.MaxHealth)
+            _timer += Time.deltaTime;
+            if (_timer >= _botData.HealerData.HealCooldown)
             {
-                return;
-            }
-            _cooldownTimer += Time.deltaTime;
-            if (_cooldownTimer >= _healCooldown)
-            {
-                if (_playerHealth != null)
-                {
-                    _playerHealth.Heal(_healAmount);
-                }
-                _cooldownTimer = 0f;
+                _timer = 0f;
+                playerHealth.Heal(_botData.HealerData.HealAmount);
             }
         }
     }

@@ -1,21 +1,17 @@
-﻿using Movement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CompanionBot.Mode
 {
-    public class BaseBotMode : ICmpBotModeStrategy
+    public class BaseBotMode : CmpBotMode
     {
-        public void Execute(Rotator rotator,GameObject reference, float rotationSpeed)
+        public override void Initialize()
         {
-            rotator.SetLookDirection();
+            Debug.Log("BaseBotMode initialized.");
         }
 
-        public void SetProperties(Material eyeMaterial)
+        public override void Execute()
         {
-            eyeMaterial.color = Color.cyan;            
-        }
-        public void ModeBehaviour()
-        {
+            Debug.Log("BaseBotMode executing.");
         }
     }
 }

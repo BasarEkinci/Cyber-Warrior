@@ -38,6 +38,10 @@ namespace Player
 
         public void Heal(float healAmount)
         {
+            if (_currentHealth >= _playerStatsData.maxHealth)
+            {
+                return;
+            }
             _currentHealth += healAmount;
             _currentHealth = Mathf.Min(_currentHealth, _playerStatsData.maxHealth);
             healthEventSO.OnEventRaised(_currentHealth);
