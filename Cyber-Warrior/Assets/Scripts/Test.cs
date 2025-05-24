@@ -13,7 +13,7 @@ public class Test : MonoBehaviour
     [SerializeField] private GameStateEvent gameStateEvent;
     
     [Button]
-    public void ExecuteEvent()
+    public void ChangeGameState()
     {
         gameStateEvent.RaiseEvent(gameState);
     }
