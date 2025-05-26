@@ -8,13 +8,17 @@ namespace CompanionBot.Mode
     {
         [Header("Data")]
         public CmpBotDataSO botData;
-        
+
         [Header("Visuals")]
         public Material eyeMaterial;
         public Color modeColor;
-        
+
         [Header("Class References")]
         public LevelManager levelManager;
+        [Header("Variables")]
+        public Vector3 followOffset;
+        public Transform target;
+
         public abstract void Initialize();
         public abstract void Execute();
     }

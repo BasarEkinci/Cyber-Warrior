@@ -1505,6 +1505,8 @@ MonoBehaviour:
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 0, b: 0, a: 0}
   levelManager: {fileID: 2022862511379052110}
+  followOffset: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!1 &159852087
 GameObject:
   m_ObjectHideFlags: 0
@@ -9255,6 +9257,8 @@ MonoBehaviour:
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 0, b: 0, a: 0}
   levelManager: {fileID: 5270933456566423008}
+  followOffset: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!1 &1496198204
 GameObject:
   m_ObjectHideFlags: 0
@@ -11660,7 +11664,8 @@ MonoBehaviour:
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 1, b: 0.10735226, a: 1}
   levelManager: {fileID: 5270933456566423008}
-  followTarget: {fileID: 445555854}
+  followOffset: {x: 0, y: 2, z: -1}
+  target: {fileID: 445555854}
   playerHealth: {fileID: 2022862511379052118}
 --- !u!1001 &1926688803
 PrefabInstance:

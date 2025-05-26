@@ -8,7 +8,6 @@ namespace CompanionBot.Mode
 {
     public class CmpBotModeManager : MonoBehaviour
     {
-        [SerializeField] private Transform currentTransform;
         [SerializeField] private InputReader inputReader;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private List<CmpBotMode> botModes;

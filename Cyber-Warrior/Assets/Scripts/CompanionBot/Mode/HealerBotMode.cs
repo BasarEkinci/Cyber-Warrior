@@ -6,9 +6,8 @@ namespace CompanionBot.Mode
 {
     public class HealerBotMode : CmpBotMode
     {
-        [SerializeField] private Transform followTarget;
         [SerializeField] private PlayerHealth playerHealth;
-
+    
         private CmpBotStatData _botData;
         private float _timer;
         public override void Initialize()
@@ -25,6 +24,11 @@ namespace CompanionBot.Mode
                 _timer = 0f;
                 playerHealth.Heal(_botData.HealerData.HealAmount);
             }
+        }
+
+        public override void FollowTarget(Transform current)
+        {
+            
         }
     }
 }
