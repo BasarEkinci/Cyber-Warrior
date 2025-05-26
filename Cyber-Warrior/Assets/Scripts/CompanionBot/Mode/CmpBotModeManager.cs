@@ -3,6 +3,7 @@ using Data.UnityObjects.Events;
 using Enums;
 using Inputs;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace CompanionBot.Mode
 {
@@ -10,14 +11,15 @@ namespace CompanionBot.Mode
     {
         [SerializeField] private InputReader inputReader;
         [SerializeField] private GameStateEvent gameStateEvent;
+        [SerializeField] private BotModeEvent botModeEvent;
         [SerializeField] private List<CmpBotMode> botModes;
         
         private CmpBotMode _currentMode;
         private GameState _currentGameState;
-
         private void Start()
         {
             _currentMode = botModes.Find(mode => mode is HealerBotMode);
+            botModeEvent.RaiseEvent(_currentMode.mode);
         }
 
         private void OnEnable()
@@ -52,6 +54,7 @@ namespace CompanionBot.Mode
                     _currentMode?.Initialize();
                     break;
             }
+            botModeEvent.RaiseEvent(_currentMode.mode);
         }
 
         private void OnDisable()
@@ -74,6 +77,7 @@ namespace CompanionBot.Mode
                     _currentMode?.Initialize();
                     break;
             }
+            botModeEvent.RaiseEvent(_currentMode.mode);
         }
     }
 }

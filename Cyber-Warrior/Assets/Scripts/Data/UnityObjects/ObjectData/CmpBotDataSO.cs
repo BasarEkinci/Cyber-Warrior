@@ -8,6 +8,7 @@ namespace Data.UnityObjects
     public class CmpBotDataSO : ScriptableObject
     {
         public int MaxLevel => statDataList.Count - 1;
+        public CmpMovementData movementData;
         public List<CmpBotStatData> statDataList;
     }
 }

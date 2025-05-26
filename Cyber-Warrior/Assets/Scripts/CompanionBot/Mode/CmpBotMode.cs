@@ -1,5 +1,7 @@
 ﻿using Data.UnityObjects;
+using Enums;
 using Managers;
+using Movement;
 using UnityEngine;
 
 namespace CompanionBot.Mode
@@ -17,8 +19,7 @@ namespace CompanionBot.Mode
         public LevelManager levelManager;
         [Header("Variables")]
         public Vector3 followOffset;
-        public Transform target;
-
+        public CmpMode mode;
         public abstract void Initialize();
         public abstract void Execute();
     }
