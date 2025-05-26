@@ -9,6 +9,7 @@ namespace Data.UnityObjects
     {
         public int MaxLevel => statDataList.Count - 1;
         public CmpMovementData movementData;
+        [Header("Data List")]
         public List<CmpBotStatData> statDataList;
     }
 }

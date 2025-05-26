@@ -1,8 +1,7 @@
 ﻿using Data.ValueObjects;
 using Player;
 using UnityEngine;
-using Movement;
-using Enums;
+
 namespace CompanionBot.Mode
 {
     public class HealerBotMode : CmpBotMode
