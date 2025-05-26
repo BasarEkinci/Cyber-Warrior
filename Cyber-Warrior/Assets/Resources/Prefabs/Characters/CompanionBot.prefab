@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d12b0646c7a9495ea258494434cb245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  followPos: {fileID: 0}
+  attackPos: {fileID: 0}
+  cross: {fileID: 0}
   data: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   modeEvent: {fileID: 11400000, guid: e77125a4a7c5144f7ae39e59d3c76578, type: 2}
   transformEvent: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
@@ -632,6 +634,7 @@ MonoBehaviour:
   modeColor: {r: 1, g: 0, b: 0, a: 1}
   levelManager: {fileID: 0}
   mode: 2
+  data: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
 --- !u!1 &9056458591613503400
 GameObject:
   m_ObjectHideFlags: 0

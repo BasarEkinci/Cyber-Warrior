@@ -7,6 +7,7 @@ namespace Data.ValueObjects
     {
         public float AttackCooldown;
         public float Damage;
+        public float Range;
         public LayerMask EnemyLayer;
     }
 

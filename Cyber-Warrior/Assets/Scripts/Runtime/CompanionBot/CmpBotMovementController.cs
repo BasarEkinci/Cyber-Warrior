@@ -16,26 +16,22 @@ public class CmpBotMovementController : MonoBehaviour
     [SerializeField] private TransformEventChannel transformEvent;
 
     private float _moveSpeed;
-    private Vector3 _followOffset;
-    private Vector3 _currentOffset;
-    private Vector3 _attackOffset;
-    private Transform _currentTarget;
+    private Transform _currentFollowPos;
+    private Transform _currentAimPos;
     private Rotator _rotator;
 
     private void OnEnable()
     {
         _moveSpeed = data.movementData.MoveSpeed;
-        _followOffset = data.movementData.FollowOffset;
-        _attackOffset = data.movementData.AttackOffset;
         modeEvent.OnEventRaised += OnBotModeChange;
-        transformEvent.OnEventRaised += OnTargetChange;
-        _currentTarget = followPos;
+        transformEvent.OnEventRaised += OnFollowPosChange;
+        _currentFollowPos = followPos;
         _rotator = new Rotator(transform,cross);
     }
 
-    private void OnTargetChange(Transform currentTarget)
+    private void OnFollowPosChange(Transform newAimPos)
     {
-        
+        _currentAimPos = newAimPos;
     }
 
     private void OnBotModeChange(CmpMode mode)
@@ -43,19 +39,18 @@ public class CmpBotMovementController : MonoBehaviour
         switch (mode)
         {
             case CmpMode.Base:
-                _currentOffset = Vector3.zero;
+                _currentFollowPos = followPos; //change it to base pos
+                _currentAimPos = cross.transform; //change it to base aim pos
                 break;
             case CmpMode.Healer:
-                _currentOffset = _followOffset;
-                _currentTarget = followPos;
-                
+                _currentFollowPos = followPos;
+                _currentAimPos = cross.transform;
                 break;
             case CmpMode.Attacker:
-                _currentOffset = _attackOffset;
-                _currentTarget = attackPos;
+                _currentFollowPos = attackPos;
                 break;
             default:
-                _currentOffset = _followOffset;
+                _currentFollowPos = followPos;
                 break;
         }
     }
@@ -66,12 +61,18 @@ public class CmpBotMovementController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        FollowTarget(_moveSpeed * Time.fixedDeltaTime,_currentTarget);
+        FollowTarget(_moveSpeed * Time.fixedDeltaTime,_currentFollowPos);
     }
-
+    private void SetAimPos()
+    {
+        if (_currentAimPos == null)
+        {
+            _currentAimPos = cross.transform;
+        }
+    }
     private void FollowTarget(float speed,Transform target)
     {
-        Vector3 desiredPos = target.position + _currentOffset;
+        Vector3 desiredPos = target.position;
         transform.position = Vector3.Lerp(transform.position, desiredPos, speed);
     }
 }

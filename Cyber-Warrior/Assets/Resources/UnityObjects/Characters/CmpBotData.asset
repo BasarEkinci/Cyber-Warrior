@@ -19,8 +19,9 @@ MonoBehaviour:
     RotationSpeed: 360
   statDataList:
   - CombatData:
-      AttackCooldown: 5
+      AttackCooldown: 1
       Damage: 5
+      Range: 10
       EnemyLayer:
         serializedVersion: 2
         m_Bits: 64

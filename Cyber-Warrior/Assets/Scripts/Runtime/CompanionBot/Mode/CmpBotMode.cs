@@ -16,7 +16,6 @@ namespace CompanionBot.Mode
 
         [Header("Class References")]
         public LevelManager levelManager;
-        [Header("Variables")]
         public CmpMode mode;
         public abstract void Initialize();
         public abstract void Execute();

@@ -14419,14 +14419,18 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2022862511379052110}
+    - target: {fileID: 8481779090774494902, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: onTargetChange
+      value: 
+      objectReference: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
+    - target: {fileID: 8481779090774494902, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8663440602826652969, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: cross
       value: 
       objectReference: {fileID: 843945625}
-    - target: {fileID: 8663440602826652969, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1139953103}
     - target: {fileID: 8663440602826652969, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: attackPos
       value: 
