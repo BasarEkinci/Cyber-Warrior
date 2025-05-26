@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CmpBotData
   m_EditorClassIdentifier: 
   movementData:
-    FollowOffset: {x: 0, y: 2, z: -1}
-    AttackOffset: {x: 0, y: 2.5, z: 0}
+    FollowOffset: {x: 0, y: 0, z: 0}
+    AttackOffset: {x: 0, y: 0, z: 0}
     MoveSpeed: 8
     RotationSpeed: 360
   statDataList:
@@ -28,6 +28,6 @@ MonoBehaviour:
       EyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       Mesh: {fileID: 0}
     HealerData:
-      HealCooldown: 1
+      HealCooldown: 3
       HealAmount: 1
     LevelPrice: 0
