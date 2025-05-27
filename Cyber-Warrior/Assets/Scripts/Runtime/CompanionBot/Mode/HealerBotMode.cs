@@ -11,9 +11,13 @@ namespace Runtime.CompanionBot.Mode
         private CmpHealerData _botData;
         private float _timer;
         public override GameState ValidGameState => GameState.Action;
+        public override Transform TargetObject { get; set; }
+        public override Transform FollowPosition { get; set; }
 
         public override void Initialize()
         {
+            TargetObject = anchorPoints.GetTargetObject();
+            FollowPosition = anchorPoints.GetAnchorPoint(mode);
             eyeMaterial.color = modeColor;
             _botData = GetDataAtCurrentLevel().healerData;
         }
@@ -30,12 +34,12 @@ namespace Runtime.CompanionBot.Mode
 
         public override void RotateBehaviour(Transform currentTransform)
         {
-            currentTransform.LookAt(targetObject);
+            currentTransform.LookAt(TargetObject);
         }
 
         public override void MoveBehaviourFixed(Transform currentTransform)
         {
-            Vector3 desiredPosition = followPosition.position;
+            Vector3 desiredPosition = FollowPosition.position;
             currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * Time.fixedDeltaTime);
         }
         

@@ -617,7 +617,7 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   targetObject: {fileID: 0}
   followPosition: {fileID: 0}
-  onTargetChange: {fileID: 0}
+  onTargetChange: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
 --- !u!1 &9056458591613503400
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,12 @@ namespace Runtime.CompanionBot.Mode
 {
     public abstract class CmpBotMode : MonoBehaviour
     {
+        public abstract GameState ValidGameState { get; }
+        public abstract Transform TargetObject { get; set; }
+        public abstract Transform FollowPosition { get; set; }
         [Header("Mode Info")]
         public CmpMode mode;
-        public abstract GameState ValidGameState { get; }
+        
         [Header("Data")]
         public CmpBotDataSO botData;
 
@@ -20,10 +23,7 @@ namespace Runtime.CompanionBot.Mode
 
         [Header("Class References")]
         public LevelManager levelManager;
-
-        [Header("Values")] 
-        public Transform targetObject;
-        public Transform followPosition;
+        public BotAnchorPoints anchorPoints;
         public abstract CmpBotStatData GetDataAtCurrentLevel();
         public abstract void Initialize();
         public abstract void Execute();
