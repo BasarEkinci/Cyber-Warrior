@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CompanionBot.Mode
+namespace Runtime.CompanionBot.Mode
 {
     public class BaseBotMode : CmpBotMode
     {
@@ -12,6 +12,16 @@ namespace CompanionBot.Mode
         public override void Execute()
         {
             Debug.Log("BaseBotMode executing.");
+        }
+
+        public override void RotateBehaviour(Transform currentTransform)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void MoveBehaviourFixed(Transform currentTransform)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

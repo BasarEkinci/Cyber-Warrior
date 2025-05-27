@@ -4131,7 +4131,7 @@ Transform:
   m_GameObject: {fileID: 524064227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 1.977, z: -0.049}
+  m_LocalPosition: {x: -0.002, y: 2.144, z: -0.049}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14371,6 +14371,14 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 2022862511379052118}
+    - target: {fileID: 2532649767726626640, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 52563614186761174}
+    - target: {fileID: 2532649767726626640, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: followPosition
+      value: 
+      objectReference: {fileID: 1139953103}
     - target: {fileID: 2909494619995276644, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: m_Name
       value: CompanionBot
@@ -14420,6 +14428,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2022862511379052110}
     - target: {fileID: 8481779090774494902, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 52563614186761174}
+    - target: {fileID: 8481779090774494902, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: followPosition
+      value: 
+      objectReference: {fileID: 524064228}
+    - target: {fileID: 8481779090774494902, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: onTargetChange
       value: 
       objectReference: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
@@ -14439,11 +14455,16 @@ PrefabInstance:
       propertyPath: followPos
       value: 
       objectReference: {fileID: 1139953103}
+    - target: {fileID: 8663440602826652969, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: modeManager
+      value: 
+      objectReference: {fileID: 5270933456566423007}
     - target: {fileID: 9037268400884756809, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1483146460}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8663440602826652969, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -14457,6 +14478,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8026a9370044ea480838f25846e6cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5270933456566423007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9037268400884756809, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+  m_PrefabInstance: {fileID: 5270933456566423000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e7ad2ec26aa4a2198a4e25009ee869f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5404024574244425736

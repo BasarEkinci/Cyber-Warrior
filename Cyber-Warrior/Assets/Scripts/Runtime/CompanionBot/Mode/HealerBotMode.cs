@@ -2,7 +2,7 @@
 using Player;
 using UnityEngine;
 
-namespace CompanionBot.Mode
+namespace Runtime.CompanionBot.Mode
 {
     public class HealerBotMode : CmpBotMode
     {
@@ -23,6 +23,17 @@ namespace CompanionBot.Mode
                 _timer = 0f;
                 playerHealth.Heal(_botData.HealerData.HealAmount);
             }
+        }
+
+        public override void RotateBehaviour(Transform currentTransform)
+        {
+            currentTransform.LookAt(targetObject);
+        }
+
+        public override void MoveBehaviourFixed(Transform currentTransform)
+        {
+            Vector3 desiredPosition = followPosition.position;
+            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.MoveSpeed * Time.fixedDeltaTime);
         }
     }
 }

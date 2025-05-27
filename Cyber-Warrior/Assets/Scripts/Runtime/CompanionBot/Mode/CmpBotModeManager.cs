@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Data.UnityObjects.Events;
+using Data.ValueObjects;
 using Enums;
 using Inputs;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace CompanionBot.Mode
+namespace Runtime.CompanionBot.Mode
 {
     public class CmpBotModeManager : MonoBehaviour
     {
@@ -35,7 +35,14 @@ namespace CompanionBot.Mode
                 return;
             }
             _currentMode.Execute();
+            _currentMode.RotateBehaviour(transform);
         }
+
+        private void FixedUpdate()
+        {
+            _currentMode.MoveBehaviourFixed(transform);
+        }
+
         private void SwitchMode()
         {
             if (_currentGameState != GameState.Action)

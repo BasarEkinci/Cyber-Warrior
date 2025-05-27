@@ -3,7 +3,7 @@ using Enums;
 using Managers;
 using UnityEngine;
 
-namespace CompanionBot.Mode
+namespace Runtime.CompanionBot.Mode
 {
     public abstract class CmpBotMode : MonoBehaviour
     {
@@ -17,7 +17,13 @@ namespace CompanionBot.Mode
         [Header("Class References")]
         public LevelManager levelManager;
         public CmpMode mode;
+
+        [Header("Values")] 
+        public Transform targetObject;
+        public Transform followPosition;
         public abstract void Initialize();
         public abstract void Execute();
+        public abstract void RotateBehaviour(Transform currentTransform);
+        public abstract void MoveBehaviourFixed(Transform currentTransform);
     }
 }

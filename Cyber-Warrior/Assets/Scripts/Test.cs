@@ -16,7 +16,14 @@ public class Test : MonoBehaviour
     [Header("Data References")]
     [SerializeField] private GameState gameState;
     [SerializeField] private GameStateEvent gameStateEvent;
-    
+
+
+    private void OnEnable()
+    {
+        gameStateEvent.RaiseEvent(GameState.Action);
+    }
+
+    #region Test Methods
     [Title("Changes the game state with specified value")]
     [Button(ButtonSizes.Large)]
     public void ChangeGameState()
@@ -38,6 +45,7 @@ public class Test : MonoBehaviour
     {
         ScarpAmountManager.Instance.TrySpendScarp(scarpToSpend);
     }
+    
     [PropertySpace]
     [Title("Damages the player up to given value")]
     [Button(ButtonSizes.Large)]
@@ -45,4 +53,5 @@ public class Test : MonoBehaviour
     {
         playerHealth.TakeDamage(damageAmount);
     }
+    #endregion
 }
