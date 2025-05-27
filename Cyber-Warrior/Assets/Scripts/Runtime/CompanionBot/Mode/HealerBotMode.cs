@@ -16,7 +16,12 @@ namespace Runtime.CompanionBot.Mode
 
         public override void Initialize()
         {
-            TargetObject = anchorPoints.GetTargetObject();
+            if (TargetObject == null || FollowPosition == null)
+            {
+                Debug.LogWarning($"{mode} mode is not properly initialized. TargetObject or FollowPosition is null.");
+                return;
+            }
+            TargetObject = anchorPoints.GetInitialTargetObject();
             FollowPosition = anchorPoints.GetAnchorPoint(mode);
             eyeMaterial.color = modeColor;
             _botData = GetDataAtCurrentLevel().healerData;

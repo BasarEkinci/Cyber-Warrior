@@ -24,7 +24,7 @@ namespace Runtime.CompanionBot
             };
         }
 
-        public Transform GetTargetObject()
+        public Transform GetInitialTargetObject()
         {
             return targetObject;
         }
