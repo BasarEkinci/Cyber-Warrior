@@ -1,5 +1,5 @@
-﻿using Data.ValueObjects;
-using Enums;
+﻿using Enums;
+using Runtime.Data.ValueObjects;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -8,10 +8,15 @@ namespace Runtime.CompanionBot.Mode
     {
         public override GameState ValidGameState => GameState.Base;
         private CmpBotStatData _botData;
+        public override CmpBotStatData GetDataAtCurrentLevel()
+        {
+            return botData.statDataList[levelManager.CurrentLevel];
+        }
+
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;
-            _botData = botData.statDataList[levelManager.CurrentLevel];
+            _botData = GetDataAtCurrentLevel();
         }
         
         public override void Execute()
@@ -26,7 +31,7 @@ namespace Runtime.CompanionBot.Mode
         public override void MoveBehaviourFixed(Transform currentTransform)
         {
             Vector3 desiredPosition = followPosition.position;
-            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.MoveSpeed * Time.fixedDeltaTime);
+            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * Time.fixedDeltaTime);
         }
     }
 }

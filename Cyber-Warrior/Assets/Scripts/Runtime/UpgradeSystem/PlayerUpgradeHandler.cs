@@ -14,7 +14,7 @@ namespace UpgradeSystem
         public int CurrentLevel => levelManager.CurrentLevel;
         public int MaxLevel => playerData.MaxLevel;
 
-        public int GetLevelPrice(int level) => playerData.playerStatsDataList[level].LevelPrice;
+        public int GetLevelPrice(int level) => playerData.playerStatsDataList[level].levelPrice;
 
         public void Upgrade()
         {

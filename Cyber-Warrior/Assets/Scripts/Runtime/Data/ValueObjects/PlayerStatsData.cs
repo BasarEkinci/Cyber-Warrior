@@ -1,9 +1,9 @@
-﻿namespace Data.ValueObjects
+﻿namespace Runtime.Data.ValueObjects
 {
     [System.Serializable]
     public struct PlayerStatsData
     {
-        public int LevelPrice;
+        public int levelPrice;
         public float moveSpeed;
         public float rotateSpeed;
         public float maxHealth;

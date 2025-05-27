@@ -1,6 +1,7 @@
 ﻿using Data.UnityObjects;
 using Enums;
 using Managers;
+using Runtime.Data.ValueObjects;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -23,6 +24,7 @@ namespace Runtime.CompanionBot.Mode
         [Header("Values")] 
         public Transform targetObject;
         public Transform followPosition;
+        public abstract CmpBotStatData GetDataAtCurrentLevel();
         public abstract void Initialize();
         public abstract void Execute();
         public abstract void RotateBehaviour(Transform currentTransform);

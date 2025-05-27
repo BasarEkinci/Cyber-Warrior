@@ -1,11 +1,13 @@
-﻿namespace Data.ValueObjects
+﻿using UnityEngine.Serialization;
+
+namespace Runtime.Data.ValueObjects
 {
     [System.Serializable]
     public struct GunStats
     {
-        public float Damage;
-        public float Range;
-        public float AttackInterval;
-        public int Price;
+        public float damage;
+        public float range;
+        public float attackInterval;
+        public int price;
     }
 }

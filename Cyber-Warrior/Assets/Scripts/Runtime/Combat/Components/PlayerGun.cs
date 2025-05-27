@@ -2,10 +2,10 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
-using Data.ValueObjects;
 using Inputs;
 using Interfaces;
 using Managers;
+using Runtime.Data.ValueObjects;
 using UnityEngine;
 
 namespace Combat.Components
@@ -82,11 +82,11 @@ namespace Combat.Components
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
                 muzzleFlash.Play();
                 Vector3 direction = _crosshair.transform.position - gunBarrelTransform.position;
-                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.Range))
+                if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.range))
                 {
                     if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
                     {
-                        damagable.TakeDamage(_currentGunStats.Damage);
+                        damagable.TakeDamage(_currentGunStats.damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }

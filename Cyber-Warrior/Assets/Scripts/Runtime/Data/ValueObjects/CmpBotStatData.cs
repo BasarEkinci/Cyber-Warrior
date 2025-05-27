@@ -1,4 +1,4 @@
-﻿namespace Data.ValueObjects
+﻿namespace Runtime.Data.ValueObjects
 {
     [System.Serializable]
     public struct CmpBotStatData

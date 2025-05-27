@@ -14,7 +14,7 @@ namespace UpgradeSystem
         public int CurrentLevel => levelManager.CurrentLevel;
         public int MaxLevel => weaponData.MaxLevel;
 
-        public int GetLevelPrice(int level) => weaponData.GunStatsList[level].Price;
+        public int GetLevelPrice(int level) => weaponData.GunStatsList[level].price;
 
         public void Upgrade()
         {

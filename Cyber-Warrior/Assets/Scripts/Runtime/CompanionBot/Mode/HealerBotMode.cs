@@ -1,6 +1,6 @@
-﻿using Data.ValueObjects;
-using Enums;
+﻿using Enums;
 using Player;
+using Runtime.Data.ValueObjects;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -8,23 +8,23 @@ namespace Runtime.CompanionBot.Mode
     public class HealerBotMode : CmpBotMode
     {
         [SerializeField] private PlayerHealth playerHealth;
-        private CmpBotStatData _botData;
+        private CmpHealerData _botData;
         private float _timer;
         public override GameState ValidGameState => GameState.Action;
 
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;
-            _botData = botData.statDataList[levelManager.CurrentLevel];
+            _botData = GetDataAtCurrentLevel().HealerData;
         }
         
         public override void Execute()
         {
             _timer += Time.deltaTime;
-            if (_timer >= _botData.HealerData.HealCooldown)
+            if (_timer >= _botData.HealCooldown)
             {
                 _timer = 0f;
-                playerHealth.Heal(_botData.HealerData.HealAmount);
+                playerHealth.Heal(_botData.HealAmount);
             }
         }
 
@@ -36,7 +36,12 @@ namespace Runtime.CompanionBot.Mode
         public override void MoveBehaviourFixed(Transform currentTransform)
         {
             Vector3 desiredPosition = followPosition.position;
-            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.MoveSpeed * Time.fixedDeltaTime);
+            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * Time.fixedDeltaTime);
+        }
+        
+        public override CmpBotStatData GetDataAtCurrentLevel()
+        {
+            return botData.statDataList[levelManager.CurrentLevel];
         }
     }
 }
