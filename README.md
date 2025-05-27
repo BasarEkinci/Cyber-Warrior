@@ -45,7 +45,7 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 # Project - DevLog 📝
 
 ⚠️Because I started the devlog late, I will write what I have done so far superficially. The rest will be more detailed.
-### Current Features 📈
+### Current Features - 05.18.2025 📈
 
 - The player; 
    - Has 8 dimension animations
