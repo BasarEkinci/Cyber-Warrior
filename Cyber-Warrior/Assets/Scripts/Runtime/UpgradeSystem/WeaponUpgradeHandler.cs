@@ -1,9 +1,10 @@
 ﻿using Data.UnityObjects;
-using Interfaces;
 using Managers;
+using Runtime.Interfaces;
+using Runtime.Managers;
 using UnityEngine;
 
-namespace UpgradeSystem
+namespace Runtime.UpgradeSystem
 {
     public class WeaponUpgradeHandler : MonoBehaviour, IUpgradeable
     {
@@ -11,8 +12,14 @@ namespace UpgradeSystem
         [SerializeField] private LevelManager levelManager;
         [SerializeField] private string weaponID = "weapon_1";
 
-        public int CurrentLevel => levelManager.CurrentLevel;
-        public int MaxLevel => weaponData.MaxLevel;
+        public int CurrentLevel { get; set; }
+        public int MaxLevel { get; set; }
+
+        private void OnEnable()
+        {
+            CurrentLevel = levelManager.CurrentLevel;
+            MaxLevel = weaponData.MaxLevel;
+        }
 
         public int GetLevelPrice(int level) => weaponData.GunStatsList[level].price;
 

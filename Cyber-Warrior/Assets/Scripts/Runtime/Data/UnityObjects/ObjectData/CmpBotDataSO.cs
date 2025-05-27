@@ -2,7 +2,7 @@
 using Runtime.Data.ValueObjects;
 using UnityEngine;
 
-namespace Data.UnityObjects
+namespace Runtime.Data.UnityObjects.ObjectData
 {
     [CreateAssetMenu(fileName = "Companion Bot", menuName = "Scriptable Objects/Companion Bot", order = 0)]
     public class CmpBotDataSO : ScriptableObject

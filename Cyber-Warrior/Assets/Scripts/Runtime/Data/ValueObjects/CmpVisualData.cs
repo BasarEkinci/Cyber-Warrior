@@ -6,6 +6,6 @@ namespace Runtime.Data.ValueObjects
     public struct CmpVisualData
     {
         public Material eyeMaterial;
-        public GameObject mesh; //This value will change based on the level
+        public GameObject mesh;
     }
 }

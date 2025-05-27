@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace Managers
+namespace Runtime.Managers
 {
     [System.Serializable]
     public class SaveData

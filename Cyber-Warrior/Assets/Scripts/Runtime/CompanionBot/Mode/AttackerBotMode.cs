@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Runtime.Data.ValueObjects;
 using UnityEngine;
 
@@ -11,14 +12,12 @@ namespace Runtime.CompanionBot.Mode
         public override GameState ValidGameState => GameState.Action;
         public override Transform TargetObject { get; set; }
         public override Transform FollowPosition { get; set; }
+        private CmpBotVFXPlayer _vfxPlayer;
+        private float _timer;
 
         public override void Initialize()
         {
-            if (TargetObject == null || FollowPosition == null)
-            {
-                Debug.LogWarning($"{mode} mode is not properly initialized. TargetObject or FollowPosition is null.");
-                return;
-            }
+            _vfxPlayer = transform.parent.GetComponentInChildren<CmpBotVFXPlayer>();
             TargetObject = anchorPoints.GetInitialTargetObject();
             FollowPosition = anchorPoints.GetAnchorPoint(mode);
             eyeMaterial.color = modeColor;
@@ -26,6 +25,12 @@ namespace Runtime.CompanionBot.Mode
         }
         public override void Execute()
         {
+            _timer += Time.deltaTime;
+            if (_timer >= _botData.attackCooldown)
+            {
+                _vfxPlayer.PlayVFX();
+                _timer = 0f;
+            }
         }
 
         public override void RotateBehaviour(Transform currentTransform)

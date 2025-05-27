@@ -1,8 +1,10 @@
 ﻿using Data.UnityObjects;
 using Inputs;
+using Managers;
+using Runtime.Data.UnityObjects.ObjectData;
 using UnityEngine;
 
-namespace Managers
+namespace Runtime.Managers
 {
     public class CmpBotUpgradeManager : MonoBehaviour
     {

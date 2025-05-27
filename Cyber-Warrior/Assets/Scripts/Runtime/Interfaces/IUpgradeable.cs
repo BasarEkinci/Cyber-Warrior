@@ -1,9 +1,9 @@
-namespace Interfaces
+namespace Runtime.Interfaces
 {
     public interface IUpgradeable
     {
-        int CurrentLevel { get; }
-        int MaxLevel { get; }
+        int CurrentLevel { get; set; }
+        int MaxLevel { get; set; }
         int GetLevelPrice(int level);
         void Upgrade();
     }

@@ -19,16 +19,44 @@ MonoBehaviour:
     rotationSpeed: 360
   statDataList:
   - combatData:
-      attackCooldown: 0
-      damage: 0
-      range: 0
+      attackCooldown: 2
+      damage: 4
+      range: 10
       enemyLayer:
         serializedVersion: 2
-        m_Bits: 0
+        m_Bits: 64
     visualData:
       eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
-      mesh: {fileID: 2909494619995276644, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      mesh: {fileID: 5794103751566755491, guid: 8877d463e7b5e9e47a081706a543a2eb, type: 3}
     healerData:
-      healCooldown: 1
-      healAmount: 5
+      healCooldown: 0
+      healAmount: 0
     levelPrice: 0
+  - combatData:
+      attackCooldown: 1.9
+      damage: 5
+      range: 12
+      enemyLayer:
+        serializedVersion: 2
+        m_Bits: 64
+    visualData:
+      eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
+      mesh: {fileID: 5665959452139842833, guid: b3827c09224a8a64198cfb98ca43e06e, type: 3}
+    healerData:
+      healCooldown: 8
+      healAmount: 10
+    levelPrice: 50
+  - combatData:
+      attackCooldown: 1.8
+      damage: 6
+      range: 14
+      enemyLayer:
+        serializedVersion: 2
+        m_Bits: 64
+    visualData:
+      eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
+      mesh: {fileID: 6593914072655373387, guid: dc828958767e82b459a53174ed068d0f, type: 3}
+    healerData:
+      healCooldown: 7
+      healAmount: 12
+    levelPrice: 80
