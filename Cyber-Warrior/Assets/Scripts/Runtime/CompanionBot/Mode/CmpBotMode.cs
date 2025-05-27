@@ -7,8 +7,10 @@ namespace Runtime.CompanionBot.Mode
 {
     public abstract class CmpBotMode : MonoBehaviour
     {
+        public abstract GameState ValidGameState { get; }
         [Header("Data")]
         public CmpBotDataSO botData;
+        public CmpMode mode;
 
         [Header("Visuals")]
         public Material eyeMaterial;
@@ -16,7 +18,6 @@ namespace Runtime.CompanionBot.Mode
 
         [Header("Class References")]
         public LevelManager levelManager;
-        public CmpMode mode;
 
         [Header("Values")] 
         public Transform targetObject;

@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
 {
     public class BaseBotMode : CmpBotMode
     {
+        public override GameState ValidGameState => GameState.Base;
+
         public override void Initialize()
         {
             Debug.Log("BaseBotMode initialized.");

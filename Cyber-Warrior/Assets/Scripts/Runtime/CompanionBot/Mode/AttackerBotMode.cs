@@ -1,4 +1,5 @@
 ﻿using Data.ValueObjects;
+using Enums;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -7,6 +8,8 @@ namespace Runtime.CompanionBot.Mode
     {
         [SerializeField] private TransformEventChannel onTargetChange;
         private CmpCombatData _botData;
+        public override GameState ValidGameState => GameState.Action;
+
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;

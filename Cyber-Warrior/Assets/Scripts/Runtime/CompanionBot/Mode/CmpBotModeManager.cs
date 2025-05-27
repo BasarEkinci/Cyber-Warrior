@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Data.UnityObjects.Events;
-using Data.ValueObjects;
 using Enums;
 using Inputs;
 using UnityEngine;
+
 
 namespace Runtime.CompanionBot.Mode
 {
@@ -16,15 +18,15 @@ namespace Runtime.CompanionBot.Mode
         
         private CmpBotMode _currentMode;
         private GameState _currentGameState;
-        private void Start()
+        
+        private readonly Dictionary<GameState, Type> _stateModeMap = new Dictionary<GameState, System.Type>
         {
-            _currentMode = botModes.Find(mode => mode is HealerBotMode);
-            botModeEvent.RaiseEvent(_currentMode.mode);
-        }
-
+            { GameState.Base, typeof(BaseBotMode) },
+            { GameState.Action, typeof(HealerBotMode) }
+        };
         private void OnEnable()
         {
-            inputReader.OnSwitchMode += SwitchMode;
+            inputReader.OnSwitchMode += SwitchModeInActionState;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
         }
 
@@ -43,48 +45,38 @@ namespace Runtime.CompanionBot.Mode
             _currentMode.MoveBehaviourFixed(transform);
         }
 
-        private void SwitchMode()
-        {
-            if (_currentGameState != GameState.Action)
-            {
-                return;
-            }
-
-            switch (_currentMode)
-            {
-                case HealerBotMode:
-                    _currentMode = botModes.Find(mode => mode is AttackerBotMode);
-                    _currentMode?.Initialize();
-                    break;
-                case AttackerBotMode:
-                    _currentMode = botModes.Find(mode => mode is HealerBotMode);
-                    _currentMode?.Initialize();
-                    break;
-            }
-            botModeEvent.RaiseEvent(_currentMode.mode);
-        }
-
         private void OnDisable()
         {
-            inputReader.OnSwitchMode -= SwitchMode;
+            inputReader.OnSwitchMode -= SwitchModeInActionState;
             gameStateEvent.OnEventRaised -= OnGameStateChanged;
         }
-
+        
+        private void SwitchModeInActionState()
+        {
+            var currentValidModes = botModes.Where(mode => mode.ValidGameState == _currentGameState).ToList();
+            int currentIndex = currentValidModes.IndexOf(_currentMode);
+            int nextIndex = (currentIndex + 1) % currentValidModes.Count;
+            ChangeModeTo(currentValidModes[nextIndex]);
+        }
+        
+        /// <summary>
+        /// This method is called only when the game state changes base to action or vice versa.
+        /// </summary>
+        /// <param name="state">New Game State</param>
         private void OnGameStateChanged(GameState state)
         {
-            _currentGameState = state;
-            switch (state)
+            if (_stateModeMap.TryGetValue(state, out var modeType))
             {
-                case GameState.Base:
-                    _currentMode = botModes.Find(mode => mode is BaseBotMode);
-                    _currentMode?.Initialize();
-                    break;
-                case GameState.Action:
-                    _currentMode = botModes.Find(mode => mode is HealerBotMode);
-                    _currentMode?.Initialize();
-                    break;
+                ChangeModeTo(botModes.Find(mode => mode.GetType() == modeType));
             }
-            botModeEvent.RaiseEvent(_currentMode.mode);
+        }
+
+        private void ChangeModeTo(CmpBotMode newMode)
+        {
+            _currentMode = newMode;
+            _currentMode?.Initialize();
+            if (_currentMode != null) 
+                botModeEvent.RaiseEvent(_currentMode.mode);
         }
     }
 }

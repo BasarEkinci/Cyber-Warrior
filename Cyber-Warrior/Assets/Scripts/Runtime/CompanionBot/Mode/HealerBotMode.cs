@@ -1,4 +1,5 @@
 ﻿using Data.ValueObjects;
+using Enums;
 using Player;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Runtime.CompanionBot.Mode
         [SerializeField] private PlayerHealth playerHealth;
         private CmpBotStatData _botData;
         private float _timer;
+        public override GameState ValidGameState => GameState.Action;
+
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;
