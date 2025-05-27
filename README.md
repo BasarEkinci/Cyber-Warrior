@@ -136,7 +136,7 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 - I changed the companion's mod switching feature. Now, mod switching is locked while inside the base.
 - During action, we can switch between healer and attacker modes.
 - Inside the base, the companion automatically switches to base mode and it cannot be changed.
-  
+
 <table>
   <tr>
     <td align="center" valign="middle">
