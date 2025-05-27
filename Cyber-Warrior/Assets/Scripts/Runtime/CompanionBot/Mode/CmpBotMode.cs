@@ -7,10 +7,11 @@ namespace Runtime.CompanionBot.Mode
 {
     public abstract class CmpBotMode : MonoBehaviour
     {
+        [Header("Mode Info")]
+        public CmpMode mode;
         public abstract GameState ValidGameState { get; }
         [Header("Data")]
         public CmpBotDataSO botData;
-        public CmpMode mode;
 
         [Header("Visuals")]
         public Material eyeMaterial;

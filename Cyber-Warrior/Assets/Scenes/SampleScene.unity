@@ -14459,6 +14459,14 @@ PrefabInstance:
       propertyPath: modeManager
       value: 
       objectReference: {fileID: 5270933456566423007}
+    - target: {fileID: 8826552260243335937, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 52563614186761174}
+    - target: {fileID: 8826552260243335937, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: followPosition
+      value: 
+      objectReference: {fileID: 1139953103}
     - target: {fileID: 9037268400884756809, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: inputReader
       value: 

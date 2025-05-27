@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Data.ValueObjects;
+using Enums;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -6,25 +7,26 @@ namespace Runtime.CompanionBot.Mode
     public class BaseBotMode : CmpBotMode
     {
         public override GameState ValidGameState => GameState.Base;
-
+        private CmpBotStatData _botData;
         public override void Initialize()
         {
-            Debug.Log("BaseBotMode initialized.");
+            eyeMaterial.color = modeColor;
+            _botData = botData.statDataList[levelManager.CurrentLevel];
         }
-
+        
         public override void Execute()
         {
-            Debug.Log("BaseBotMode executing.");
         }
 
         public override void RotateBehaviour(Transform currentTransform)
         {
-            throw new System.NotImplementedException();
+            currentTransform.LookAt(targetObject);
         }
 
         public override void MoveBehaviourFixed(Transform currentTransform)
         {
-            throw new System.NotImplementedException();
+            Vector3 desiredPosition = followPosition.position;
+            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.MoveSpeed * Time.fixedDeltaTime);
         }
     }
 }
