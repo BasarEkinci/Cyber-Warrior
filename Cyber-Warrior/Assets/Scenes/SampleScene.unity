@@ -1154,7 +1154,7 @@ MonoBehaviour:
   scarpToAdd: 300
   scarpToSpend: 100
   playerHealth: {fileID: 2022862511379052118}
-  gameState: 0
+  gameState: 1
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
 --- !u!1 &114197699
 GameObject:
