@@ -147,3 +147,23 @@ The game begins at a safe base area. The player's mission is to explore dangerou
     </td>
   </tr>
 </table>
+
+## 05.27.2025 Updates 🔄
+
+- The moderation system of the Companion Bot was made more modular.
+- The required models for the new levels were added to the Companion Bot.
+- Upgrades were enabled.
+
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <div><strong>Level 2</strong></div>
+      <img src="ReadmeFiles/Images/cmp_LvL_2.png" alt="Cmp2" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <div><strong>Level 3</strong></div>
+      <img src="ReadmeFiles/Images/cmp_LvL_3.png" alt="Cmp3" width="250"/>
+    </td>
+  </tr>
+</table>
+
