@@ -157,6 +157,10 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 <table>
   <tr>
     <td align="center" valign="middle">
+      <div><strong>Level 1</strong></div>
+      <img src="ReadmeFiles/Images/cmp_LvL_1.png" alt="Cmp1" width="250"/>
+    </td>
+    <td align="center" valign="middle">
       <div><strong>Level 2</strong></div>
       <img src="ReadmeFiles/Images/cmp_LvL_2.png" alt="Cmp2" width="250"/>
     </td>
