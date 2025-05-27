@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerGun
   m_EditorClassIdentifier: 
   GunStatsList:
-  - Damage: 5
-    Range: 50
-    AttackInterval: 2
-    Price: 0
+  - damage: 10
+    range: 50
+    attackInterval: 2
+    price: 0

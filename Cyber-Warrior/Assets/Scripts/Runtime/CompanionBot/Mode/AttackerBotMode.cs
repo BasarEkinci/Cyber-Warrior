@@ -13,7 +13,7 @@ namespace Runtime.CompanionBot.Mode
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;
-            _botData = GetDataAtCurrentLevel().CombatData;
+            _botData = GetDataAtCurrentLevel().combatData;
         }
         public override void Execute()
         {

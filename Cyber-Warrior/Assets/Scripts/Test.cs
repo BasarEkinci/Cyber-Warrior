@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
 
     private void OnEnable()
     {
-        gameStateEvent.RaiseEvent(GameState.Action);
+        gameStateEvent.RaiseEvent(GameState.Base);
     }
 
     #region Test Methods

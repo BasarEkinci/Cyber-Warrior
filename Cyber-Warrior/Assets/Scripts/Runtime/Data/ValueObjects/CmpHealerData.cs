@@ -3,7 +3,7 @@
     [System.Serializable]
     public struct CmpHealerData
     {
-        public float HealCooldown;
-        public float HealAmount;
+        public float healCooldown;
+        public float healAmount;
     }
 }

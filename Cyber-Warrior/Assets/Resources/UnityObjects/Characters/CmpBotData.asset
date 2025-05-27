@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: CmpBotData
   m_EditorClassIdentifier: 
   movementData:
-    FollowOffset: {x: 0, y: 0, z: 0}
-    AttackOffset: {x: 0, y: 0, z: 0}
-    MoveSpeed: 8
-    RotationSpeed: 360
+    followOffset: {x: 0, y: 0, z: 0}
+    attackOffset: {x: 0, y: 0, z: 0}
+    moveSpeed: 8
+    rotationSpeed: 360
   statDataList:
-  - CombatData:
-      AttackCooldown: 1
-      Damage: 5
-      Range: 10
-      EnemyLayer:
+  - combatData:
+      attackCooldown: 0
+      damage: 0
+      range: 0
+      enemyLayer:
         serializedVersion: 2
-        m_Bits: 64
-    VisualData:
-      EyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
-      Mesh: {fileID: 0}
-    HealerData:
-      HealCooldown: 3
-      HealAmount: 1
-    LevelPrice: 0
+        m_Bits: 0
+    visualData:
+      eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
+      mesh: {fileID: 2909494619995276644, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+    healerData:
+      healCooldown: 1
+      healAmount: 5
+    levelPrice: 0

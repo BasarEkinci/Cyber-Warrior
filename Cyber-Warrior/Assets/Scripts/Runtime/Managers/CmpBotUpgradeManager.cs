@@ -30,7 +30,7 @@ namespace Managers
                 _currentHoldTime += Time.deltaTime;
                 if (_currentHoldTime >= interactHoldTime)
                 {
-                    if (ScarpAmountManager.Instance.TrySpendScarp(cmpBotData.statDataList[levelManager.CurrentLevel].LevelPrice))
+                    if (ScarpAmountManager.Instance.TrySpendScarp(cmpBotData.statDataList[levelManager.CurrentLevel].levelPrice))
                     {
                         onUpgradeEvent.Invoke();
                         _currentHoldTime = 0f;

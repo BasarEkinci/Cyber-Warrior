@@ -2,7 +2,7 @@ using Data.UnityObjects;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Objects
+namespace Runtime.Objects
 {
     public class ScrapContainer : MonoBehaviour
     {
@@ -23,8 +23,8 @@ namespace Objects
             ScarpAmountManager.Instance.OnScrapEarned -= OnScrapEarned;
         }
         private void OnScrapEarned(int amount)
-        { 
-            if (scrapStack.transform.position.y > maxStackYPos)
+        {
+            if (scrapStack.localPosition.y >= maxStackYPos)
             {
                 return;
             }
@@ -34,7 +34,7 @@ namespace Objects
         }
         private void OnScrapSpend(int amount)
         {
-            if (scrapStack.transform.position.y < minStackYPos)
+            if (scrapStack.localPosition.y <= minStackYPos)
             {
                 return;
             }

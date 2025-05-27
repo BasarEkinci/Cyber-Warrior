@@ -15,16 +15,16 @@ namespace Runtime.CompanionBot.Mode
         public override void Initialize()
         {
             eyeMaterial.color = modeColor;
-            _botData = GetDataAtCurrentLevel().HealerData;
+            _botData = GetDataAtCurrentLevel().healerData;
         }
         
         public override void Execute()
         {
             _timer += Time.deltaTime;
-            if (_timer >= _botData.HealCooldown)
+            if (_timer >= _botData.healCooldown)
             {
                 _timer = 0f;
-                playerHealth.Heal(_botData.HealAmount);
+                playerHealth.Heal(_botData.healAmount);
             }
         }
 

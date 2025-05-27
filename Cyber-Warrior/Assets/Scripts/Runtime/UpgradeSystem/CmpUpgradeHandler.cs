@@ -14,7 +14,7 @@ namespace UpgradeSystem
         public int CurrentLevel { get; }
         public int MaxLevel { get; }
         
-        public int GetLevelPrice(int level) => data.statDataList[level].LevelPrice;
+        public int GetLevelPrice(int level) => data.statDataList[level].levelPrice;
 
         public void Upgrade()
         {
