@@ -31,7 +31,6 @@ namespace Runtime.UpgradeSystem
             _currentLevelMesh = Instantiate(data.statDataList[levelManager.CurrentLevel].visualData.mesh, transform);
             //SaveManager.Instance.CurrentData.CompanionLevels[companionID] = levelManager.CurrentLevel;
             //SaveManager.Instance.Save();
-            Debug.Log($"Companion upgraded to level {levelManager.CurrentLevel}");
         }
     }
 }
