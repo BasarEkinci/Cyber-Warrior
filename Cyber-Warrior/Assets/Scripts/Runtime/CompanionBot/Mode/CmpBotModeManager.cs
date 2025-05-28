@@ -47,7 +47,7 @@ namespace Runtime.CompanionBot.Mode
 
         private void FixedUpdate()
         {
-            _currentMode.MoveBehaviourFixed(transform);
+            _currentMode.Move(transform,Time.fixedDeltaTime);
         }
 
         private void OnDisable()

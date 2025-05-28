@@ -29,6 +29,6 @@ namespace Runtime.CompanionBot.Mode
         public abstract void Initialize();
         public abstract void Execute();
         public abstract void RotateBehaviour(Transform currentTransform);
-        public abstract void MoveBehaviourFixed(Transform currentTransform);
+        public abstract void Move(Transform currentTransform, float deltaTime);
     }
 }

@@ -37,10 +37,10 @@ namespace Runtime.CompanionBot.Mode
             currentTransform.LookAt(TargetObject);
         }
 
-        public override void MoveBehaviourFixed(Transform currentTransform)
+        public override void Move(Transform currentTransform, float deltaTime)
         {
             Vector3 desiredPosition = FollowPosition.position;
-            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * Time.fixedDeltaTime);
+            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * deltaTime);
         }
         
         public override CmpBotStatData GetDataAtCurrentLevel()
