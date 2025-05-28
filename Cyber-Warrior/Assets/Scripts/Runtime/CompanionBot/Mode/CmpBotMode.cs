@@ -1,5 +1,4 @@
-﻿using Data.UnityObjects;
-using Enums;
+﻿using Enums;
 using Managers;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
@@ -28,6 +27,7 @@ namespace Runtime.CompanionBot.Mode
         public abstract CmpBotStatData GetDataAtCurrentLevel();
         public abstract void Initialize();
         public abstract void Execute();
+        public abstract void ExitState();
         public abstract void RotateBehaviour(Transform currentTransform);
         public abstract void Move(Transform currentTransform, float deltaTime);
     }

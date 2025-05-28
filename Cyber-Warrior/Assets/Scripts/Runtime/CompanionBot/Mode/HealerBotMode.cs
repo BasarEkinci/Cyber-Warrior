@@ -32,6 +32,10 @@ namespace Runtime.CompanionBot.Mode
             }
         }
 
+        public override void ExitState()
+        {
+        }
+
         public override void RotateBehaviour(Transform currentTransform)
         {
             currentTransform.LookAt(TargetObject);

@@ -1,9 +1,57 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Data.ValueObjects;
+using TMPro;
+using UnityEditor.ShaderGraph.Internal;
+using UnityEngine;
 
-namespace Objects.ControlPanelScreens
+namespace Runtime.Objects.ControlPanelScreens
 {
     public class CmpStatsScreen : PanelScreenBase
     {
+        [Header("Texts")] 
+        [SerializeField] private TMP_Text healAmountText;
+        [SerializeField] private TMP_Text healRateText;
+        [SerializeField] private TMP_Text damageAmountText;
+        [SerializeField] private TMP_Text attackRateText;
+        [SerializeField] private TMP_Text nextLevelCost;
+        [SerializeField] private TMP_Text rangeText;
         
+        [SerializeField] private float scaleFactor = 1f;
+        [SerializeField] private CmpBotDataSO botDataSo;
+
+        private CmpHealerData _healerData;
+        private CmpCombatData _combatData;
+        
+        private void OnEnable()
+        {
+            ClosePanel();
+            SetStatsToScreen();
+        }
+
+        public override void SetStatsToScreen()
+        {
+            _healerData = botDataSo.statDataList[levelManager.CurrentLevel].healerData;
+            _combatData = botDataSo.statDataList[levelManager.CurrentLevel].combatData;
+            healAmountText.text =
+                "Heal Amount: " + _healerData.healAmount;
+            healRateText.text = "Heal Rate: " + _healerData.healCooldown;
+            damageAmountText.text = "Damage: " + _combatData.damage;
+            attackRateText.text = "Attack Rate: " + _combatData.attackCooldown;
+            rangeText.text = "Range: " + _combatData.range;
+            nextLevelCost.text = "Upgrade Cost: " + botDataSo.statDataList[levelManager.CurrentLevel].levelPrice;
+        }
+
+        public override void OpenPanel()
+        {
+            transform.DOScale(Vector3.one * scaleFactor, 0.1f);
+        }
+
+        public override void ClosePanel()
+        {
+            Debug.Log(transform.name);
+            transform.DOScale(Vector3.zero, 0.1f);
+        }
     }
 }

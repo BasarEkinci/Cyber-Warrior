@@ -1,4 +1,3 @@
-using System.Diagnostics.Tracing;
 using Data.UnityObjects.Events;
 using UnityEngine;
 

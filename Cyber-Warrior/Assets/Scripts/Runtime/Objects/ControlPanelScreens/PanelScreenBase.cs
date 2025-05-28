@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using Managers;
+using UnityEngine;
 
-namespace Objects.ControlPanelScreens
+namespace Runtime.Objects.ControlPanelScreens
 {
-    public class PanelScreenBase : MonoBehaviour
+    public abstract class PanelScreenBase : MonoBehaviour
     {
+        public LevelManager levelManager;
+        public abstract void SetStatsToScreen();
+        public abstract void OpenPanel();
+        public abstract void ClosePanel();
     }
 }

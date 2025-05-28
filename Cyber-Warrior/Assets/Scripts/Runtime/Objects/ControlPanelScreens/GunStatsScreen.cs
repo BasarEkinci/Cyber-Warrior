@@ -1,17 +1,32 @@
 ﻿using Data.UnityObjects;
+using DG.Tweening;
 using UnityEngine;
 
-namespace Objects.ControlPanelScreens
+namespace Runtime.Objects.ControlPanelScreens
 {
     public class GunStatsScreen : PanelScreenBase
     {
-        [SerializeField] private PlayerGunStatsSO playerGunStatsSo;
-        
+        [SerializeField] private PlayerGunStatsSO gunStats;
+
         private void OnEnable()
         {
+            ClosePanel();
+            transform.DOScale(Vector3.zero, 0.1f);
         }
-        private void OnDisable()
+
+        public override void SetStatsToScreen()
         {
+        }
+
+        public override void OpenPanel()
+        {
+            transform.DOScale(Vector3.one, 0.1f);
+        }
+
+        public override void ClosePanel()
+        {
+            Debug.Log(transform.name);
+            transform.DOScale(Vector3.zero, 0.1f);
         }
     }
 }

@@ -66,7 +66,8 @@ namespace Runtime.CompanionBot.Mode
         }
         
         /// <summary>
-        /// This method is called only when the game state changes base to action or vice versa.
+        /// Handles game state changes between base and action states by updating the current game state,
+        /// filtering active bot modes for the new state, and switching to the first available mode.
         /// </summary>
         /// <param name="state">New Game State</param>
         private void OnGameStateChanged(GameState state)
@@ -84,6 +85,7 @@ namespace Runtime.CompanionBot.Mode
 
         private void ChangeModeTo(CmpBotMode newMode)
         {
+            _currentMode?.ExitState();
             _currentMode = newMode;
             _currentMode?.Initialize();
             if (_currentMode != null) 
