@@ -25,7 +25,6 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void ClosePanel()
         {
-            Debug.Log(transform.name);
             transform.DOScale(Vector3.zero, 0.1f);
         }
     }

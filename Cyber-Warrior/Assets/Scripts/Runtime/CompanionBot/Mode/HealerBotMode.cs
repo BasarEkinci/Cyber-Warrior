@@ -47,7 +47,7 @@ namespace Runtime.CompanionBot.Mode
             currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * deltaTime);
         }
         
-        public override CmpBotStatData GetDataAtCurrentLevel()
+        private CmpBotStatData GetDataAtCurrentLevel()
         {
             return botData.statDataList[levelManager.CurrentLevel];
         }

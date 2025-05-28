@@ -24,7 +24,6 @@ namespace Runtime.CompanionBot.Mode
         [Header("Class References")]
         public LevelManager levelManager;
         public BotAnchorPoints anchorPoints;
-        public abstract CmpBotStatData GetDataAtCurrentLevel();
         public abstract void Initialize();
         public abstract void Execute();
         public abstract void ExitState();

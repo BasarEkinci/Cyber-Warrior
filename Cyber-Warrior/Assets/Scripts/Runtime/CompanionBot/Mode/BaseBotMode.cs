@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Enums;
-using Runtime.Data.ValueObjects;
 using Runtime.Objects;
 using Runtime.Objects.ControlPanelScreens;
 using UnityEngine;
@@ -22,14 +20,15 @@ namespace Runtime.CompanionBot.Mode
         
         [Header("Scriptables")]
         [SerializeField] private TransformEventChannel transformEvent;
-
-        private CmpBotStatData _botData;
+        
         private UpgradeItemType _upgradeItemType;
         private Transform _waitPointTransform;
         private Transform _parent;
         private CmpBotVFXPlayer _vfxPlayer;
         private PanelScreenBase _previousScreen;
         private List<PanelScreenBase> _screens = new();
+
+        #region Unity Functions
 
         private void Awake()
         {
@@ -45,9 +44,13 @@ namespace Runtime.CompanionBot.Mode
             Initialize();
         }
 
+        #endregion
+
+        #region Overridden Functions
+
         public override void Initialize()
         {
-            transformEvent.OnEventRaised += OnTransformChanged;
+            transformEvent.OnEventRaised += HandleTransformChanged;
             
             if (_vfxPlayer == null)
                 _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
@@ -58,39 +61,41 @@ namespace Runtime.CompanionBot.Mode
             if (FollowPosition == null)
                 FollowPosition = anchorPoints.GetAnchorPoint(mode);
             
-            _botData = GetDataAtCurrentLevel();
             eyeMaterial.color = modeColor;
         }
+
         public override void Execute()
         {
         }
-        public override void RotateBehaviour(Transform currentTransform)
+
+        public override void RotateBehaviour(Transform botTransform)
         {
-            currentTransform.LookAt(TargetObject);
+            botTransform.LookAt(TargetObject);
         }
 
-        public override void Move(Transform currentTransform,float deltaTime)
+        public override void Move(Transform botTransform, float deltaTime)
         {
             Vector3 desiredPosition = FollowPosition.position;
-            currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition,
+            botTransform.position = Vector3.Lerp(botTransform.position, desiredPosition,
                 (botData.movementData.moveSpeed * deltaTime) / 2);
         }
-        public override CmpBotStatData GetDataAtCurrentLevel()
-        {
-            return botData.statDataList[levelManager.CurrentLevel];
-        }
+
         public override void ExitState()
         {
-            transformEvent.OnEventRaised -= OnTransformChanged;
+            transformEvent.OnEventRaised -= HandleTransformChanged;
             foreach (var screen in _screens)
             {
-                Debug.Log(screen.transform.name);
                 screen.ClosePanel();
             }
         }
-        private void OnTransformChanged(Transform val = null)
+
+        #endregion
+
+        #region Custom Functions
+
+        private void HandleTransformChanged(Transform changedTransform = null)
         {
-            if (val == null)
+            if (changedTransform == null)
             {
                 TargetObject = anchorPoints.GetInitialTargetObject();
                 FollowPosition = anchorPoints.GetAnchorPoint(mode);
@@ -98,9 +103,9 @@ namespace Runtime.CompanionBot.Mode
                 _vfxPlayer.CloseLights();
                 return;
             }
-            _upgradeItemType = val.GetComponentInParent<UpgradeArea>().ItemType;
+            _upgradeItemType = changedTransform.GetComponentInParent<UpgradeArea>().ItemType;
             TargetObject = anchorPoints.transform;
-            _waitPointTransform = val;
+            _waitPointTransform = changedTransform;
             FollowPosition = _waitPointTransform;
             OpenCurrentItemStatsScreen();
         }
@@ -126,5 +131,7 @@ namespace Runtime.CompanionBot.Mode
                     break;
             }
         }
+
+        #endregion
     }
 }

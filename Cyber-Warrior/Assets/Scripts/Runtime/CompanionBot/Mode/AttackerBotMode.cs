@@ -75,15 +75,13 @@ namespace Runtime.CompanionBot.Mode
             Vector3 desiredPosition = FollowPosition.position;
             currentTransform.position = Vector3.Lerp(currentTransform.position, desiredPosition, botData.movementData.moveSpeed * deltaTime);
         }
-
-        public override CmpBotStatData GetDataAtCurrentLevel()
-        {
-            return botData.statDataList[levelManager.CurrentLevel];
-        }
-
         #endregion
 
         #region Bot Logic
+        private CmpBotStatData GetDataAtCurrentLevel()
+        {
+            return botData.statDataList[levelManager.CurrentLevel];
+        }
 
         private void Attack()
         {

@@ -1,9 +1,7 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using TMPro;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace Runtime.Objects.ControlPanelScreens
@@ -18,7 +16,10 @@ namespace Runtime.Objects.ControlPanelScreens
         [SerializeField] private TMP_Text nextLevelCost;
         [SerializeField] private TMP_Text rangeText;
         
+        [Header("Visual Settings")]
         [SerializeField] private float scaleFactor = 1f;
+        
+        [Header("Data")]
         [SerializeField] private CmpBotDataSO botDataSo;
 
         private CmpHealerData _healerData;
@@ -50,7 +51,6 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void ClosePanel()
         {
-            Debug.Log(transform.name);
             transform.DOScale(Vector3.zero, 0.1f);
         }
     }
