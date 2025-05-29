@@ -85,6 +85,9 @@ namespace Runtime.CompanionBot.Mode
 
         private void Attack()
         {
+            if (_vfxPlayer == null)
+                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
+            
             if (TargetObject.TryGetComponent(out IDamageable damageable))
             {
                 _vfxPlayer.PlayFireVFX();

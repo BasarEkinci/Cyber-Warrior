@@ -117,6 +117,9 @@ namespace Runtime.CompanionBot.Mode
 
         private void HandleTransformChanged(Transform changedTransform = null)
         {
+            if (_vfxPlayer == null)
+                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
+            
             if (changedTransform == null)
             {
                 TargetObject = anchorPoints.GetInitialTargetObject();
