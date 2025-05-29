@@ -1,20 +1,38 @@
-﻿using Data.UnityObjects;
+﻿using System;
+using Data.UnityObjects;
 using DG.Tweening;
+using Runtime.Data.ValueObjects;
+using TMPro;
 using UnityEngine;
 
 namespace Runtime.Objects.ControlPanelScreens
 {
     public class PlayerStatsScreen : PanelScreenBase
     {
+        [Header("Data")]
         [SerializeField] private PlayerStatsSO statsData;
 
-        private void OnEnable()
+        [Header("Text")] 
+        [SerializeField] private TMP_Text maxHealth;
+        [SerializeField] private TMP_Text level;
+
+        private PlayerStatsData _data;
+
+        private void Start()
         {
             ClosePanel();
         }
 
+        private void OnEnable()
+        {
+            SetStatsToScreen();
+        }
+
         public override void SetStatsToScreen()
         {
+            _data = statsData.playerStatsDataList[levelManager.CurrentLevel];
+            maxHealth.text = "Max Health: " + _data.maxHealth;
+            level.text = "Level: " + levelManager.CurrentLevel;
         }
 
         public override void OpenPanel()

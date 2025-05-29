@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using TMPro;
@@ -24,10 +25,14 @@ namespace Runtime.Objects.ControlPanelScreens
 
         private CmpHealerData _healerData;
         private CmpCombatData _combatData;
-        
-        private void OnEnable()
+
+        private void Start()
         {
             ClosePanel();
+        }
+
+        private void OnEnable()
+        {
             SetStatsToScreen();
         }
 
