@@ -2,10 +2,10 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
-using Inputs;
 using Interfaces;
 using Managers;
 using Runtime.Data.ValueObjects;
+using Runtime.Inputs;
 using UnityEngine;
 
 namespace Combat.Components

@@ -1,8 +1,9 @@
 ﻿using System;
+using Data.UnityObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Inputs
+namespace Runtime.Inputs
 {
     public class InputReader : MonoBehaviour, InputActions.IPlayerActions
     {
@@ -12,6 +13,7 @@ namespace Inputs
         public event Action OnFireStarted;
         public event Action OnFireCanceled;
         public event Action OnInteractCanceled;
+        public event Action OnStatsButtonPressed;
         
         private InputActions _inputActions;
 
@@ -51,6 +53,14 @@ namespace Inputs
         {
             if (context.performed)
                 OnSwitchMode?.Invoke();
+        }
+
+        public void OnShowStats(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnStatsButtonPressed?.Invoke();
+            }
         }
 
         public void OnInteraction(InputAction.CallbackContext context)

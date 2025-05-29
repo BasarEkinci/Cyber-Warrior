@@ -1,6 +1,6 @@
 ﻿using Data.UnityObjects;
-using Inputs;
 using Interfaces;
+using Runtime.Inputs;
 using Runtime.Interfaces;
 using UnityEngine;
 

@@ -1,8 +1,8 @@
 using Data.UnityObjects;
-using Inputs;
 using Managers;
 using Movement;
 using Runtime.Data.ValueObjects;
+using Runtime.Inputs;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 

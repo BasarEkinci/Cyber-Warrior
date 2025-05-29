@@ -119,6 +119,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""ShowStats"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ad6224b-8426-498d-8795-b0956199c78b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""6f2245bb-fdce-41c7-9549-bfeae9e6fbd8"",
@@ -263,6 +272,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""fda5b59b-50f6-4f41-a626-a0ef4b6aa464"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1e8ced81-aa7a-493f-88f0-f2b61b3139dc"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -282,6 +302,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_CompanionMode = m_Player.FindAction("CompanionMode", throwIfNotFound: true);
+        m_Player_ShowStats = m_Player.FindAction("ShowStats", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
     }
 
@@ -366,6 +387,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_CompanionMode;
+    private readonly InputAction m_Player_ShowStats;
     private readonly InputAction m_Player_Interaction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -390,6 +412,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/CompanionMode".
         /// </summary>
         public InputAction @CompanionMode => m_Wrapper.m_Player_CompanionMode;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ShowStats".
+        /// </summary>
+        public InputAction @ShowStats => m_Wrapper.m_Player_ShowStats;
         /// <summary>
         /// Provides access to the underlying input action "Player/Interaction".
         /// </summary>
@@ -429,6 +455,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @CompanionMode.started += instance.OnCompanionMode;
             @CompanionMode.performed += instance.OnCompanionMode;
             @CompanionMode.canceled += instance.OnCompanionMode;
+            @ShowStats.started += instance.OnShowStats;
+            @ShowStats.performed += instance.OnShowStats;
+            @ShowStats.canceled += instance.OnShowStats;
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
@@ -452,6 +481,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @CompanionMode.started -= instance.OnCompanionMode;
             @CompanionMode.performed -= instance.OnCompanionMode;
             @CompanionMode.canceled -= instance.OnCompanionMode;
+            @ShowStats.started -= instance.OnShowStats;
+            @ShowStats.performed -= instance.OnShowStats;
+            @ShowStats.canceled -= instance.OnShowStats;
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
@@ -516,6 +548,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCompanionMode(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShowStats" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShowStats(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

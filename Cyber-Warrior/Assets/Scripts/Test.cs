@@ -1,3 +1,4 @@
+using System;
 using Data.UnityObjects;
 using Data.UnityObjects.Events;
 using Enums;
@@ -18,7 +19,7 @@ public class Test : MonoBehaviour
     [SerializeField] private GameStateEvent gameStateEvent;
 
 
-    private void OnEnable()
+    private void Start()
     {
         gameStateEvent.RaiseEvent(GameState.Base);
     }

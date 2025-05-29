@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data.UnityObjects.Events;
 using Enums;
-using Inputs;
+using Runtime.Inputs;
 using UnityEngine;
 
 
@@ -11,6 +11,8 @@ namespace Runtime.CompanionBot.Mode
 {
     public class CmpBotModeManager : MonoBehaviour
     {
+        public InputReader InputReader => inputReader;
+        
         [SerializeField] private InputReader inputReader;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private BotModeEvent botModeEvent;

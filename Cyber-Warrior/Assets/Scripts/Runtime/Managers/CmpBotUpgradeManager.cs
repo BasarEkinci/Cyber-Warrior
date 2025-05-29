@@ -1,7 +1,7 @@
 ﻿using Data.UnityObjects;
-using Inputs;
 using Managers;
 using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Inputs;
 using UnityEngine;
 
 namespace Runtime.Managers

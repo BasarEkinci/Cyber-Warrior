@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Enums;
+using Runtime.Inputs;
 using Runtime.Objects;
 using Runtime.Objects.ControlPanelScreens;
 using UnityEngine;
@@ -17,33 +19,33 @@ namespace Runtime.CompanionBot.Mode
         [SerializeField] private PanelScreenBase gunStatsScreen;
         [SerializeField] private PanelScreenBase playerStatsScreen;
         [SerializeField] private PanelScreenBase botStatsScreen;
+        [SerializeField] private PanelScreenBase gameStatsScreen;
         
         [Header("Scriptables")]
         [SerializeField] private TransformEventChannel transformEvent;
         
         private UpgradeItemType _upgradeItemType;
+        private InputReader _inputReader;
         private Transform _waitPointTransform;
         private Transform _parent;
         private CmpBotVFXPlayer _vfxPlayer;
         private PanelScreenBase _previousScreen;
         private List<PanelScreenBase> _screens = new();
 
+        private bool _isPlayerInUpgradeArea;
+        private bool _isStatsPanelOpened;
+        
+
         #region Unity Functions
 
         private void Awake()
         {
             _parent = transform.parent;
+            _inputReader = GetComponentInParent<CmpBotModeManager>().InputReader;
             _screens.Add(gunStatsScreen);
             _screens.Add(playerStatsScreen);
             _screens.Add(botStatsScreen);
         }
-
-        private async void Start()
-        {
-            await UniTask.Yield();
-            Initialize();
-        }
-
         #endregion
 
         #region Overridden Functions
@@ -51,6 +53,7 @@ namespace Runtime.CompanionBot.Mode
         public override void Initialize()
         {
             transformEvent.OnEventRaised += HandleTransformChanged;
+            _inputReader.OnStatsButtonPressed += OnStatsButtonPressed;
             
             if (_vfxPlayer == null)
                 _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
@@ -62,6 +65,26 @@ namespace Runtime.CompanionBot.Mode
                 FollowPosition = anchorPoints.GetAnchorPoint(mode);
             
             eyeMaterial.color = modeColor;
+        }
+
+        private void OnStatsButtonPressed()
+        {
+            if (_isPlayerInUpgradeArea)
+            {
+                return;
+            }
+            if (_isStatsPanelOpened)
+            {
+                gameStatsScreen.ClosePanel();
+                _isStatsPanelOpened = false;
+                TargetObject = anchorPoints.GetInitialTargetObject();
+                _vfxPlayer.CloseLights();
+                return;
+            }
+            _vfxPlayer.OpenLights();
+            TargetObject = Camera.main.transform;
+            gameStatsScreen.OpenPanel();
+            _isStatsPanelOpened = true;
         }
 
         public override void Execute()
@@ -101,8 +124,12 @@ namespace Runtime.CompanionBot.Mode
                 FollowPosition = anchorPoints.GetAnchorPoint(mode);
                 _previousScreen?.ClosePanel();
                 _vfxPlayer.CloseLights();
+                _isPlayerInUpgradeArea = false;
                 return;
             }
+            _isStatsPanelOpened = false;
+            gameStatsScreen.ClosePanel();
+            _isPlayerInUpgradeArea = true;
             _upgradeItemType = changedTransform.GetComponentInParent<UpgradeArea>().ItemType;
             TargetObject = anchorPoints.transform;
             _waitPointTransform = changedTransform;

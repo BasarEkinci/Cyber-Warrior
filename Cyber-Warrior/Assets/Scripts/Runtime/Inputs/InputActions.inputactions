@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ShowStats",
+                    "type": "Button",
+                    "id": "3ad6224b-8426-498d-8795-b0956199c78b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interaction",
                     "type": "Button",
                     "id": "6f2245bb-fdce-41c7-9549-bfeae9e6fbd8",
@@ -172,6 +181,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CompanionMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fda5b59b-50f6-4f41-a626-a0ef4b6aa464",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowStats",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
