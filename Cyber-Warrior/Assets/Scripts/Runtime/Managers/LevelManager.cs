@@ -8,7 +8,7 @@ namespace Runtime.Managers
         [SerializeField] private UpgradeItemType upgradeItemType;
         public int CurrentLevel => _currentLevel;
 
-        private int _currentLevel;
+        private int _currentLevel = 0;
         
         public void SetLevel(int level)
         {

@@ -1,5 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using TMPro;
@@ -9,6 +9,7 @@ namespace Runtime.Objects.ControlPanelScreens
 {
     public class CmpStatsScreen : PanelScreenBase
     {
+        [SerializeField] private VoidEventSO upgradeSucceedEvent;
         [Header("Texts")] 
         [SerializeField] private TMP_Text healAmountText;
         [SerializeField] private TMP_Text healRateText;
@@ -33,7 +34,19 @@ namespace Runtime.Objects.ControlPanelScreens
 
         private void OnEnable()
         {
+            upgradeSucceedEvent.OnEventRaised += OnUpgradeSucceed;
             SetStatsToScreen();
+        }
+
+        private void OnDisable()
+        {
+            upgradeSucceedEvent.OnEventRaised -= OnUpgradeSucceed;
+        }
+
+        private void OnUpgradeSucceed()
+        {
+            SetStatsToScreen();
+            transform.DOScale(transform.localScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
         }
 
         public override void SetStatsToScreen()

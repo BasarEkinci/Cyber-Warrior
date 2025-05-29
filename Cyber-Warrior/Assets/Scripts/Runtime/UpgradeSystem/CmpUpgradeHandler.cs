@@ -20,7 +20,6 @@ namespace Runtime.UpgradeSystem
         {
             MaxLevel = data.MaxLevel;
             CurrentLevel = levelManager.CurrentLevel;
-            Debug.Log(CurrentLevel);
             _currentLevelMesh = Instantiate(data.statDataList[CurrentLevel].visualData.mesh,transform.position,Quaternion.identity, transform);
         }
 
@@ -28,6 +27,7 @@ namespace Runtime.UpgradeSystem
         {
             Destroy(_currentLevelMesh);
             levelManager.Upgrade();
+            CurrentLevel = levelManager.CurrentLevel;
             _currentLevelMesh = Instantiate(data.statDataList[levelManager.CurrentLevel].visualData.mesh, transform);
             //SaveManager.Instance.CurrentData.CompanionLevels[companionID] = levelManager.CurrentLevel;
             //SaveManager.Instance.Save();

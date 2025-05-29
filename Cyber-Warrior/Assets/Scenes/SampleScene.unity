@@ -3940,6 +3940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2253177f49e42ec8de51046cd19ebac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeEvent: {fileID: 0}
   inputReader: {fileID: 1483146460}
   upgradeTarget: {fileID: 2022862511379052113}
   holdTime: 2
@@ -4926,6 +4927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 5270933456566423005}
+  upgradeSucceedEvent: {fileID: 11400000, guid: 644c1e8679683964fb165abf24a88ac6, type: 2}
   healAmountText: {fileID: 2059779429}
   healRateText: {fileID: 1547791639}
   damageAmountText: {fileID: 1574477664}
@@ -5225,6 +5227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2253177f49e42ec8de51046cd19ebac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeEvent: {fileID: 0}
   inputReader: {fileID: 1483146460}
   upgradeTarget: {fileID: 2022862511379052112}
   holdTime: 2
@@ -12885,6 +12888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2253177f49e42ec8de51046cd19ebac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeEvent: {fileID: 11400000, guid: 644c1e8679683964fb165abf24a88ac6, type: 2}
   inputReader: {fileID: 1483146460}
   upgradeTarget: {fileID: 5270933456566423004}
   holdTime: 2
@@ -16152,13 +16156,29 @@ PrefabInstance:
       value: CompanionBot
       objectReference: {fileID: 0}
     - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2022862511379052115}
+    - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: upgradeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 6aa4a66e4ce98de4ea9dfa5484e9799f, type: 2}
+    - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2022862511379052110}
+    - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: upgradeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 6aa4a66e4ce98de4ea9dfa5484e9799f, type: 2}
     - target: {fileID: 7896260988278129711, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.192

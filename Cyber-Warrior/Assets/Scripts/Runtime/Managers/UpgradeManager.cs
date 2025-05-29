@@ -1,4 +1,5 @@
 ﻿using Data.UnityObjects;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Inputs;
 using Runtime.Interfaces;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Runtime.Managers
 {
     public class UpgradeManager : MonoBehaviour
     {
+        [SerializeField] private VoidEventSO upgradeEvent;
         [SerializeField] private InputReader inputReader;
         [SerializeField] private MonoBehaviour upgradeTarget;
         [SerializeField] private float holdTime = 2f;
@@ -67,7 +69,8 @@ namespace Runtime.Managers
 
         private void TryUpgrade()
         {
-            if (_upgradeable.CurrentLevel >= _upgradeable.MaxLevel)
+            Debug.Log(_upgradeable.CurrentLevel + " " + _upgradeable.MaxLevel);
+            if (_upgradeable.CurrentLevel == _upgradeable.MaxLevel)
             {
                 Debug.Log("Max level reached.");
                 return;
@@ -75,7 +78,10 @@ namespace Runtime.Managers
 
             var price = _upgradeable.GetLevelPrice(_upgradeable.CurrentLevel);
             if (ScarpAmountManager.Instance.TrySpendScarp(price))
+            {
                 _upgradeable.Upgrade();
+                upgradeEvent.Invoke();
+            }
             else
                 Debug.Log("Not enough scrap.");
         }
