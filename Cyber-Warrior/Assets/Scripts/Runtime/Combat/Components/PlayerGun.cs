@@ -94,16 +94,6 @@ namespace Runtime.Combat.Components
             }
         }
 
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.blue;
-            if (_crosshair != null)
-            {
-                Gizmos.DrawRay(gunBarrelTransform.position, _crosshair.transform.position - gunBarrelTransform.position);
-            }
-        }
-#endif
         private void DrawLineToCrosshair()
         {
             if (_isPlayerDead)
@@ -114,5 +104,16 @@ namespace Runtime.Combat.Components
             lineRenderer.SetPosition(0, gunBarrelTransform.position);
             lineRenderer.SetPosition(1, _crosshair.transform.position);
         }
+        
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            if (_crosshair != null)
+            {
+                Gizmos.DrawRay(gunBarrelTransform.position, _crosshair.transform.position - gunBarrelTransform.position);
+            }
+        }
+#endif
     }
 }

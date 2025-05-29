@@ -27,7 +27,7 @@ namespace Runtime.CompanionBot.Mode
             eyesLights.SetActive(true);
             foreach (var effect in eyesLines)
             {
-                effect.transform.DOScaleZ(0.01f, 0.1f);
+                effect.transform.DOScaleZ(0.01f, 0.3f);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Runtime.CompanionBot.Mode
             eyesLights.SetActive(false);
             foreach (var effect in eyesLines)
             {
-                effect.transform.DOScaleZ(0f, 0.1f);
+                effect.transform.DOScaleZ(0f, 0.3f);
             }
         }
      }
