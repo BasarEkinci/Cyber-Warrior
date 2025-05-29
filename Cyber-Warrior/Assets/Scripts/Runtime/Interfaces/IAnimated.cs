@@ -1,4 +1,4 @@
-namespace Interfaces
+namespace Runtime.Interfaces
 {
     public interface IAnimated
     {

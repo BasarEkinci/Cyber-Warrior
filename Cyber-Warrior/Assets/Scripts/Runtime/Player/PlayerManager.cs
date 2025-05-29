@@ -1,12 +1,13 @@
 using Data.UnityObjects;
-using Managers;
-using Movement;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.ValueObjects;
 using Runtime.Inputs;
+using Runtime.Managers;
+using Runtime.Movement;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-namespace Player
+namespace Runtime.Player
 {
     public class PlayerManager : MonoBehaviour
     {

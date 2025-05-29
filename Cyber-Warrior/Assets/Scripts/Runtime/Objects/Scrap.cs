@@ -1,8 +1,9 @@
 using Data.UnityObjects;
 using DG.Tweening;
+using Runtime.Managers;
 using UnityEngine;
 
-namespace Objects
+namespace Runtime.Objects
 {
     public class Scrap : MonoBehaviour
     {

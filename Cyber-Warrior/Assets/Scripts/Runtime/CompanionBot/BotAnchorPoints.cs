@@ -1,4 +1,4 @@
-using Enums;
+using Runtime.Enums;
 using UnityEngine;
 
 namespace Runtime.CompanionBot

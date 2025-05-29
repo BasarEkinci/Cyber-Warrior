@@ -1,5 +1,5 @@
 ﻿using Data.UnityObjects;
-using Managers;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Inputs;
 using UnityEngine;

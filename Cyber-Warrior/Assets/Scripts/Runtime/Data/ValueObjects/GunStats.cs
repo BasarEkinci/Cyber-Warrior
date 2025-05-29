@@ -1,6 +1,4 @@
-﻿using UnityEngine.Serialization;
-
-namespace Runtime.Data.ValueObjects
+﻿namespace Runtime.Data.ValueObjects
 {
     [System.Serializable]
     public struct GunStats

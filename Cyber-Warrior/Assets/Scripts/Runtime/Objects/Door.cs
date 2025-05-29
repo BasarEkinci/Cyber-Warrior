@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Objects
+namespace Runtime.Objects
 {
     public class Door : MonoBehaviour
     {

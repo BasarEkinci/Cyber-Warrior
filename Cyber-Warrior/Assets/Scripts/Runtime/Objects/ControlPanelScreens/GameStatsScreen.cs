@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
-using Managers;
 using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Managers;
 using TMPro;
 using UnityEngine;
 

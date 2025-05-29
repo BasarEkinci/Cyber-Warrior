@@ -1,9 +1,10 @@
 using Data.UnityObjects;
 using Data.UnityObjects.Events;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.ValueObjects;
 using UnityEngine;
 
-namespace Player
+namespace Runtime.Player
 {
     public class PlayerHealth : MonoBehaviour
     {

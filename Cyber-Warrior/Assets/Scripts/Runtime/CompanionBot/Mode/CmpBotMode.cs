@@ -1,7 +1,6 @@
-﻿using Enums;
-using Managers;
-using Runtime.Data.UnityObjects.ObjectData;
-using Runtime.Data.ValueObjects;
+﻿using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Enums;
+using Runtime.Managers;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode

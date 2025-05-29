@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Movement
+namespace Runtime.Movement
 {
     public class Mover
     {

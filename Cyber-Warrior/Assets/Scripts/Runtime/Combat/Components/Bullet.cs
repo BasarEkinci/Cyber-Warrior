@@ -1,7 +1,7 @@
-using Interfaces;
+using Runtime.Interfaces;
 using UnityEngine;
 
-namespace Combat.Components
+namespace Runtime.Combat.Components
 {
     public class Bullet : MonoBehaviour
     {
@@ -23,10 +23,10 @@ namespace Combat.Components
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IDamagable>(out var damagable))
+            if (other.TryGetComponent<IDamageable>(out var damagable))
             {
                 damagable.TakeDamage(_damage);
-                if (other.TryGetComponent<IKnockbackable>(out var knockBackable))
+                if (other.TryGetComponent<IKnockBackable>(out var knockBackable))
                 {
                     knockBackable.Knockback(-other.transform.forward, _knockBackForce);
                 }

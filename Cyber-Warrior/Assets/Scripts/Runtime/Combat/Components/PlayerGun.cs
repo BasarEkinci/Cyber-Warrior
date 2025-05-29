@@ -2,13 +2,14 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
-using Interfaces;
-using Managers;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.ValueObjects;
 using Runtime.Inputs;
+using Runtime.Interfaces;
+using Runtime.Managers;
 using UnityEngine;
 
-namespace Combat.Components
+namespace Runtime.Combat.Components
 {
     public class PlayerGun : MonoBehaviour
     {   
@@ -84,7 +85,7 @@ namespace Combat.Components
                 Vector3 direction = _crosshair.transform.position - gunBarrelTransform.position;
                 if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.range))
                 {
-                    if (hit.collider.TryGetComponent<IDamagable>(out var damagable))
+                    if (hit.collider.TryGetComponent<IDamageable>(out var damagable))
                     {
                         damagable.TakeDamage(_currentGunStats.damage);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));

@@ -1,6 +1,6 @@
-﻿using Enums;
-using Interfaces;
-using Runtime.Data.ValueObjects;
+﻿using Runtime.Data.ValueObjects;
+using Runtime.Enums;
+using Runtime.Interfaces;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -85,7 +85,7 @@ namespace Runtime.CompanionBot.Mode
 
         private void Attack()
         {
-            if (TargetObject.TryGetComponent(out IDamagable damageable))
+            if (TargetObject.TryGetComponent(out IDamageable damageable))
             {
                 _vfxPlayer.PlayFireVFX();
                 damageable.TakeDamage(_combatData.damage);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Data.UnityObjects
+namespace Runtime.Managers
 {
     public class ScarpAmountManager : MonoBehaviour
     {

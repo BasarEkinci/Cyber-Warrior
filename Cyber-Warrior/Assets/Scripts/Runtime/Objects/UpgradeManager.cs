@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Objects
+namespace Runtime.Objects
 {
     public class UpgradeManager : MonoBehaviour
     {

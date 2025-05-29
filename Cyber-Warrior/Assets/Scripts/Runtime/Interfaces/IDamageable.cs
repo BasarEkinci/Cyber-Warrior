@@ -1,6 +1,6 @@
-namespace Interfaces
+namespace Runtime.Interfaces
 {
-    public interface IDamagable
+    public interface IDamageable
     {
         void TakeDamage(float amount);
         void Dead();

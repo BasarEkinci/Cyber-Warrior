@@ -1,10 +1,9 @@
 ﻿using Data.UnityObjects;
-using Interfaces;
 using Runtime.Inputs;
 using Runtime.Interfaces;
 using UnityEngine;
 
-namespace Managers
+namespace Runtime.Managers
 {
     public class UpgradeManager : MonoBehaviour
     {

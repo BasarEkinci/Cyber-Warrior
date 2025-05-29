@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Interfaces
+﻿namespace Runtime.Interfaces
 {
     public interface IAttackEffect
     {

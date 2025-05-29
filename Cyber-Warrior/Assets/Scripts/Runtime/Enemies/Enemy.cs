@@ -2,15 +2,16 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
-using Interfaces;
 using JetBrains.Annotations;
-using Player;
+using Runtime.Data.UnityObjects.Events;
+using Runtime.Interfaces;
+using Runtime.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Enemies
+namespace Runtime.Enemies
 {
-    public class Enemy : MonoBehaviour, IDamagable
+    public class Enemy : MonoBehaviour, IDamageable
     {
         public bool IsDead => _currentHealth <= 0f;
         public float CurrentHealth => _currentHealth;

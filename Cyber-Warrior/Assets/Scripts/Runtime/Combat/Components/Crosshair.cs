@@ -1,8 +1,8 @@
-using Data.UnityObjects;
 using DG.Tweening;
+using Runtime.Data.UnityObjects.Events;
 using UnityEngine;
 
-namespace Combat.Components
+namespace Runtime.Combat.Components
 {
     public class Crosshair : MonoBehaviour
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using Data.UnityObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

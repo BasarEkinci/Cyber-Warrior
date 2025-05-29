@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Managers
+namespace Runtime.Managers
 {
     public class GunUpgradeManager : MonoBehaviour
     {

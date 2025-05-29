@@ -1,6 +1,6 @@
-namespace Interfaces
+namespace Runtime.Interfaces
 {
-    public interface IKnockbackable
+    public interface IKnockBackable
     {
         void Knockback(UnityEngine.Vector3 direction, float force);
     }

@@ -1,7 +1,7 @@
-﻿using Enums;
+﻿using Runtime.Enums;
 using UnityEngine;
 
-namespace Managers
+namespace Runtime.Managers
 {
     public class LevelManager : MonoBehaviour
     {

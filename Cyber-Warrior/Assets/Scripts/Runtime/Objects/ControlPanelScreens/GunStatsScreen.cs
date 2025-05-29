@@ -1,5 +1,4 @@
-﻿using System;
-using Data.UnityObjects;
+﻿using Data.UnityObjects;
 using DG.Tweening;
 using Runtime.Data.ValueObjects;
 using TMPro;
