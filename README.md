@@ -178,3 +178,18 @@ The game begins at a safe base area. The player's mission is to explore dangerou
 - Companion behaviors were completed.
 - New VFX were added to the Companion's levels.
 - The Companion's code was refactored.
+
+
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/botStatWindow.png" alt="CmpWindow" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/PlayerUpgradeArea2.png" alt="PlayerArea" width="250"/>
+    </td>
+    <td align="center" valign="middle">
+      <img src="ReadmeFiles/Images/gunUpgradeArea2.png" alt="GunArea" width="250"/>
+    </td>
+  </tr>
+</table>
