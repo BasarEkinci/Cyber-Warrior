@@ -171,3 +171,10 @@ The game begins at a safe base area. The player's mission is to explore dangerou
   </tr>
 </table>
 
+## 05.28.2025 Updates 🔄
+
+- Upgrade fields were updated.
+- A stat display feature was added to the Companion.
+- Companion behaviors were completed.
+- New VFX were added to the Companion's levels.
+- The Companion's code was refactored.
