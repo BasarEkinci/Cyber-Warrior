@@ -1,12 +1,10 @@
-using System;
-using Data.UnityObjects;
-using Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using Runtime.Managers;
 using Runtime.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Test : MonoBehaviour
 {
@@ -55,6 +53,14 @@ public class Test : MonoBehaviour
     public void DamagePlayer()
     {
         playerHealth.TakeDamage(damageAmount);
+    }
+
+    [PropertySpace]
+    [Title("Reload the Scene")]
+    [Button(ButtonSizes.Large)]
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
     #endregion
 }
