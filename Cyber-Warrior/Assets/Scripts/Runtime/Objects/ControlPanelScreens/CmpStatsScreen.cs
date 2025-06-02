@@ -27,11 +27,6 @@ namespace Runtime.Objects.ControlPanelScreens
         private CmpHealerData _healerData;
         private CmpCombatData _combatData;
 
-        private void Start()
-        {
-            ClosePanel();
-        }
-
         private void OnEnable()
         {
             upgradeSucceedEvent.OnEventRaised += OnUpgradeSucceed;
@@ -49,6 +44,8 @@ namespace Runtime.Objects.ControlPanelScreens
             transform.DOScale(transform.localScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
         }
 
+        public override bool IsPanelActive { get; set; }
+
         public override void SetStatsToScreen()
         {
             _healerData = botDataSo.statDataList[levelManager.CurrentLevel].healerData;
@@ -64,11 +61,13 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void OpenPanel()
         {
+            IsPanelActive = true;
             transform.DOScale(Vector3.one * scaleFactor, 0.1f);
         }
 
         public override void ClosePanel()
         {
+            IsPanelActive = false;
             transform.DOScale(Vector3.zero, 0.1f);
         }
     }

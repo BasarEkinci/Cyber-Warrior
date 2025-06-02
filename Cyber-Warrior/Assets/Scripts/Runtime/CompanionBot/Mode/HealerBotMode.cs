@@ -7,7 +7,7 @@ namespace Runtime.CompanionBot.Mode
 {
     public class HealerBotMode : CmpBotMode
     {
-        [SerializeField] private PlayerHealth playerHealth;
+        private PlayerHealth _playerHealth;
         private CmpHealerData _botData;
         private float _timer;
         public override GameState ValidGameState => GameState.Action;
@@ -16,6 +16,14 @@ namespace Runtime.CompanionBot.Mode
 
         public override void Initialize()
         {
+            if (anchorPoints == null)
+            {
+                anchorPoints = FindFirstObjectByType<BotAnchorPoints>();
+            }
+            if (_playerHealth == null)
+            {
+                _playerHealth = FindFirstObjectByType<PlayerHealth>();
+            }
             TargetObject = anchorPoints.GetInitialTargetObject();
             FollowPosition = anchorPoints.GetAnchorPoint(mode);
             eyeMaterial.color = modeColor;
@@ -28,7 +36,7 @@ namespace Runtime.CompanionBot.Mode
             if (_timer >= _botData.healCooldown)
             {
                 _timer = 0f;
-                playerHealth.Heal(_botData.healAmount);
+                _playerHealth.Heal(_botData.healAmount);
             }
         }
 

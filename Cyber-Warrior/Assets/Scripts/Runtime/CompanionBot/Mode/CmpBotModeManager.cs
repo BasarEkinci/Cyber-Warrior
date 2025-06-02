@@ -11,9 +11,9 @@ namespace Runtime.CompanionBot.Mode
 {
     public class CmpBotModeManager : MonoBehaviour
     {
-        public InputReader InputReader => inputReader;
+        public InputReader InputReader => _inputReader;
         
-        [SerializeField] private InputReader inputReader;
+        private InputReader _inputReader;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private BotModeEvent botModeEvent;
         
@@ -33,7 +33,11 @@ namespace Runtime.CompanionBot.Mode
 
         private void OnEnable()
         {
-            inputReader.OnSwitchMode += SwitchModeInActionState;
+            if (_inputReader == null)
+            {
+                _inputReader = FindFirstObjectByType<InputReader>();
+            }
+            _inputReader.OnSwitchMode += SwitchModeInActionState;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
         }
 
@@ -54,7 +58,7 @@ namespace Runtime.CompanionBot.Mode
 
         private void OnDisable()
         {
-            inputReader.OnSwitchMode -= SwitchModeInActionState;
+            _inputReader.OnSwitchMode -= SwitchModeInActionState;
             gameStateEvent.OnEventRaised -= OnGameStateChanged;
         }
         

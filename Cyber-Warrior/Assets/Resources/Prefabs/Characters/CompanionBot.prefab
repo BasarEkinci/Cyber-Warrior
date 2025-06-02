@@ -2384,6 +2384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4436653152828846300}
   - component: {fileID: 8826552260243335937}
+  - component: {fileID: 2246474400080955310}
   m_Layer: 0
   m_Name: BaseMode
   m_TagString: Untagged
@@ -2427,11 +2428,23 @@ MonoBehaviour:
   modeColor: {r: 0, g: 0.38679248, b: 0.029659042, a: 1}
   levelManager: {fileID: 6881531321085355516}
   anchorPoints: {fileID: 0}
+  transformEvent: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
+--- !u!114 &2246474400080955310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445596848775411869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958bd56d14214c76b786e2fa8234a65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   gunStatsScreen: {fileID: 4788207489695226206}
   playerStatsScreen: {fileID: 6190967164290987908}
   botStatsScreen: {fileID: 0}
   gameStatsScreen: {fileID: 8478693011815188569}
-  transformEvent: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
 --- !u!1 &7638240661330414298
 GameObject:
   m_ObjectHideFlags: 0

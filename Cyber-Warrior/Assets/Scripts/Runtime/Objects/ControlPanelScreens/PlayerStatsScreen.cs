@@ -8,6 +8,8 @@ namespace Runtime.Objects.ControlPanelScreens
 {
     public class PlayerStatsScreen : PanelScreenBase
     {
+        public override bool IsPanelActive { get; set; }
+        
         [Header("Data")]
         [SerializeField] private PlayerStatsSO statsData;
 
@@ -27,6 +29,7 @@ namespace Runtime.Objects.ControlPanelScreens
             SetStatsToScreen();
         }
 
+
         public override void SetStatsToScreen()
         {
             _data = statsData.playerStatsDataList[levelManager.CurrentLevel];
@@ -36,11 +39,13 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void OpenPanel()
         {
+            IsPanelActive = true;
             transform.DOScale(Vector3.one, 0.1f);
         }
 
         public override void ClosePanel()
         {
+            IsPanelActive = false;
             transform.DOScale(Vector3.zero, 0.1f);
         }
     }

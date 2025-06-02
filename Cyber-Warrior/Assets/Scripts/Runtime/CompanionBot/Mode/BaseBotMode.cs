@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using Runtime.Inputs;
 using Runtime.Objects;
@@ -13,77 +12,37 @@ namespace Runtime.CompanionBot.Mode
         public override GameState ValidGameState => GameState.Base;
         public override Transform TargetObject { get; set; }
         public override Transform FollowPosition { get; set; }
-
-        [Header("Stats Panels")] 
-        [SerializeField] private PanelScreenBase gunStatsScreen;
-        [SerializeField] private PanelScreenBase playerStatsScreen;
-        [SerializeField] private PanelScreenBase botStatsScreen;
-        [SerializeField] private PanelScreenBase gameStatsScreen;
         
         [Header("Scriptables")]
         [SerializeField] private TransformEventChannel transformEvent;
-        
-        private UpgradeItemType _upgradeItemType;
-        private InputReader _inputReader;
-        private Transform _waitPointTransform;
-        private Transform _parent;
+
+        private PanelManager _panelManager;
         private CmpBotVFXPlayer _vfxPlayer;
-        private PanelScreenBase _previousScreen;
-        private List<PanelScreenBase> _screens = new();
-
-        private bool _isPlayerInUpgradeArea;
-        private bool _isStatsPanelOpened;
+        private BotAnchorPoints _targetProvider;
+        private InputReader _inputReader;
+        private Transform _parent;
         
-
-        #region Unity Functions
+        private bool _isStateActive;
 
         private void Awake()
         {
+            _targetProvider = FindFirstObjectByType<BotAnchorPoints>();
+            _inputReader = FindFirstObjectByType<InputReader>();
+            _panelManager = GetComponentInParent<PanelManager>();
             _parent = transform.parent;
-            _inputReader = GetComponentInParent<CmpBotModeManager>().InputReader;
-            _screens.Add(gunStatsScreen);
-            _screens.Add(playerStatsScreen);
-            _screens.Add(botStatsScreen);
+            _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>();
         }
-        #endregion
+
 
         #region Overridden Functions
-
+        
         public override void Initialize()
-        {
+        {   
             transformEvent.OnEventRaised += HandleTransformChanged;
             _inputReader.OnStatsButtonPressed += OnStatsButtonPressed;
-            
-            if (_vfxPlayer == null)
-                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
-            
-            if (TargetObject == null)
-                TargetObject = anchorPoints.GetInitialTargetObject();
-            
-            if (FollowPosition == null)
-                FollowPosition = anchorPoints.GetAnchorPoint(mode);
-            
+            InitializeComponents();
+            _isStateActive = true;
             eyeMaterial.color = modeColor;
-        }
-
-        private void OnStatsButtonPressed()
-        {
-            if (_isPlayerInUpgradeArea)
-            {
-                return;
-            }
-            if (_isStatsPanelOpened)
-            {
-                gameStatsScreen.ClosePanel();
-                _isStatsPanelOpened = false;
-                TargetObject = anchorPoints.GetInitialTargetObject();
-                _vfxPlayer.CloseLights();
-                return;
-            }
-            _vfxPlayer.OpenLights();
-            TargetObject = Camera.main.transform;
-            gameStatsScreen.OpenPanel();
-            _isStatsPanelOpened = true;
         }
 
         public override void Execute()
@@ -105,62 +64,75 @@ namespace Runtime.CompanionBot.Mode
         public override void ExitState()
         {
             transformEvent.OnEventRaised -= HandleTransformChanged;
-            foreach (var screen in _screens)
+            _inputReader.OnStatsButtonPressed -= OnStatsButtonPressed;
+            _panelManager.CloseAllPanels();
+            _isStateActive = false;
+        }
+
+        private void OnStatsButtonPressed()
+        {
+            Debug.Log("Stats button pressed in BaseBotMode");
+            if (!_isStateActive || TargetObject == anchorPoints.transform)
             {
-                screen.ClosePanel();
+                return;
             }
+            if (!_panelManager.IsStatsPanelActive)
+            {
+                _panelManager.OpenGameStatsPanel();
+                TargetObject = Camera.main.transform;
+                _vfxPlayer.OpenLights();
+                return;
+            }
+            _panelManager.CloseGameStatsPanel();
+            _vfxPlayer.CloseLights();
+            TargetObject = _targetProvider.GetInitialTargetObject();
         }
 
         #endregion
 
-        #region Custom Functions
+        #region Class Functions
 
+        private void InitializeComponents()
+        {
+            if (_targetProvider == null)
+                _targetProvider = FindFirstObjectByType<BotAnchorPoints>();
+            if (_inputReader == null)
+                _inputReader = FindFirstObjectByType<InputReader>();
+            if (_panelManager == null)
+                _panelManager = GetComponentInParent<PanelManager>();
+            if (_parent == null)
+                _parent = transform.parent;
+            if (_vfxPlayer == null)
+                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>();
+            
+            if (TargetObject == null)
+                TargetObject = anchorPoints.GetInitialTargetObject();
+            
+            if (FollowPosition == null)
+                FollowPosition = anchorPoints.GetAnchorPoint(mode);
+        }
+        
         private void HandleTransformChanged(Transform changedTransform = null)
         {
-            if (_vfxPlayer == null)
-                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
-            
             if (changedTransform == null)
             {
-                TargetObject = anchorPoints.GetInitialTargetObject();
-                FollowPosition = anchorPoints.GetAnchorPoint(mode);
-                _previousScreen?.ClosePanel();
+                TargetObject = _targetProvider.GetInitialTargetObject();
+                FollowPosition = _targetProvider.GetAnchorPoint(mode);
+                _panelManager.CloseAllPanels();
                 _vfxPlayer.CloseLights();
-                _isPlayerInUpgradeArea = false;
                 return;
             }
-            _isStatsPanelOpened = false;
-            gameStatsScreen.ClosePanel();
-            _isPlayerInUpgradeArea = true;
-            _upgradeItemType = changedTransform.GetComponentInParent<UpgradeArea>().ItemType;
-            TargetObject = anchorPoints.transform;
-            _waitPointTransform = changedTransform;
-            FollowPosition = _waitPointTransform;
-            OpenCurrentItemStatsScreen();
-        }
-
-        private void OpenCurrentItemStatsScreen()
-        {
-            switch (_upgradeItemType)
+            _panelManager.CloseGameStatsPanel();
+            _vfxPlayer.CloseLights();        
+            var upgradeArea = changedTransform.GetComponentInParent<UpgradeArea>();
+            if (upgradeArea != null)
             {
-                case UpgradeItemType.Player:
-                    _previousScreen = playerStatsScreen;
-                    _vfxPlayer.OpenLights();
-                    _previousScreen.OpenPanel();
-                    break;
-                case UpgradeItemType.Companion:
-                    _previousScreen = botStatsScreen;
-                    _vfxPlayer.OpenLights();
-                    _previousScreen.OpenPanel();
-                    break;
-                case UpgradeItemType.Gun:
-                    _previousScreen = gunStatsScreen;
-                    _vfxPlayer.OpenLights();
-                    _previousScreen.OpenPanel();
-                    break;
+                _panelManager.OpenPanel(upgradeArea.ItemType);
+                _vfxPlayer.OpenLights();
             }
+            TargetObject = anchorPoints.transform;
+            FollowPosition = changedTransform;
         }
-
         #endregion
     }
 }

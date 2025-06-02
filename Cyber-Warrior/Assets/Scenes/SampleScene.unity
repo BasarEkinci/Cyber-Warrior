@@ -16143,6 +16143,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2246474400080955310, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
+      propertyPath: botStatsScreen
+      value: 
+      objectReference: {fileID: 571313511}
     - target: {fileID: 2532649767726626640, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: anchorPoints
       value: 
@@ -16156,29 +16160,13 @@ PrefabInstance:
       value: CompanionBot
       objectReference: {fileID: 0}
     - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2022862511379052115}
-    - target: {fileID: 4788207489695226206, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: upgradeEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 6aa4a66e4ce98de4ea9dfa5484e9799f, type: 2}
-    - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 2022862511379052110}
-    - target: {fileID: 6190967164290987908, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: upgradeEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 6aa4a66e4ce98de4ea9dfa5484e9799f, type: 2}
     - target: {fileID: 7896260988278129711, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.192
@@ -16239,10 +16227,6 @@ PrefabInstance:
       propertyPath: anchorPoints
       value: 
       objectReference: {fileID: 2022862511379052124}
-    - target: {fileID: 8826552260243335937, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-      propertyPath: botStatsScreen
-      value: 
-      objectReference: {fileID: 571313511}
     - target: {fileID: 9037268400884756809, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
       propertyPath: inputReader
       value: 

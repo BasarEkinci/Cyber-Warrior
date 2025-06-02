@@ -8,6 +8,8 @@ namespace Runtime.Objects.ControlPanelScreens
 {
     public class GunStatsScreen : PanelScreenBase
     {
+        public override bool IsPanelActive { get; set; }
+        
         [Header("Data")]
         [SerializeField] private PlayerGunStatsSO gunStats;
         
@@ -18,11 +20,6 @@ namespace Runtime.Objects.ControlPanelScreens
         [SerializeField] private TMP_Text upgradeCostText;
 
         private GunStats _stats;
-
-        private void Start()
-        {
-            ClosePanel();
-        }
 
         private void OnEnable()
         {
@@ -40,11 +37,13 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void OpenPanel()
         {
+            IsPanelActive = true;
             transform.DOScale(Vector3.one, 0.1f);
         }
 
         public override void ClosePanel()
         {
+            IsPanelActive = false;
             transform.DOScale(Vector3.zero, 0.1f);
         }
     }
