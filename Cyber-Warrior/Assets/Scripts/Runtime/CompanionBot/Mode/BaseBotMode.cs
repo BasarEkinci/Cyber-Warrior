@@ -1,4 +1,5 @@
-﻿using Runtime.Data.UnityObjects.Events;
+﻿using System;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using Runtime.Inputs;
 using Runtime.Objects;
@@ -32,7 +33,6 @@ namespace Runtime.CompanionBot.Mode
             _parent = transform.parent;
             _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
         }
-
 
         #region Overridden Functions
         
@@ -114,6 +114,8 @@ namespace Runtime.CompanionBot.Mode
         
         private void HandleTransformChanged(Transform changedTransform = null)
         {
+            if (_effectManager == null)
+                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
             if (changedTransform == null)
             {
                 TargetObject = _targetProvider.GetInitialTargetObject();

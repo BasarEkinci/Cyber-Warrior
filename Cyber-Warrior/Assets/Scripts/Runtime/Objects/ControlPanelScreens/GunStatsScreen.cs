@@ -29,7 +29,7 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
-            //_stats = gunStats.GunStatsList[levelManager.CurrentLevel];
+            _stats = gunStats.GunStatsList[levelManager.CurrentLevel];
             damageText.text = "Damage: " + _stats.damage;
             rangeText.text = "Range: " + _stats.range;
             attackRateText.text = "Attack Rate: " + _stats.attackInterval;
