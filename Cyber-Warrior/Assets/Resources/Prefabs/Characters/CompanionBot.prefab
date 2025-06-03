@@ -912,6 +912,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7896260988278129711}
   - component: {fileID: 9037268400884756809}
+  - component: {fileID: 7939988850030113837}
+  - component: {fileID: 5075749592860620802}
+  - component: {fileID: 2637740579503800047}
   m_Layer: 0
   m_Name: CompanionBot
   m_TagString: Untagged
@@ -951,6 +954,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   botModeEvent: {fileID: 11400000, guid: e77125a4a7c5144f7ae39e59d3c76578, type: 2}
+--- !u!114 &7939988850030113837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909494619995276644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+--- !u!114 &5075749592860620802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909494619995276644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3e07c07fa445fcb0109bb761fb03b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 7939988850030113837}
+  botDataSo: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
+--- !u!114 &2637740579503800047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909494619995276644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7493b2801f034e2e81a8be0e7ada5c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
 --- !u!1 &3453005339861845678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30aaa18af0b747a0ba9ed552cee32103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 0}
   statsData: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   maxHealth: {fileID: 5658274232929909112}
   level: {fileID: 8943066414753808732}
@@ -1645,9 +1687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a05ec1082b430598650fbeea4c59d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 0}
-  cmpLevelManager: {fileID: 0}
+  cmpLevelManager: {fileID: 7939988850030113837}
   playerLevelManager: {fileID: 0}
+  gunLevelManager: {fileID: 0}
   data: {fileID: 11400000, guid: 65ab358453f22924c86802d7cf84f34e, type: 2}
   totalKills: {fileID: 3843249084221024604}
   totalDeath: {fileID: 3119801994817643146}
@@ -2336,7 +2378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d48c87cefc9440d9a6b73151e5f554c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 0}
   gunStats: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
   damageText: {fileID: 8979135021391218648}
   rangeText: {fileID: 3891784557181185496}
