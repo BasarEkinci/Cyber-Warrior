@@ -911,8 +911,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7896260988278129711}
-  - component: {fileID: 6881531321085355516}
-  - component: {fileID: 105965401091470366}
   - component: {fileID: 9037268400884756809}
   m_Layer: 0
   m_Name: CompanionBot
@@ -939,34 +937,6 @@ Transform:
   - {fileID: 4436653152828846300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6881531321085355516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909494619995276644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeItemType: 0
---- !u!114 &105965401091470366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909494619995276644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8026a9370044ea480838f25846e6cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
-  levelManager: {fileID: 6881531321085355516}
-  companionID: CmpBot
 --- !u!114 &9037268400884756809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,7 +949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7ad2ec26aa4a2198a4e25009ee869f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 0}
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   botModeEvent: {fileID: 11400000, guid: e77125a4a7c5144f7ae39e59d3c76578, type: 2}
 --- !u!1 &3453005339861845678
@@ -1166,9 +1135,8 @@ MonoBehaviour:
   botData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 1, b: 0.10735226, a: 1}
-  levelManager: {fileID: 6881531321085355516}
+  levelManager: {fileID: 0}
   anchorPoints: {fileID: 0}
-  playerHealth: {fileID: 0}
 --- !u!1 &4435253298529545496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
-  cmpLevelManager: {fileID: 6881531321085355516}
+  cmpLevelManager: {fileID: 0}
   playerLevelManager: {fileID: 0}
   data: {fileID: 11400000, guid: 65ab358453f22924c86802d7cf84f34e, type: 2}
   totalKills: {fileID: 3843249084221024604}
@@ -2426,7 +2394,7 @@ MonoBehaviour:
   botData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 0.38679248, b: 0.029659042, a: 1}
-  levelManager: {fileID: 6881531321085355516}
+  levelManager: {fileID: 0}
   anchorPoints: {fileID: 0}
   transformEvent: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
 --- !u!114 &2246474400080955310

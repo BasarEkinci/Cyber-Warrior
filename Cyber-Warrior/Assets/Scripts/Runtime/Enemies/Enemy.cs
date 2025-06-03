@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
 using JetBrains.Annotations;
 using Runtime.Data.UnityObjects.Events;
+using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Interfaces;
 using Runtime.Player;
 using UnityEngine;

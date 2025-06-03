@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Data.UnityObjects
+namespace Runtime.Data.UnityObjects.ObjectData
 {
     [CreateAssetMenu(fileName = "ScarpTypes", menuName = "Scriptable Objects/ScarpTypes", order = 0)]
     public class ScrapTypesSO : ScriptableObject

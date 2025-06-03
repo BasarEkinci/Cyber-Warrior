@@ -12881,8 +12881,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1855922673}
   - component: {fileID: 1855922675}
-  - component: {fileID: 1855922674}
   - component: {fileID: 1855922676}
+  - component: {fileID: 1855922677}
   m_Layer: 0
   m_Name: CmpUpgradeArea
   m_TagString: UpgradeArea
@@ -12908,22 +12908,6 @@ Transform:
   - {fileID: 422545277}
   m_Father: {fileID: 1199359585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1855922674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855922672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2253177f49e42ec8de51046cd19ebac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeEvent: {fileID: 11400000, guid: 644c1e8679683964fb165abf24a88ac6, type: 2}
-  inputReader: {fileID: 1483146460}
-  upgradeTarget: {fileID: 5270933456566423004}
-  holdTime: 2
 --- !u!114 &1855922675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12960,6 +12944,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3743095, y: 1, z: 1.5535952}
   m_Center: {x: 0.79554945, y: 0, z: -0.09871759}
+--- !u!114 &1855922677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855922672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35efc42165474a4482815ebc5cd18338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 
+  onUpgradeEvent: {fileID: 0}
+  levelManager: {fileID: 5270933456566423005}
+  inputReader: {fileID: 0}
+  interactHoldTime: 2
+  cmpBotData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
 --- !u!1 &1867480831
 GameObject:
   m_ObjectHideFlags: 0
@@ -16268,17 +16270,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
---- !u!114 &5270933456566423004 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 105965401091470366, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}
-  m_PrefabInstance: {fileID: 5270933456566423000}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8026a9370044ea480838f25846e6cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5270933456566423005 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6881531321085355516, guid: 0695eda4975551c43808ed34b2beb66a, type: 3}

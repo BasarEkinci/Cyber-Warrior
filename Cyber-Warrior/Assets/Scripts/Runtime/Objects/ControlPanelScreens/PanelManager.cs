@@ -26,15 +26,15 @@ namespace Runtime.Objects.ControlPanelScreens
             CloseAllPanels();
         }
         
-        public void OpenPanel(UpgradeItemType type)
+        public void OpenPanel(ItemType type)
         {
             CloseAllPanels();
 
             _currentActiveScreen = type switch
             {
-                UpgradeItemType.Player => playerStatsScreen,
-                UpgradeItemType.Companion => botStatsScreen,
-                UpgradeItemType.Gun => gunStatsScreen,
+                ItemType.Player => playerStatsScreen,
+                ItemType.Companion => botStatsScreen,
+                ItemType.Gun => gunStatsScreen,
                 _ => _currentActiveScreen
             };
 

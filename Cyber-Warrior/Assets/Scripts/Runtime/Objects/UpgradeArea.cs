@@ -6,9 +6,9 @@ namespace Runtime.Objects
 {
     public class UpgradeArea : MonoBehaviour
     {
-        public UpgradeItemType ItemType => type;
+        public ItemType ItemType => type;
 
-        [SerializeField] private UpgradeItemType type;
+        [SerializeField] private ItemType type;
         [SerializeField] private Transform cmpWaitPoint;
         [SerializeField] private TransformEventChannel eventChannel;
         private void OnTriggerEnter(Collider other)

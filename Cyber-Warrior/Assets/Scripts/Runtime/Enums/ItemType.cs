@@ -1,6 +1,6 @@
 ﻿namespace Runtime.Enums
 {
-    public enum UpgradeItemType
+    public enum ItemType
     {
         Companion,
         Gun,
