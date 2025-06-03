@@ -1,5 +1,4 @@
-﻿using Data.UnityObjects;
-using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Data.UnityObjects.Events;
 using Runtime.Inputs;
 using Runtime.Interfaces;
 using UnityEngine;

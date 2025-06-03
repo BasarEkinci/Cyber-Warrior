@@ -127,7 +127,7 @@ namespace Runtime.CompanionBot.Mode
             var upgradeArea = changedTransform.GetComponentInParent<UpgradeArea>();
             if (upgradeArea != null)
             {
-                _panelManager.OpenPanel(upgradeArea.ItemType);
+                _panelManager.OpenPanel(upgradeArea.Type);
                 _effectManager.OpenEyesLights();
             }
             TargetObject = anchorPoints.transform;

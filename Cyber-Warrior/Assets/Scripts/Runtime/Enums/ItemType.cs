@@ -4,6 +4,7 @@
     {
         Companion,
         Gun,
-        Player
+        Player,
+        None
     }
 }

@@ -14,7 +14,7 @@ namespace Runtime.CompanionBot.Mode
         public CmpMode mode;
         
         [Header("Data")]
-        public CmpBotDataSO botData;
+        public CmpBotDataSo botData;
 
         [Header("Visuals")]
         public Material eyeMaterial;

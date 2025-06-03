@@ -13,7 +13,7 @@ namespace Runtime.Objects.ControlPanelScreens
         [Header("Level Info")] 
         [SerializeField] private LevelManager cmpLevelManager;
         [SerializeField] private LevelManager playerLevelManager;
-        
+        [SerializeField] private LevelManager gunLevelManager;
         [Header("Data")] 
         [SerializeField] private GameStatsDataSO data;
 
@@ -32,12 +32,13 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
+            
             totalKills.text = $"Total Kills: {data.gameStats.totalKilledEnemies}";
             totalDeath.text = $"Total Deaths: {data.gameStats.totalDeaths}";
             runTime.text = $"Games Played: {data.gameStats.totalGameTime}";
             botLevel.text = $"Bot Level: {cmpLevelManager.CurrentLevel}";
             playerLevel.text = $"Player Level: {playerLevelManager.CurrentLevel + 1}";
-            gunLevel.text = $"Gun Level: {levelManager.CurrentLevel + 1}";
+            gunLevel.text = $"Gun Level: {gunLevelManager.CurrentLevel + 1}";
         }
 
         public override void OpenPanel()

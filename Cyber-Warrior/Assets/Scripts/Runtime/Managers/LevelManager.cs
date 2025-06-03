@@ -1,12 +1,11 @@
 ﻿using Runtime.Enums;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Managers
 {
     public class LevelManager : MonoBehaviour
     {
-        [FormerlySerializedAs("upgradeItemType")] [SerializeField] private ItemType itemType;
+        [SerializeField] private ItemType itemType;
         public int CurrentLevel => _currentLevel;
 
         private int _currentLevel = 0;

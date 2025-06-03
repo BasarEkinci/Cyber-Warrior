@@ -1,12 +1,10 @@
-﻿using Runtime.Managers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Runtime.Objects.ControlPanelScreens
 {
     public abstract class PanelScreenBase : MonoBehaviour
     {
         public abstract bool IsPanelActive { get; set; }
-        public LevelManager levelManager;
         public abstract void SetStatsToScreen();
         public abstract void OpenPanel();
         public abstract void ClosePanel();

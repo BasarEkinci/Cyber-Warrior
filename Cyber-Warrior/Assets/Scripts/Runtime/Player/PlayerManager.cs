@@ -44,7 +44,7 @@ namespace Runtime.Player
 
         private void OnEnable()
         {
-            _playerStatsData = playerStatsSo.playerStatsDataList[levelManager.CurrentLevel];
+            _playerStatsData = playerStatsSo.playerStatsDataList[0];
             _mover = new Mover(_rb, _playerStatsData.moveSpeed);
             _crosshair = GameObject.FindWithTag("Crosshair");
             _rotator = new Rotator(transform, _crosshair);

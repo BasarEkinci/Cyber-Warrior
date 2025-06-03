@@ -1,5 +1,4 @@
-﻿using Data.UnityObjects;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using TMPro;
@@ -33,9 +32,9 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
-            _data = statsData.playerStatsDataList[levelManager.CurrentLevel];
+            //_data = statsData.playerStatsDataList[levelManager.CurrentLevel];
             maxHealth.text = "Max Health: " + _data.maxHealth;
-            level.text = "Level: " + levelManager.CurrentLevel;
+            //level.text = "Level: " + levelManager.CurrentLevel;
         }
 
         public override void OpenPanel()

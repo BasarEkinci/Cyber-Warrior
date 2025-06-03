@@ -22,7 +22,7 @@ namespace Runtime.Objects.ControlPanelScreens
         [SerializeField] private float scaleFactor = 1f;
         
         [Header("Data")]
-        [SerializeField] private CmpBotDataSO botDataSo;
+        [SerializeField] private CmpBotDataSo botDataSo;
 
         private CmpHealerData _healerData;
         private CmpCombatData _combatData;
@@ -48,7 +48,7 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
-            _healerData = botDataSo.statDataList[levelManager.CurrentLevel].healerData;
+            /*_healerData = botDataSo.statDataList[levelManager.CurrentLevel].healerData;
             _combatData = botDataSo.statDataList[levelManager.CurrentLevel].combatData;
             healAmountText.text =
                 "Heal Amount: " + _healerData.healAmount;
@@ -56,7 +56,7 @@ namespace Runtime.Objects.ControlPanelScreens
             damageAmountText.text = "Damage: " + _combatData.damage;
             attackRateText.text = "Attack Rate: " + _combatData.attackCooldown;
             rangeText.text = "Range: " + _combatData.range;
-            nextLevelCost.text = "Upgrade Cost: " + botDataSo.statDataList[levelManager.CurrentLevel].levelPrice;
+            nextLevelCost.text = "Upgrade Cost: " + botDataSo.statDataList[levelManager.CurrentLevel].levelPrice;*/
         }
 
         public override void OpenPanel()

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Runtime.Data.UnityObjects.ObjectData
 {
     [CreateAssetMenu(fileName = "Companion Bot", menuName = "Scriptable Objects/Companion Bot", order = 0)]
-    public class CmpBotDataSO : ScriptableObject
+    public class CmpBotDataSo : ScriptableObject
     {
         public ItemType Type => ItemType.Companion;
         public int MaxLevel => statDataList.Count - 1;
