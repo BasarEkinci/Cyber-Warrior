@@ -6,10 +6,10 @@ namespace Runtime.Managers
     public class ScarpAmountManager : MonoBehaviour
     {
         public static ScarpAmountManager Instance { get; private set; }
-        public int currentScarp => _currentScrap;
+        public int CurrentScarp => _currentScrap;
         
         public UnityAction<int> OnScrapEarned;
-        public UnityAction<int> onScrapSpend;
+        public UnityAction<int> OnScrapSpend;
 
         private int _currentScrap;
         
@@ -37,7 +37,7 @@ namespace Runtime.Managers
                 return false;
             }
             _currentScrap -= amount;
-            onScrapSpend?.Invoke(amount);
+            OnScrapSpend?.Invoke(amount);
             return true;
         }
     }

@@ -17,7 +17,7 @@ namespace Runtime.CompanionBot.Mode
         [SerializeField] private TransformEventChannel transformEvent;
 
         private PanelManager _panelManager;
-        private CmpBotVFXPlayer _vfxPlayer;
+        private CmpBotEffectManager _effectManager;
         private BotAnchorPoints _targetProvider;
         private InputReader _inputReader;
         private Transform _parent;
@@ -30,7 +30,7 @@ namespace Runtime.CompanionBot.Mode
             _inputReader = FindFirstObjectByType<InputReader>();
             _panelManager = GetComponentInParent<PanelManager>();
             _parent = transform.parent;
-            _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>();
+            _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
         }
 
 
@@ -80,11 +80,11 @@ namespace Runtime.CompanionBot.Mode
             {
                 _panelManager.OpenGameStatsPanel();
                 TargetObject = Camera.main.transform;
-                _vfxPlayer.OpenLights();
+                _effectManager.OpenEyesLights();
                 return;
             }
             _panelManager.CloseGameStatsPanel();
-            _vfxPlayer.CloseLights();
+            _effectManager.CloseEyesLights();
             TargetObject = _targetProvider.GetInitialTargetObject();
         }
 
@@ -102,8 +102,8 @@ namespace Runtime.CompanionBot.Mode
                 _panelManager = GetComponentInParent<PanelManager>();
             if (_parent == null)
                 _parent = transform.parent;
-            if (_vfxPlayer == null)
-                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>();
+            if (_effectManager == null)
+                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
             
             if (TargetObject == null)
                 TargetObject = anchorPoints.GetInitialTargetObject();
@@ -119,16 +119,16 @@ namespace Runtime.CompanionBot.Mode
                 TargetObject = _targetProvider.GetInitialTargetObject();
                 FollowPosition = _targetProvider.GetAnchorPoint(mode);
                 _panelManager.CloseAllPanels();
-                _vfxPlayer.CloseLights();
+                _effectManager.CloseEyesLights();
                 return;
             }
             _panelManager.CloseGameStatsPanel();
-            _vfxPlayer.CloseLights();        
+            _effectManager.CloseEyesLights();        
             var upgradeArea = changedTransform.GetComponentInParent<UpgradeArea>();
             if (upgradeArea != null)
             {
                 _panelManager.OpenPanel(upgradeArea.ItemType);
-                _vfxPlayer.OpenLights();
+                _effectManager.OpenEyesLights();
             }
             TargetObject = anchorPoints.transform;
             FollowPosition = changedTransform;

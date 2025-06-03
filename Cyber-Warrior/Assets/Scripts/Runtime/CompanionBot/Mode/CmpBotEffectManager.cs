@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
 {
-    public class CmpBotVFXPlayer : MonoBehaviour
+    public class CmpBotEffectManager : MonoBehaviour
     {
         [SerializeField] private GameObject eyesLights;
         [SerializeField] private List<GameObject> eyesLines;
@@ -12,17 +12,17 @@ namespace Runtime.CompanionBot.Mode
 
         private void OnEnable()
         {
-            CloseLights();
+            CloseEyesLights();
         }
 
-        public void PlayFireVFX()
+        public void PlayFireEffect()
         {
             foreach (var particle in muzzleFlashSystems)
             {
                 particle?.Play();
             }
         }
-        public void OpenLights()
+        public void OpenEyesLights()
         {
             eyesLights.SetActive(true);
             foreach (var effect in eyesLines)
@@ -31,7 +31,7 @@ namespace Runtime.CompanionBot.Mode
             }
         }
 
-        public void CloseLights()
+        public void CloseEyesLights()
         {
             eyesLights.SetActive(false);
             foreach (var effect in eyesLines)

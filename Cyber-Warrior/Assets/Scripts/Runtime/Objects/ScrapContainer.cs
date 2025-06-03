@@ -15,12 +15,12 @@ namespace Runtime.Objects
         
         private void OnEnable()
         {
-            ScarpAmountManager.Instance.onScrapSpend += OnScrapSpend;
+            ScarpAmountManager.Instance.OnScrapSpend += OnScrapSpend;
             ScarpAmountManager.Instance.OnScrapEarned += OnScrapEarned;
         }
         private void OnDisable()
         {
-            ScarpAmountManager.Instance.onScrapSpend -= OnScrapSpend;
+            ScarpAmountManager.Instance.OnScrapSpend -= OnScrapSpend;
             ScarpAmountManager.Instance.OnScrapEarned -= OnScrapEarned;
         }
         private void OnScrapEarned(int amount)

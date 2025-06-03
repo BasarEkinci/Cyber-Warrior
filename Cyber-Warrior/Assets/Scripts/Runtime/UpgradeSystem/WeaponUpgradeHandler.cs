@@ -25,8 +25,6 @@ namespace Runtime.UpgradeSystem
         public void Upgrade()
         {
             levelManager.Upgrade();
-            SaveManager.Instance.CurrentData.WeaponLevels[weaponID] = levelManager.CurrentLevel;
-            SaveManager.Instance.Save();
             Debug.Log($"Weapon upgraded to level {levelManager.CurrentLevel}");
         }
     }

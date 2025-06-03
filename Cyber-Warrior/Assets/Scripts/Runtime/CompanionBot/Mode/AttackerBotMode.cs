@@ -11,7 +11,7 @@ namespace Runtime.CompanionBot.Mode
         public override Transform TargetObject { get; set; }
         public override Transform FollowPosition { get; set; }
         
-        private CmpBotVFXPlayer _vfxPlayer;
+        private CmpBotEffectManager _effectManager;
         private CmpCombatData _combatData;
         private Transform _parent;
 
@@ -28,8 +28,8 @@ namespace Runtime.CompanionBot.Mode
 
         public override void Initialize()
         {
-            if (_vfxPlayer == null)
-                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
+            if (_effectManager == null)
+                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>(true);
 
             if (TargetObject == null)
                 TargetObject = anchorPoints.GetInitialTargetObject();
@@ -85,12 +85,12 @@ namespace Runtime.CompanionBot.Mode
 
         private void Attack()
         {
-            if (_vfxPlayer == null)
-                _vfxPlayer = _parent.GetComponentInChildren<CmpBotVFXPlayer>(true);
+            if (_effectManager == null)
+                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>(true);
             
             if (TargetObject.TryGetComponent(out IDamageable damageable))
             {
-                _vfxPlayer.PlayFireVFX();
+                _effectManager.PlayFireEffect();
                 damageable.TakeDamage(_combatData.damage);
             }
         }

@@ -1,18 +1,29 @@
-﻿using Data.UnityObjects;
-using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Inputs;
+using Runtime.Managers;
 using UnityEngine;
 
-namespace Runtime.Managers
+namespace Runtime.UpgradeSystem
 {
     public class CmpBotUpgradeManager : MonoBehaviour
     {
-        [SerializeField] private InputReader inputReader;
-        [SerializeField] private LevelManager levelManager;
-        [SerializeField] private CmpBotDataSO cmpBotData;
+        [Header("Scriptables")]
         [SerializeField] private VoidEventSO onUpgradeEvent;
-        [SerializeField] private float interactHoldTime = 2f;
+        [SerializeField] private CmpBotDataSO cmpBotData;
+        
+        [Header("Class References")]
+        public LevelManager levelManager;
+        public InputReader inputReader;
+
+        [Header("Settings")]
+        public float interactHoldTime = 2f;
+        
+        private void Awake()
+        {
+            inputReader = FindFirstObjectByType<InputReader>();
+        }
+        
         
         private bool _isInRange;
         private bool _isHoldingInteractButton;
@@ -27,27 +38,7 @@ namespace Runtime.Managers
         }
         private void Update()
         {
-            if (_isInRange && _isHoldingInteractButton)
-            {
-                _currentHoldTime += Time.deltaTime;
-                if (_currentHoldTime >= interactHoldTime)
-                {
-                    if (ScarpAmountManager.Instance.TrySpendScarp(cmpBotData.statDataList[levelManager.CurrentLevel].levelPrice))
-                    {
-                        onUpgradeEvent.Invoke();
-                        _currentHoldTime = 0f;
-                    }
-                    else
-                    {
-                        Debug.Log("Not enough scarp");
-                    }
-                }
-            }
-            else
-            {
-                _currentHoldTime = 0f;
-            }
-            
+            UpdateHandler();   
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -78,6 +69,30 @@ namespace Runtime.Managers
         private void OnInteractPressed()
         {
             _isHoldingInteractButton = true;
+        }
+
+        private void UpdateHandler()
+        {
+            if (_isInRange && _isHoldingInteractButton)
+            {
+                _currentHoldTime += Time.deltaTime;
+                if (_currentHoldTime >= interactHoldTime)
+                {
+                    if (ScarpAmountManager.Instance.TrySpendScarp(cmpBotData.statDataList[levelManager.CurrentLevel].levelPrice))
+                    {
+                        onUpgradeEvent.Invoke();
+                        _currentHoldTime = 0f;
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough scarp");
+                    }
+                }
+            }
+            else
+            {
+                _currentHoldTime = 0f;
+            }
         }
     }
 }

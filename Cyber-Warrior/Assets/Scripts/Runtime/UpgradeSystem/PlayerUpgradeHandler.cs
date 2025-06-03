@@ -25,8 +25,6 @@ namespace Runtime.UpgradeSystem
         public void Upgrade()
         {
             levelManager.Upgrade();
-            SaveManager.Instance.CurrentData.PlayerLevels[playerID] = levelManager.CurrentLevel;
-            SaveManager.Instance.Save();
             Debug.Log($"Player upgraded to level {levelManager.CurrentLevel}");
         }
     }
