@@ -32,6 +32,10 @@ namespace Runtime.CompanionBot.Mode
         
         public override void Execute()
         {
+            if (_playerHealth.CurrentHealth <= 0f)
+            {
+                return;
+            }
             _timer += Time.deltaTime;
             if (_timer >= _botData.healCooldown)
             {

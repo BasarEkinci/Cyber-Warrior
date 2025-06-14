@@ -1,4 +1,3 @@
-using Data.UnityObjects;
 using Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
@@ -47,15 +46,6 @@ namespace Runtime.Player
             _currentHealth += healAmount;
             _currentHealth = Mathf.Min(_currentHealth, _playerStatsData.maxHealth);
             healthEventSO.OnEventRaised(_currentHealth);
-        }
-
-        public void Upgrade(int amount)
-        {
-            if (_currentLevel >= playerStatsSo.MaxLevel)
-            {
-                return;
-            }
-            _currentLevel += amount;
         }
     }
 }

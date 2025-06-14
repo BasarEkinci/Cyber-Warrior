@@ -29,7 +29,7 @@ MonoBehaviour:
       eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       mesh: {fileID: 5794103751566755491, guid: 8877d463e7b5e9e47a081706a543a2eb, type: 3}
     healerData:
-      healCooldown: 8
+      healCooldown: 1
       healAmount: 8
     levelPrice: 50
   - combatData:

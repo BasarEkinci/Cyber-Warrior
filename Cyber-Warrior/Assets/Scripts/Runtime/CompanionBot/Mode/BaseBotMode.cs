@@ -5,6 +5,7 @@ using Runtime.Inputs;
 using Runtime.Objects;
 using Runtime.Objects.ControlPanelScreens;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.CompanionBot.Mode
 {
@@ -16,11 +17,13 @@ namespace Runtime.CompanionBot.Mode
         
         [Header("Scriptables")]
         [SerializeField] private TransformEventChannel transformEvent;
+        
+        [Header("Class References")]
+        [SerializeField] private InputReader inputReader;
 
         private PanelManager _panelManager;
         private CmpBotEffectManager _effectManager;
         private BotAnchorPoints _targetProvider;
-        private InputReader _inputReader;
         private Transform _parent;
         
         private bool _isStateActive;
@@ -28,18 +31,24 @@ namespace Runtime.CompanionBot.Mode
         private void Awake()
         {
             _targetProvider = FindFirstObjectByType<BotAnchorPoints>();
-            _inputReader = FindFirstObjectByType<InputReader>();
             _panelManager = GetComponentInParent<PanelManager>();
             _parent = transform.parent;
-            _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
+        }
+        private void Start()
+        {
+            InitializeComponents();
+            TargetObject = _targetProvider.GetInitialTargetObject();
+            FollowPosition = _targetProvider.GetAnchorPoint(mode);
+            eyeMaterial.color = modeColor;
         }
 
         #region Overridden Functions
-        
+
+        // ReSharper disable Unity.PerformanceAnalysis
         public override void Initialize()
         {   
             transformEvent.OnEventRaised += HandleTransformChanged;
-            _inputReader.OnStatsButtonPressed += OnStatsButtonPressed;
+            inputReader.OnStatsButtonPressed += OnStatsButtonPressed;
             InitializeComponents();
             _isStateActive = true;
             eyeMaterial.color = modeColor;
@@ -47,6 +56,7 @@ namespace Runtime.CompanionBot.Mode
 
         public override void Execute()
         {
+            Debug.Log(_panelManager.IsStatsPanelActive);
         }
 
         public override void RotateBehaviour(Transform botTransform)
@@ -64,17 +74,21 @@ namespace Runtime.CompanionBot.Mode
         public override void ExitState()
         {
             transformEvent.OnEventRaised -= HandleTransformChanged;
-            _inputReader.OnStatsButtonPressed -= OnStatsButtonPressed;
+            inputReader.OnStatsButtonPressed -= OnStatsButtonPressed;
             _panelManager.CloseAllPanels();
+            _effectManager?.CloseEyesLights();
             _isStateActive = false;
         }
 
         private void OnStatsButtonPressed()
         {
-            Debug.Log("Stats button pressed in BaseBotMode");
             if (!_isStateActive || TargetObject == anchorPoints.transform)
             {
                 return;
+            }
+            if (_effectManager == null)
+            {
+                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
             }
             if (!_panelManager.IsStatsPanelActive)
             {
@@ -96,18 +110,16 @@ namespace Runtime.CompanionBot.Mode
         {
             if (_targetProvider == null)
                 _targetProvider = FindFirstObjectByType<BotAnchorPoints>();
-            if (_inputReader == null)
-                _inputReader = FindFirstObjectByType<InputReader>();
+            if (inputReader == null)
+                inputReader = FindFirstObjectByType<InputReader>();
             if (_panelManager == null)
                 _panelManager = GetComponentInParent<PanelManager>();
             if (_parent == null)
                 _parent = transform.parent;
             if (_effectManager == null)
                 _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
-            
             if (TargetObject == null)
                 TargetObject = anchorPoints.GetInitialTargetObject();
-            
             if (FollowPosition == null)
                 FollowPosition = anchorPoints.GetAnchorPoint(mode);
         }

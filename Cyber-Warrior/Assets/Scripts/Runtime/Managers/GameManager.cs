@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Runtime.Managers
     {
         [SerializeField] private GameStateEvent gameStateEvent;
 
-        private void OnEnable()
+        private void Start()
         {
             gameStateEvent.RaiseEvent(GameState.Base);
         }
