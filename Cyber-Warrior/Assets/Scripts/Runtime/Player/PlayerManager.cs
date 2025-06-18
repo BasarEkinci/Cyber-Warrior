@@ -34,6 +34,7 @@ namespace Runtime.Player
         private Vector2 _inputVector;
         private Vector3 _moveVector;
         private bool _canMove;
+        private GameState _gameState;
         #endregion
         
         #region Unity Methods
@@ -51,14 +52,22 @@ namespace Runtime.Player
             _rotator = new Rotator(transform, _crosshair);
             _movementAnimator = new MovementAnimator(_animator);
             voidEventSo.OnEventRaised += OnPlayerDeath;
+            gameStateEvent.OnEventRaised += OnGameStateChanged;
             inputReader.OnMove += HandleMove;
             _canMove = true;
+        }
+
+        private void OnGameStateChanged(GameState arg0)
+        {
+            _gameState = arg0;
+            _canMove = _gameState == GameState.Action || _gameState == GameState.Base;
         }
 
         private void Update()
         {
             if (!_canMove)
             {
+                Debug.Log("Player cannot move, waiting for action state.");
                 return;
             }
             _movementAnimator.SetAnimations(_moveVector, transform);
@@ -81,6 +90,7 @@ namespace Runtime.Player
         private void OnDisable()
         {
             voidEventSo.OnEventRaised -= OnPlayerDeath;
+            gameStateEvent.OnEventRaised += OnGameStateChanged;
             inputReader.OnMove -= HandleMove;
         }
 

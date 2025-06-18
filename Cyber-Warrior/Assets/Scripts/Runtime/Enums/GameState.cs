@@ -3,6 +3,8 @@
     public enum GameState
     {
         Base,
-        Action
+        Action,
+        CardSelection,
+        GameOver
     }
 }

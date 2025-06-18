@@ -1,31 +1,33 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Data.UnityObjects;
 using JetBrains.Annotations;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Gameplay;
 using Runtime.Interfaces;
 using Runtime.Player;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Runtime.Enemies
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        public bool IsDead => _currentHealth <= 0f;
-        public float CurrentHealth => _currentHealth;
+        public VoidEventSO EnemyDeathEvent => enemyDeathEvent;
         
+        [Header("Visuals")]
         [SerializeField] private GameObject bloodEffect;
         
         [Header("Scriptables")]
-        [SerializeField] private VoidEventSO voidEventSo;
-        [SerializeField] private EnemySO enemySo;
+        [SerializeField] private VoidEventSO playerDeathEvent;
+        [SerializeField] private VoidEventSO enemyDeathEvent;
+        [SerializeField] private EnemySo enemySo;
         [SerializeField] private ScrapTypesSO scrapTypesSo;
         
-        private NavMeshAgent _agent;
-        private Transform _playerTransform;
+        private EnemyPool _enemyPool;
+        private EnemyTickManager _enemyTickManager;
+        private Transform _target;
+        private Vector3 _moveDirection;
         private CancellationTokenSource _cancellationToken;
         private Animator _animator;
         private Collider _collider;
@@ -43,8 +45,9 @@ namespace Runtime.Enemies
         private void FixedUpdate()
         {
             if (_currentHealth <= 0f) return;
-            if (_playerTransform != null || !_isPLayerDead)
-                _agent.SetDestination(_playerTransform.position);
+            if (_isPLayerDead) return;
+            transform.position += _moveDirection * (enemySo.moveSpeed * Time.fixedDeltaTime);
+            RotateTowardsTarget();
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -64,6 +67,13 @@ namespace Runtime.Enemies
                 _cancellationToken.Dispose();
             }
         }
+
+        private void OnDisable()
+        {
+             _enemyTickManager.Unregister(this);
+             playerDeathEvent.OnEventRaised -= OnPlayerDeath;
+        }
+
         #endregion
 
         #region Custom Functions
@@ -94,32 +104,36 @@ namespace Runtime.Enemies
                 Dead();
             }
         }
-        public void Dead()
+        public async void Dead()
         {
             _collider.enabled = false;
-            _agent.enabled = false;
+            enemyDeathEvent.OnEventRaised();
             _animator.Play("Death1");
             CreateScarp();
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            _enemyPool.ReturnEnemy(this);
         }
-        private void OnPlayerDeath()
+        private async void OnPlayerDeath()
         {
             _isPLayerDead = true;
             _animator.Play("idle");
-            _cancellationToken.Cancel();
-            _cancellationToken.Dispose();
+            if (_cancellationToken != null && !_cancellationToken.IsCancellationRequested)
+            {
+                _cancellationToken.Cancel();
+                _cancellationToken.Dispose();   
+            }
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            _enemyPool.ReturnEnemy(this);
         }
         private void Initialize()
         {
-            _agent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
             _collider = GetComponent<Collider>();
-            voidEventSo.OnEventRaised += OnPlayerDeath;
-            _agent.speed = enemySo.moveSpeed;
+            _enemyPool = FindFirstObjectByType<EnemyPool>();
+            _enemyTickManager = FindFirstObjectByType<EnemyTickManager>();
+            playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _currentHealth = enemySo.maxHealth;
             _damageResistance = enemySo.damageResistance;
-            var playerManager = FindFirstObjectByType<PlayerManager>();
-            if (playerManager != null)
-                _playerTransform = playerManager.transform;
         }
 
         private void CreateScarp()
@@ -127,6 +141,30 @@ namespace Runtime.Enemies
             GameObject scarp = scrapTypesSo.GetRandomScrap();
             Instantiate(scarp, transform.position, Quaternion.identity);
         }
+
+        public void InitializeValues(Transform player)
+        {
+            _target = player;
+            _enemyTickManager.Register(this);
+        }
+
+        public void Tick()
+        {
+            if (_target == null) return;
+            Vector3 direction = (_target.position - transform.position).normalized;
+            _moveDirection = new Vector3(direction.x, 0f, direction.z);
+        }
+
+        private void RotateTowardsTarget()
+        {
+            if (_target == null || _isPLayerDead) return;
+            Vector3 direction = (_target.position - transform.position).normalized;
+            direction.y = 0f;
+            if (direction == Vector3.zero) return;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
+        }
+        
         #endregion
     }
 }

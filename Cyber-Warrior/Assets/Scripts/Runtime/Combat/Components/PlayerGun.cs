@@ -39,6 +39,7 @@ namespace Runtime.Combat.Components
         {
             _levelManager = GetComponent<LevelManager>();
             _crosshair = GameObject.FindWithTag("Crosshair");
+            _currentGunStats = playerGunStatsSo.GunStatsList[_levelManager.CurrentLevel];
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;
@@ -84,9 +85,10 @@ namespace Runtime.Combat.Components
                 Vector3 direction = _crosshair.transform.position - gunBarrelTransform.position;
                 if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.range))
                 {
-                    if (hit.collider.TryGetComponent<IDamageable>(out var damagable))
+                    if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
                     {
-                        damagable.TakeDamage(_currentGunStats.damage);
+                        damageable.TakeDamage(_currentGunStats.damage);
+                        Debug.Log("Hit: " + hit.collider.name);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }

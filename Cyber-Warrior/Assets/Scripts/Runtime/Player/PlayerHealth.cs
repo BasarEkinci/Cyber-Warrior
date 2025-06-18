@@ -2,6 +2,7 @@ using Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
+using Runtime.Enums;
 using UnityEngine;
 
 namespace Runtime.Player
@@ -12,6 +13,7 @@ namespace Runtime.Player
         public float MaxHealth => _playerStatsData.maxHealth;
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private PlayerStatsSO playerStatsSo;
+        [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private FloatEventChannel healthEventSO;
         
         private int _currentLevel;
@@ -33,6 +35,7 @@ namespace Runtime.Player
             if (_currentHealth <= 0f)
             {
                 playerDeathEvent?.Invoke();
+                gameStateEvent.RaiseEvent(GameState.GameOver);
                 _animator.Play("Death");
             }
         }
