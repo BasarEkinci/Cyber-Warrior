@@ -41,7 +41,7 @@ namespace Runtime.UpgradeSystem.Handlers
                 Debug.Log("Not enough scarp to upgrade");
                 return;
             }
-            ScarpAmountManager.Instance.OnScrapSpend(GetLevelPrice(CurrentLevel));
+            ScarpAmountManager.Instance.OnScarpSpend.OnEventRaised(GetLevelPrice(CurrentLevel));
             Debug.Log($"Upgrading Cmp Bot to level {CurrentLevel + 1}");
             Destroy(_currentMesh);
             CurrentLevel++;

@@ -1,7 +1,7 @@
 ﻿namespace Runtime.Data.ValueObjects
 {
     [System.Serializable]
-    public struct GameStatsData
+    public class GameStatsData
     {
         public int totalKilledEnemies;
         public int totalDeaths;
