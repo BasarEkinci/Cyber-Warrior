@@ -1,7 +1,7 @@
-using Data.UnityObjects;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
+using Runtime.Enums;
 using Runtime.Inputs;
 using Runtime.Managers;
 using Runtime.Movement;
@@ -16,6 +16,7 @@ namespace Runtime.Player
         [SerializeField] private LevelManager levelManager;
         [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
+        [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private RigBuilder rigBuilder;
         [SerializeField] private InputReader inputReader;
         #endregion
@@ -68,6 +69,15 @@ namespace Runtime.Player
         {
             _mover.MoveWithRb(_moveVector, _canMove);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("DoorOutside"))
+            {
+                gameStateEvent.RaiseEvent(GameState.Action);
+            }
+        }
+
         private void OnDisable()
         {
             voidEventSo.OnEventRaised -= OnPlayerDeath;

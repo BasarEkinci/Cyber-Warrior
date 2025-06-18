@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Crosshair
   - UpgradeArea
+  - DoorOutside
   layers:
   - Default
   - TransparentFX

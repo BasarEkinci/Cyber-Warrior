@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Runtime.Objects
+namespace Runtime.Objects.Door
 {
     public class Door : MonoBehaviour
     {
@@ -23,7 +23,6 @@ namespace Runtime.Objects
             {
                 leftDoor.transform.DOMove(_leftDoorFirstPos + new Vector3(0, 0, -2), 0.5f);
                 rightDoor.transform.DOMove(_rightDoorFirstPos + new Vector3(0, 0, 2), 0.5f);
-
             }
         }
 
