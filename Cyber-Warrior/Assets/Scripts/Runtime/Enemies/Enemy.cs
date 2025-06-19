@@ -26,6 +26,7 @@ namespace Runtime.Enemies
         
         private EnemyPool _enemyPool;
         private EnemyTickManager _enemyTickManager;
+        private PlayerHealth _playerHealth;
         private Transform _target;
         private Vector3 _moveDirection;
         private CancellationTokenSource _cancellationToken;
@@ -54,8 +55,9 @@ namespace Runtime.Enemies
             if (other.TryGetComponent(out PlayerHealth playerHealth))
             {
                 _animator.SetBool(IsAttached, true);
+                _playerHealth = playerHealth;
                 _cancellationToken = new CancellationTokenSource();
-                StartDamagingAsync(_cancellationToken, playerHealth);
+                StartDamagingAsync(_cancellationToken,playerHealth);
             }
         }
         private void OnTriggerExit(Collider other)
@@ -63,6 +65,7 @@ namespace Runtime.Enemies
             if (other.CompareTag("Player"))
             {
                 _animator.SetBool(IsAttached, false);
+                _playerHealth = null;
                 _cancellationToken.Cancel();
                 _cancellationToken.Dispose();
             }
@@ -116,6 +119,7 @@ namespace Runtime.Enemies
         private async void OnPlayerDeath()
         {
             _isPLayerDead = true;
+            _playerHealth = null;
             _animator.Play("idle");
             if (_cancellationToken != null && !_cancellationToken.IsCancellationRequested)
             {

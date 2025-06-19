@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using UnityEngine;
 
@@ -10,9 +9,13 @@ namespace Runtime.Managers
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameStateEvent gameStateEvent;
 
+
         private void Start()
         {
-            gameOverPanel.SetActive(false);
+            if (gameOverPanel.activeSelf)
+            {
+                gameOverPanel.SetActive(false);
+            }
         }
 
         private void OnEnable()

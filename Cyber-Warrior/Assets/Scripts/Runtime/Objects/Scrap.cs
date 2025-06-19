@@ -1,4 +1,3 @@
-using Data.UnityObjects;
 using DG.Tweening;
 using Runtime.Managers;
 using UnityEngine;
@@ -30,11 +29,8 @@ namespace Runtime.Objects
         private void CollectAnimation(Transform playerTransform)
         {
             _tween.Kill();
-            transform.DOMove(playerTransform.position, 0.1f).SetEase(Ease.OutQuart).OnComplete(() =>
-            {
-                //SFX
-                Destroy(gameObject);
-            });
+            transform.DOMove(playerTransform.position, 0.1f).SetEase(Ease.OutQuart);
+            Destroy(gameObject,0.11f);
         }
     }
 }

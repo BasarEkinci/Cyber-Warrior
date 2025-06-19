@@ -1,7 +1,4 @@
-using System;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Runtime.Data.UnityObjects.Events;
 using Runtime.Gameplay;
 using TMPro;
 using UnityEngine;
@@ -11,40 +8,47 @@ namespace Runtime.UI
 {
     public class GameOverScreen : MonoBehaviour
     {
-        [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private GameStatDataHolder statDataHolder;
         [SerializeField] private TMP_Text header;
         [SerializeField] private TMP_Text totalKillsText;
         [SerializeField] private TMP_Text collectedScrapText;
         [SerializeField] private Button restartButton;
-        
+
         private Sequence _sequence;
+
         private void OnEnable()
         {
-            playerDeathEvent.OnEventRaised += OnPlayerDeath;
-            totalKillsText.text = $"Total Kills\n{statDataHolder.TotalKills}";
-            collectedScrapText.text = $"Collected Scrap\n{statDataHolder.CollectedScrap}";
+            totalKillsText.text = $"Total Kills\n0";
+            collectedScrapText.text = $"Collected Scrap\n0";
+
             _sequence = DOTween.Sequence();
             _sequence.SetEase(Ease.OutBack);
-            _sequence.Append(header.transform.DOScale(Vector3.one, 1f));
-            _sequence.Append(totalKillsText.transform.DOScale(Vector3.one, 1f));
-            _sequence.Append(collectedScrapText.transform.DOScale(Vector3.one, 1f));
-            _sequence.Append(restartButton.transform.DOScale(Vector3.one, 1f));
-            _sequence.OnComplete(()=> Debug.Log("Game Over"));
+
+            _sequence.Append(header.transform.DOScale(Vector3.zero, 1f).From());
+            _sequence.Append(totalKillsText.transform.DOScale(Vector3.zero, 1f).From().OnComplete(() =>
+            {
+                AnimateTextNumber(totalKillsText, "Total Kills\n", statDataHolder.TotalKills);
+            }));
+            _sequence.Append(collectedScrapText.transform.DOScale(Vector3.zero, 1f).From().OnComplete(() =>
+            {
+                AnimateTextNumber(collectedScrapText, "Collected Scrap\n", statDataHolder.CollectedScrap);
+            }));
+            _sequence.Append(restartButton.transform.DOScale(Vector3.zero, 1f).From());
+
+            _sequence.OnComplete(() => Debug.Log("Sequence Completed"));
         }
 
-        private void OnPlayerDeath()
+        private void AnimateTextNumber(TMP_Text textComponent, string prefix, int targetValue, float duration = 1f)
         {
-
-        }
-        private void OnDisable()
-        {
-            header.gameObject.transform.DOScale(Vector3.zero, 0.2f);
-            totalKillsText.gameObject.transform.DOScale(Vector3.zero, 0.2f);
-            collectedScrapText.gameObject.transform.DOScale(Vector3.zero, 0.2f);
-            restartButton.gameObject.transform.DOScale(Vector3.zero, 0.2f);
-            Debug.Log("Game Over Screen Disabled");
-            playerDeathEvent.OnEventRaised -= OnPlayerDeath;
+            int currentValue = 0;
+            DOTween.To(() => currentValue, x =>
+                {
+                    currentValue = x;
+                    textComponent.text = $"{prefix}{currentValue}";
+                },
+                targetValue,
+                duration
+            ).SetEase(Ease.OutCubic);
         }
     }
 }

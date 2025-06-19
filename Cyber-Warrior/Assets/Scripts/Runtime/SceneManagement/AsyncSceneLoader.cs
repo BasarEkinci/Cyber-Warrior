@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,13 @@ namespace Runtime.SceneManagement
     {
         [SerializeField] private GameObject loadingScreen;
         [SerializeField] private Slider loadingSlider;
-        
+
+        private void Start()
+        {
+            if(loadingScreen.activeSelf)
+                loadingScreen.SetActive(false);
+        }
+
         public void LoadLevelButton(int sceneIndex)
         {
             loadingScreen.SetActive(true);
@@ -25,6 +32,7 @@ namespace Runtime.SceneManagement
                 loadingSlider.value = progress;
                 yield return null;
             }
+            loadingScreen.SetActive(false);
         }
     }
 }
