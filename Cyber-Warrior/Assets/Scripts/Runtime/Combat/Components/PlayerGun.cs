@@ -27,7 +27,6 @@ namespace Runtime.Combat.Components
         [SerializeField] private InputReader inputReader;
         [SerializeField] private Transform gunBarrelTransform;
         
-        private LevelManager _levelManager;
         private int _currentLevel;
         private GameObject _crosshair;
         private GunStats _currentGunStats;
@@ -37,9 +36,8 @@ namespace Runtime.Combat.Components
         
         private void OnEnable()
         {
-            _levelManager = GetComponent<LevelManager>();
             _crosshair = GameObject.FindWithTag("Crosshair");
-            _currentGunStats = playerGunStatsSo.GunStatsList[_levelManager.CurrentLevel];
+            _currentGunStats = playerGunStatsSo.GunStatsList[GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel)];
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;

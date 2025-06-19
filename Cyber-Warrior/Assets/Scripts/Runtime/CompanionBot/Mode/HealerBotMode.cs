@@ -1,5 +1,6 @@
 ﻿using Runtime.Data.ValueObjects;
 using Runtime.Enums;
+using Runtime.Managers;
 using Runtime.Player;
 using UnityEngine;
 
@@ -61,7 +62,7 @@ namespace Runtime.CompanionBot.Mode
         
         private CmpBotStatData GetDataAtCurrentLevel()
         {
-            return botData.statDataList[levelManager.CurrentLevel];
+            return botData.statDataList[GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel)];
         }
     }
 }

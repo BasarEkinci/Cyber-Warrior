@@ -2,6 +2,7 @@
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
+using Runtime.Managers;
 using TMPro;
 using UnityEngine;
 
@@ -48,15 +49,16 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
-            /*_healerData = botDataSo.statDataList[levelManager.CurrentLevel].healerData;
-            _combatData = botDataSo.statDataList[levelManager.CurrentLevel].combatData;
+            int dataLevel = GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel);
+            _healerData = botDataSo.statDataList[dataLevel].healerData;
+            _combatData = botDataSo.statDataList[dataLevel].combatData;
             healAmountText.text =
                 "Heal Amount: " + _healerData.healAmount;
             healRateText.text = "Heal Rate: " + _healerData.healCooldown;
             damageAmountText.text = "Damage: " + _combatData.damage;
             attackRateText.text = "Attack Rate: " + _combatData.attackCooldown;
             rangeText.text = "Range: " + _combatData.range;
-            nextLevelCost.text = "Upgrade Cost: " + botDataSo.statDataList[levelManager.CurrentLevel].levelPrice;*/
+            nextLevelCost.text = "Upgrade Cost: " + botDataSo.statDataList[dataLevel].levelPrice;
         }
 
         public override void OpenPanel()

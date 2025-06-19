@@ -1,6 +1,7 @@
 ﻿using Runtime.Data.ValueObjects;
 using Runtime.Enums;
 using Runtime.Interfaces;
+using Runtime.Managers;
 using UnityEngine;
 
 namespace Runtime.CompanionBot.Mode
@@ -80,7 +81,7 @@ namespace Runtime.CompanionBot.Mode
         #region Bot Logic
         private CmpBotStatData GetDataAtCurrentLevel()
         {
-            return botData.statDataList[levelManager.CurrentLevel];
+            return botData.statDataList[GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel)];
         }
 
         private void Attack()

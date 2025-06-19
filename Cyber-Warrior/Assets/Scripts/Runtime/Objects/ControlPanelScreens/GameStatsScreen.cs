@@ -10,10 +10,6 @@ namespace Runtime.Objects.ControlPanelScreens
     {
         public override bool IsPanelActive { get; set; }
         
-        [Header("Level Info")] 
-        [SerializeField] private LevelManager cmpLevelManager;
-        [SerializeField] private LevelManager playerLevelManager;
-        [SerializeField] private LevelManager gunLevelManager;
         [Header("Data")] 
         [SerializeField] private GameStatsDataSO data;
 
@@ -36,9 +32,9 @@ namespace Runtime.Objects.ControlPanelScreens
             totalKills.text = $"Total Kills: {data.gameStats.totalKilledEnemies}";
             totalDeath.text = $"Total Deaths: {data.gameStats.totalDeaths}";
             runTime.text = $"Games Played: {data.gameStats.totalGameTime}";
-            botLevel.text = $"Bot Level: {cmpLevelManager.CurrentLevel}";
-            playerLevel.text = $"Player Level: {playerLevelManager.CurrentLevel + 1}";
-            gunLevel.text = $"Gun Level: {gunLevelManager.CurrentLevel + 1}";
+            botLevel.text = $"Bot Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel) + 1}";
+            playerLevel.text = $"Player Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel+ 1)}";
+            gunLevel.text = $"Gun Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel) + 1}";
         }
 
         public override void OpenPanel()

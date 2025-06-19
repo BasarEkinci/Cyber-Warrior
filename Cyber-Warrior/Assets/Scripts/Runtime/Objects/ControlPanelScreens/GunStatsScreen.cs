@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
+using Runtime.Managers;
 using TMPro;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Runtime.Objects.ControlPanelScreens
 
         public override void SetStatsToScreen()
         {
-            _stats = gunStats.GunStatsList[levelManager.CurrentLevel];
+            _stats = gunStats.GunStatsList[GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel)];
             damageText.text = "Damage: " + _stats.damage;
             rangeText.text = "Range: " + _stats.range;
             attackRateText.text = "Attack Rate: " + _stats.attackInterval;

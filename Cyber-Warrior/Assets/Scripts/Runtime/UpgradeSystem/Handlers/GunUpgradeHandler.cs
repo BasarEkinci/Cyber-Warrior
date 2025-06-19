@@ -1,4 +1,5 @@
-﻿using Runtime.Data.UnityObjects.ObjectData;
+﻿using System;
+using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Interfaces;
 using Runtime.Managers;
 using UnityEngine;
@@ -10,6 +11,12 @@ namespace Runtime.UpgradeSystem.Handlers
         [SerializeField] private PlayerGunStatsSO data;
         public int CurrentLevel { get; set; }
         public int MaxLevel { get; set; }
+
+        private void OnEnable()
+        {
+            CurrentLevel = GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel);
+        }
+
         public int GetLevelPrice(int level)
         {
             return data.GunStatsList[level].price;
@@ -25,7 +32,7 @@ namespace Runtime.UpgradeSystem.Handlers
             ScarpAmountManager.Instance.OnScarpSpend.OnEventRaised(GetLevelPrice(CurrentLevel));
             Debug.Log($"Upgrading Gun to level {CurrentLevel + 1}");
             CurrentLevel++;
-            // Here you can add logic to apply the new stats to the gun
+            GameDatabaseManager.Instance.SaveData(SaveKeys.GunLevel, CurrentLevel);
         }
     }
 }

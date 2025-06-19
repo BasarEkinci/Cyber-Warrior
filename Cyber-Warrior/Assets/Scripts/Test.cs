@@ -62,5 +62,25 @@ public class Test : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    
+    [PropertySpace]
+    [Title("Show Saved Data")]
+    [Button(ButtonSizes.Large)]
+    public void ShowSavedData()
+    {
+        Debug.Log($"Player Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel)}");
+        Debug.Log($"Gun Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel)}");
+        Debug.Log($"Companion Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel)}");
+        Debug.Log($"Scarp Amount: {ScarpAmountManager.Instance.CurrentScarp}");
+    }
+    
+    [PropertySpace]
+    [Title("Clear All Saved Data")]
+    [Button(ButtonSizes.Large)]
+    public void ClearSavedData()
+    {
+        GameDatabaseManager.Instance.ClearAllData();
+        Debug.Log("All saved data cleared.");
+    }
     #endregion
 }

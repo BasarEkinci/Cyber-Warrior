@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.Data.UnityObjects.ObjectData;
+﻿using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Interfaces;
 using Runtime.Managers;
 using UnityEngine;
@@ -19,8 +18,9 @@ namespace Runtime.UpgradeSystem.Handlers
             MaxLevel = data.statDataList.Count - 1;
         }
 
-        private void Start()
+        private void OnEnable()
         {
+            CurrentLevel = GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel);
             _currentMesh = Instantiate(data.statDataList[CurrentLevel].visualData.mesh, transform);
         }
 
@@ -45,6 +45,7 @@ namespace Runtime.UpgradeSystem.Handlers
             Debug.Log($"Upgrading Cmp Bot to level {CurrentLevel + 1}");
             Destroy(_currentMesh);
             CurrentLevel++;
+            GameDatabaseManager.Instance.SaveData(SaveKeys.CompanionLevel, CurrentLevel);
             _currentMesh = Instantiate(data.statDataList[CurrentLevel].visualData.mesh, transform);
         }
     }
