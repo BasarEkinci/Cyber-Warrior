@@ -1,10 +1,10 @@
-﻿namespace Runtime.Data.ValueObjects
+﻿
+namespace Runtime.Data.ValueObjects
 {
-    [System.Serializable]
     public class GameStatsData
     {
-        public int totalKilledEnemies;
-        public int totalDeaths;
-        public int totalGameTime;
+        public int TotalKilledEnemies;
+        public int TotalDeaths;
+        public int TotalGameTime;
     }
 }

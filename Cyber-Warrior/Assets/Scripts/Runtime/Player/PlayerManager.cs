@@ -13,7 +13,6 @@ namespace Runtime.Player
     public class PlayerManager : MonoBehaviour
     {
         #region Serilized Fields
-        [SerializeField] private LevelManager levelManager;
         [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
         [SerializeField] private GameStateEvent gameStateEvent;

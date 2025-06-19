@@ -22,7 +22,6 @@ namespace Runtime.CompanionBot.Mode
         public Color modeColor;
 
         [Header("Class References")]
-        public LevelManager levelManager;
         public BotAnchorPoints anchorPoints;
         public abstract void Initialize();
         public abstract void Execute();

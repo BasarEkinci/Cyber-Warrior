@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.Extensions;
+﻿using Runtime.Extensions;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -10,6 +9,8 @@ namespace Runtime.Managers
         public const string ScrapAmount = "ScrapAmount";
         public const string GunLevel = "GunLevel";
         public const string CompanionLevel = "CompanionLevel";
+        public const string TotalKills = "TotalKills";
+        public const string TotalDeaths = "TotalDeaths";
     }
     public class GameDatabaseManager : MonoSingleton<GameDatabaseManager>
     {

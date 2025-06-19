@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Runtime.Enums;
+using Runtime.Objects.ControlPanelScreens;
 using UnityEngine;
 
-namespace Runtime.Objects.ControlPanelScreens
+namespace Runtime.Managers
 {
     public class PanelManager : MonoBehaviour
     {

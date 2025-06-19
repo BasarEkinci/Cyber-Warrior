@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Runtime.Gameplay;
+using Runtime.Data.UnityObjects.ObjectData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +8,7 @@ namespace Runtime.UI
 {
     public class GameOverScreen : MonoBehaviour
     {
-        [SerializeField] private GameStatDataHolder statDataHolder;
+        [SerializeField] private GameStatsDataTracker statDataTracker;
         [SerializeField] private TMP_Text header;
         [SerializeField] private TMP_Text totalKillsText;
         [SerializeField] private TMP_Text collectedScrapText;
@@ -27,11 +27,11 @@ namespace Runtime.UI
             _sequence.Append(header.transform.DOScale(Vector3.zero, 1f).From());
             _sequence.Append(totalKillsText.transform.DOScale(Vector3.zero, 1f).From().OnComplete(() =>
             {
-                AnimateTextNumber(totalKillsText, "Total Kills\n", statDataHolder.TotalKills);
+                AnimateTextNumber(totalKillsText, "Total Kills\n", statDataTracker.TotalKillsInCurrentRun);
             }));
             _sequence.Append(collectedScrapText.transform.DOScale(Vector3.zero, 1f).From().OnComplete(() =>
             {
-                AnimateTextNumber(collectedScrapText, "Collected Scrap\n", statDataHolder.CollectedScrap);
+                AnimateTextNumber(collectedScrapText, "Collected Scrap\n", statDataTracker.TotalCollectedScrapInCurrentRun);
             }));
             _sequence.Append(restartButton.transform.DOScale(Vector3.zero, 1f).From());
 

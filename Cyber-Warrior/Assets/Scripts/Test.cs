@@ -71,7 +71,7 @@ public class Test : MonoBehaviour
         Debug.Log($"Player Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel)}");
         Debug.Log($"Gun Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel)}");
         Debug.Log($"Companion Level: {GameDatabaseManager.Instance.LoadData(SaveKeys.CompanionLevel)}");
-        Debug.Log($"Scarp Amount: {ScarpAmountManager.Instance.CurrentScarp}");
+        Debug.Log($"Scarp Amount: {GameDatabaseManager.Instance.LoadData(SaveKeys.ScrapAmount)}");
     }
     
     [PropertySpace]

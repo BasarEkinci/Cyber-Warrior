@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   playerStatsDataList:
-  - LevelPrice: 0
+  - levelPrice: 30
     moveSpeed: 8
     rotateSpeed: 45
     maxHealth: 100
+  - levelPrice: 0
+    moveSpeed: 8
+    rotateSpeed: 45
+    maxHealth: 120
