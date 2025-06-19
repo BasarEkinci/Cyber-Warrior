@@ -1617,9 +1617,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64af59c788a5f974097312d8faffc0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColor: {r: 0.7735849, g: 0, b: 0, a: 1}
+  healthColor: {r: 0.033077084, g: 0.6698113, b: 0, a: 1}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
   healthBar: {fileID: 8732431291722272718}
   healthBarBackground: {fileID: 6916114069319765045}
-  healthEventSO: {fileID: 11400000, guid: 6b4f7157a046fef479e057aeb103a5b0, type: 2}
+  healthEventSo: {fileID: 11400000, guid: 6b4f7157a046fef479e057aeb103a5b0, type: 2}
 --- !u!1 &5168243714318435277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,7 +2237,6 @@ GameObject:
   - component: {fileID: 2000213883468793892}
   - component: {fileID: 2225839465524455756}
   - component: {fileID: 4702197356825277619}
-  - component: {fileID: 3808339081784039195}
   - component: {fileID: 3132214343320796289}
   m_Layer: 0
   m_Name: Player_1
@@ -2349,6 +2351,7 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   playerStatsSo: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   rigBuilder: {fileID: 2225839465524455756}
   inputReader: {fileID: 0}
 --- !u!114 &2000213883468793892
@@ -2365,6 +2368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   playerStatsSo: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   healthEventSO: {fileID: 11400000, guid: 6b4f7157a046fef479e057aeb103a5b0, type: 2}
 --- !u!114 &2225839465524455756
 MonoBehaviour:
@@ -2398,19 +2402,6 @@ MonoBehaviour:
   attackerAnchorPoint: {fileID: 7753981063032969940}
   baseAnchorPoint: {fileID: 2280359082717865387}
   targetObject: {fileID: 0}
---- !u!114 &3808339081784039195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6222879182373596369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 2
 --- !u!114 &3132214343320796289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3541,9 +3532,6 @@ PrefabInstance:
       addedObject: {fileID: 3877007227997996256}
     - targetCorrespondingSourceObject: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3686086854455239422}
-    - targetCorrespondingSourceObject: {fileID: 9037063608375731116, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6317542774479272265}
   m_SourcePrefab: {fileID: 100100000, guid: 335c42c5b554d424cbdc243b5ba37455, type: 3}
 --- !u!1 &423744939500418658 stripped
@@ -3570,19 +3558,6 @@ MonoBehaviour:
   bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
   inputReader: {fileID: 0}
   gunBarrelTransform: {fileID: 1094096495925985718}
---- !u!114 &3686086854455239422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423744939500418658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 1
 --- !u!114 &6317542774479272265
 MonoBehaviour:
   m_ObjectHideFlags: 0

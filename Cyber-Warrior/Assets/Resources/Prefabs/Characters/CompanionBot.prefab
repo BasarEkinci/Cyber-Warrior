@@ -910,7 +910,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7896260988278129711}
   - component: {fileID: 9037268400884756809}
-  - component: {fileID: 7939988850030113837}
   - component: {fileID: 5075749592860620802}
   - component: {fileID: 2637740579503800047}
   m_Layer: 0
@@ -952,20 +951,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   botModeEvent: {fileID: 11400000, guid: e77125a4a7c5144f7ae39e59d3c76578, type: 2}
---- !u!114 &7939988850030113837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909494619995276644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f2457b36804300801e5082042c39a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveId: 
-  itemType: 0
 --- !u!114 &5075749592860620802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,7 +1160,7 @@ MonoBehaviour:
   botData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 0, g: 1, b: 0.10735226, a: 1}
-  levelManager: {fileID: 7939988850030113837}
+  levelManager: {fileID: 0}
   anchorPoints: {fileID: 0}
 --- !u!1 &4435253298529545496
 GameObject:
@@ -1685,10 +1670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a05ec1082b430598650fbeea4c59d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 7939988850030113837}
-  cmpLevelManager: {fileID: 7939988850030113837}
-  playerLevelManager: {fileID: 0}
-  gunLevelManager: {fileID: 0}
+  levelManager: {fileID: 0}
   data: {fileID: 11400000, guid: 65ab358453f22924c86802d7cf84f34e, type: 2}
   totalKills: {fileID: 3843249084221024604}
   totalDeath: {fileID: 3119801994817643146}
@@ -2435,8 +2417,8 @@ MonoBehaviour:
   mode: 0
   botData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
-  modeColor: {r: 0, g: 0.38679248, b: 0.029659042, a: 1}
-  levelManager: {fileID: 7939988850030113837}
+  modeColor: {r: 0, g: 0.99010324, b: 1, a: 1}
+  levelManager: {fileID: 0}
   anchorPoints: {fileID: 0}
   transformEvent: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
   inputReader: {fileID: 0}
@@ -2776,5 +2758,5 @@ MonoBehaviour:
   botData: {fileID: 11400000, guid: d467e98a418545043883108ffa25fbb1, type: 2}
   eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
   modeColor: {r: 1, g: 0, b: 0, a: 1}
-  levelManager: {fileID: 7939988850030113837}
+  levelManager: {fileID: 0}
   anchorPoints: {fileID: 0}

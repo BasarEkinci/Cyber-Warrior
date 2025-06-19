@@ -1,26 +1,31 @@
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Extensions;
-using Runtime.Interfaces;
 using UnityEngine;
 
 namespace Runtime.Managers
 {
-    public class ScarpAmountManager : MonoSingleton<ScarpAmountManager>,ISaveable
+    public class ScarpAmountManager : MonoSingleton<ScarpAmountManager>
     {
         public IntegerEventSo OnScarpSpend => scrapSpendEvent;
         public IntegerEventSo OnScarpEarned => scrapEarnedEvent;
-        public string SaveId { get; private set; }
         public int CurrentScarp => _currentScrap;
         
-        [SerializeField] private string saveId;
         [SerializeField] private IntegerEventSo scrapEarnedEvent;
         [SerializeField] private IntegerEventSo scrapSpendEvent;
 
         private int _currentScrap;
+
+        private void OnEnable()
+        {
+            _currentScrap = GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel);
+        }
+
         public void AddScarp(int amount)
         {
+            _currentScrap = GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel);
             _currentScrap += amount;
             scrapEarnedEvent.OnEventRaised(amount);
+            GameDatabaseManager.Instance.SaveData(SaveKeys.ScrapAmount, _currentScrap);
         }
 
         public bool TrySpendScarp(int amount)
@@ -32,14 +37,6 @@ namespace Runtime.Managers
             _currentScrap -= amount;
             scrapSpendEvent.OnEventRaised(amount);
             return true;
-        }
-
-        public void Save()
-        {
-        }
-
-        public void Load()
-        {
         }
     }
 }
