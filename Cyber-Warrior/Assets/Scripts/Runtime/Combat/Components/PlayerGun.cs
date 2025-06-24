@@ -90,7 +90,6 @@ namespace Runtime.Combat.Components
                     if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
                     {
                         damageable.TakeDamage(_currentGunStats.damage);
-                        Debug.Log("Hit: " + hit.collider.name);
                         Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
                     }   
                 }

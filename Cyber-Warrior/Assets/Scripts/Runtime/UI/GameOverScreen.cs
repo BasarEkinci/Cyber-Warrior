@@ -34,8 +34,6 @@ namespace Runtime.UI
                 AnimateTextNumber(collectedScrapText, "Collected Scrap\n", statDataTracker.TotalCollectedScrapInCurrentRun);
             }));
             _sequence.Append(restartButton.transform.DOScale(Vector3.zero, 1f).From());
-
-            _sequence.OnComplete(() => Debug.Log("Sequence Completed"));
         }
 
         private void AnimateTextNumber(TMP_Text textComponent, string prefix, int targetValue, float duration = 1f)

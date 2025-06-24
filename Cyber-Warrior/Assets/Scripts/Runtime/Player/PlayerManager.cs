@@ -66,7 +66,6 @@ namespace Runtime.Player
         {
             if (!_canMove)
             {
-                Debug.Log("Player cannot move, waiting for action state.");
                 return;
             }
             _movementAnimator.SetAnimations(_moveVector, transform);

@@ -22,6 +22,15 @@ namespace Runtime.SceneManagement
             StartCoroutine(LoadLevelAsync(sceneIndex));
         }
 
+        public void Quit()
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit(); // Quit the application in a build
+            #endif
+        }
+
         IEnumerator LoadLevelAsync(int sceneIndex)
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex);

@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Runtime.Audio;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
+using Runtime.Enums;
 using Runtime.Gameplay;
 using Runtime.Interfaces;
 using Runtime.Player;
@@ -22,6 +23,7 @@ namespace Runtime.Enemies
         [Header("Scriptables")]
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private VoidEventSO enemyDeathEvent;
+        [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private EnemySo enemySo;
         [SerializeField] private ScrapTypesSO scrapTypesSo;
         
@@ -37,6 +39,7 @@ namespace Runtime.Enemies
         private float _currentHealth;
         private float _damageResistance;
         private bool _isPLayerDead;
+        private bool _canMove = true;
         private static readonly int IsAttached = Animator.StringToHash("IsAttached");
 
         #region Unity Functions
@@ -49,6 +52,7 @@ namespace Runtime.Enemies
         {
             if (_currentHealth <= 0f) return;
             if (_isPLayerDead) return;
+            if (!_canMove) return;
             transform.position += _moveDirection * (enemySo.moveSpeed * Time.fixedDeltaTime);
             RotateTowardsTarget();
         }
@@ -141,9 +145,28 @@ namespace Runtime.Enemies
             _enemyTickManager = FindFirstObjectByType<EnemyTickManager>();
             _audioSource = GetComponent<AudioSource>();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
+            gameStateEvent.OnEventRaised += OnStateChange;
             _currentHealth = enemySo.maxHealth;
             _damageResistance = enemySo.damageResistance;
             AudioManager.Instance.SetClip(SfxType.EnemyNoise, _audioSource, true);
+        }
+
+        private void OnStateChange(GameState arg0)
+        {
+            if (arg0 != GameState.Action)
+            {
+                _canMove = false;
+                if (_playerHealth != null)
+                {
+                    _playerHealth = null;
+                    _cancellationToken.Cancel();
+                    _cancellationToken.Dispose();   
+                }
+            }
+            else
+            {
+                _canMove = true;
+            }
         }
 
         private void CreateScarp()

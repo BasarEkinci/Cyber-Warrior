@@ -13,6 +13,8 @@ namespace Runtime.Inputs
         public event Action OnFireCanceled;
         public event Action OnInteractCanceled;
         public event Action OnStatsButtonPressed;
+        public event Action OnPauseGame;
+
         
         private InputActions _inputActions;
 
@@ -59,6 +61,14 @@ namespace Runtime.Inputs
             if (context.performed)
             {
                 OnStatsButtonPressed?.Invoke();
+            }
+        }
+
+        public void OnPauseResumeGame(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnPauseGame?.Invoke();
             }
         }
 

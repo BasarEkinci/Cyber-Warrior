@@ -24,6 +24,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 363087b429999ae4784d3b7a6c94e748, type: 3}
     - {fileID: 8300000, guid: ab1f997367d7a86459cc35db27a4d814, type: 3}
     - {fileID: 8300000, guid: 51d2bd563ce8aa5488148b1bec911f99, type: 3}
+    - {fileID: 8300000, guid: 5b4419ae4fd2ebb41874a03e6932e3d4, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -48,7 +49,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 9
     - Name: 
       Entry: 7
       Data: 
@@ -84,7 +85,7 @@ MonoBehaviour:
       Data: 1
     - Name: Volume
       Entry: 4
-      Data: 1
+      Data: 0.7
     - Name: 
       Entry: 8
       Data: 
@@ -208,6 +209,27 @@ MonoBehaviour:
     - Name: Clip
       Entry: 10
       Data: 7
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 8
     - Name: Volume
       Entry: 4
       Data: 1

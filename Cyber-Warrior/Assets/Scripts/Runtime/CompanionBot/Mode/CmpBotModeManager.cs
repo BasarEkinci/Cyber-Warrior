@@ -39,6 +39,7 @@ namespace Runtime.CompanionBot.Mode
             }
             _inputReader.OnSwitchMode += SwitchModeInActionState;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
+            ChangeModeTo(_botModes[0]);
         }
 
         private void Update()
@@ -53,6 +54,10 @@ namespace Runtime.CompanionBot.Mode
 
         private void FixedUpdate()
         {
+            if (_currentMode == null)
+            {
+                return;
+            }
             _currentMode.Move(transform,Time.fixedDeltaTime);
         }
 
@@ -83,7 +88,7 @@ namespace Runtime.CompanionBot.Mode
                 .Where(m => m.ValidGameState == state)
                 .ToList();
             
-            if (_activeModes.Count > 0)
+            if (_activeModes.Count > 0 || _currentGameState == GameState.Base)
             {
                 ChangeModeTo(_activeModes[0]);
             }

@@ -4,7 +4,7 @@
     {
         Base,
         Action,
-        CardSelection,
+        Pause,
         GameOver
     }
 }

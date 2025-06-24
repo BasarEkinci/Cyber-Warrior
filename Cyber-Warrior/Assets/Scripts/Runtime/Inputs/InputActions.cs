@@ -128,6 +128,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PauseResumeGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d6b44b0-de97-47d1-a1f9-5cf5f4c9330b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""6f2245bb-fdce-41c7-9549-bfeae9e6fbd8"",
@@ -283,6 +292,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""406b2525-0ec2-4045-97e6-674fe6ed9294"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseResumeGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1e8ced81-aa7a-493f-88f0-f2b61b3139dc"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -303,6 +323,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_CompanionMode = m_Player.FindAction("CompanionMode", throwIfNotFound: true);
         m_Player_ShowStats = m_Player.FindAction("ShowStats", throwIfNotFound: true);
+        m_Player_PauseResumeGame = m_Player.FindAction("PauseResumeGame", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
     }
 
@@ -388,6 +409,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_CompanionMode;
     private readonly InputAction m_Player_ShowStats;
+    private readonly InputAction m_Player_PauseResumeGame;
     private readonly InputAction m_Player_Interaction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -416,6 +438,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ShowStats".
         /// </summary>
         public InputAction @ShowStats => m_Wrapper.m_Player_ShowStats;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PauseResumeGame".
+        /// </summary>
+        public InputAction @PauseResumeGame => m_Wrapper.m_Player_PauseResumeGame;
         /// <summary>
         /// Provides access to the underlying input action "Player/Interaction".
         /// </summary>
@@ -458,6 +484,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ShowStats.started += instance.OnShowStats;
             @ShowStats.performed += instance.OnShowStats;
             @ShowStats.canceled += instance.OnShowStats;
+            @PauseResumeGame.started += instance.OnPauseResumeGame;
+            @PauseResumeGame.performed += instance.OnPauseResumeGame;
+            @PauseResumeGame.canceled += instance.OnPauseResumeGame;
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
@@ -484,6 +513,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ShowStats.started -= instance.OnShowStats;
             @ShowStats.performed -= instance.OnShowStats;
             @ShowStats.canceled -= instance.OnShowStats;
+            @PauseResumeGame.started -= instance.OnPauseResumeGame;
+            @PauseResumeGame.performed -= instance.OnPauseResumeGame;
+            @PauseResumeGame.canceled -= instance.OnPauseResumeGame;
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
@@ -555,6 +587,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShowStats(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PauseResumeGame" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPauseResumeGame(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

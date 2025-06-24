@@ -55,7 +55,6 @@ namespace Runtime.CompanionBot.Mode
 
         public override void Execute()
         {
-            Debug.Log(_panelManager.IsStatsPanelActive);
         }
 
         public override void RotateBehaviour(Transform botTransform)
