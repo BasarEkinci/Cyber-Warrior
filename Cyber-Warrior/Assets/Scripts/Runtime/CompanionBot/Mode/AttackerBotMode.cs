@@ -1,4 +1,5 @@
-﻿using Runtime.Data.ValueObjects;
+﻿using Runtime.Audio;
+using Runtime.Data.ValueObjects;
 using Runtime.Enums;
 using Runtime.Interfaces;
 using Runtime.Managers;
@@ -15,6 +16,7 @@ namespace Runtime.CompanionBot.Mode
         private CmpBotEffectManager _effectManager;
         private CmpCombatData _combatData;
         private Transform _parent;
+        private AudioSource _audioSource;
 
         private float _attackTimer;
         private float _detectionTimer;
@@ -41,6 +43,7 @@ namespace Runtime.CompanionBot.Mode
             if (eyeMaterial != null)
                 eyeMaterial.color = modeColor;
 
+            _audioSource = GetComponentInParent<AudioSource>();
             _combatData = GetDataAtCurrentLevel().combatData;
         }
 
@@ -92,6 +95,7 @@ namespace Runtime.CompanionBot.Mode
             if (TargetObject.TryGetComponent(out IDamageable damageable))
             {
                 _effectManager.PlayFireEffect();
+                AudioManager.Instance.PlaySfx(SfxType.BotAttack,_audioSource);
                 damageable.TakeDamage(_combatData.damage);
             }
         }

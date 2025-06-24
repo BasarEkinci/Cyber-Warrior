@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54316661750409ab5cecc5533ed0f74, type: 3}
+  m_Name: AudioDatabase
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: bebbfe6acb877b447accae2bc484457f, type: 3}
+    - {fileID: 8300000, guid: 6bb8db3eedb1f234e8f4584d99073246, type: 3}
+    - {fileID: 8300000, guid: 69a423012fd332d40899e1a88eee6ddd, type: 3}
+    - {fileID: 8300000, guid: 6a510223fb86064499c634ff24220c0a, type: 3}
+    - {fileID: 8300000, guid: cc412c1374364b74a836b7f8055ad5eb, type: 3}
+    - {fileID: 8300000, guid: 363087b429999ae4784d3b7a6c94e748, type: 3}
+    - {fileID: 8300000, guid: ab1f997367d7a86459cc35db27a4d814, type: 3}
+    - {fileID: 8300000, guid: 51d2bd563ce8aa5488148b1bec911f99, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Audios
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Runtime.Audio.SfxType, Assembly-CSharp],[Runtime.Audio.AudioData,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Runtime.Audio.SfxType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 8
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 7
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 0
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 1
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 2
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 10
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 3
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 4
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 5
+    - Name: Volume
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 11
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 6
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 7
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

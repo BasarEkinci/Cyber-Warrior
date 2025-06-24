@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.UnityObjects;
+using Runtime.Audio;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
@@ -30,6 +31,7 @@ namespace Runtime.Combat.Components
         private int _currentLevel;
         private GameObject _crosshair;
         private GunStats _currentGunStats;
+        private AudioSource _audioSource;
         private CancellationTokenSource _cancellationTokenSource;
         
         private bool _isPlayerDead;
@@ -38,6 +40,7 @@ namespace Runtime.Combat.Components
         {
             _crosshair = GameObject.FindWithTag("Crosshair");
             _currentGunStats = playerGunStatsSo.GunStatsList[GameDatabaseManager.Instance.LoadData(SaveKeys.PlayerLevel)];
+            _audioSource = GetComponent<AudioSource>();
             if(muzzleFlash.isPlaying) muzzleFlash.Stop();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _isPlayerDead = false;
@@ -80,6 +83,7 @@ namespace Runtime.Combat.Components
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
                 muzzleFlash.Play();
+                AudioManager.Instance.PlaySfx(SfxType.Gunshot, _audioSource);
                 Vector3 direction = _crosshair.transform.position - gunBarrelTransform.position;
                 if (Physics.Raycast(gunBarrelTransform.position, direction, out RaycastHit hit, _currentGunStats.range))
                 {

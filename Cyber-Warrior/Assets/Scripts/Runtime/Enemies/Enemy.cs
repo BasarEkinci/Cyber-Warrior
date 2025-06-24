@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using Runtime.Audio;
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Gameplay;
@@ -27,6 +28,7 @@ namespace Runtime.Enemies
         private EnemyPool _enemyPool;
         private EnemyTickManager _enemyTickManager;
         private PlayerHealth _playerHealth;
+        private AudioSource _audioSource;
         private Transform _target;
         private Vector3 _moveDirection;
         private CancellationTokenSource _cancellationToken;
@@ -100,6 +102,7 @@ namespace Runtime.Enemies
                 damage = amount - enemySo.damageResistance;
             else
                 damage = amount;
+            AudioManager.Instance.PlaySfx(SfxType.EnemyDamage, _audioSource);
             Instantiate(bloodEffect, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(transform.forward));
             _currentHealth -= damage;
             if (_currentHealth <= 0f)
@@ -109,6 +112,7 @@ namespace Runtime.Enemies
         }
         public async void Dead()
         {
+            AudioManager.Instance.PlaySfx(SfxType.EnemyDamage, _audioSource);
             _collider.enabled = false;
             enemyDeathEvent.OnEventRaised();
             _animator.Play("Death1");
@@ -135,9 +139,11 @@ namespace Runtime.Enemies
             _collider = GetComponent<Collider>();
             _enemyPool = FindFirstObjectByType<EnemyPool>();
             _enemyTickManager = FindFirstObjectByType<EnemyTickManager>();
+            _audioSource = GetComponent<AudioSource>();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             _currentHealth = enemySo.maxHealth;
             _damageResistance = enemySo.damageResistance;
+            AudioManager.Instance.SetClip(SfxType.EnemyNoise, _audioSource, true);
         }
 
         private void CreateScarp()
