@@ -2239,6 +2239,8 @@ GameObject:
   - component: {fileID: 4702197356825277619}
   - component: {fileID: 3132214343320796289}
   - component: {fileID: 4809662184801962336}
+  - component: {fileID: 7654241882709899899}
+  - component: {fileID: 4104472288267659675}
   m_Layer: 0
   m_Name: Player_1
   m_TagString: Player
@@ -2512,6 +2514,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!167 &7654241882709899899
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222879182373596369}
+  m_Enabled: 1
+  m_MinDistance: 10
+  m_MaxDistance: 15
+  m_ReverbPreset: 0
+  m_Room: -10000
+  m_RoomHF: -10000
+  m_DecayTime: 1
+  m_DecayHFRatio: 1
+  m_Reflections: -2602
+  m_ReflectionsDelay: 0.007
+  m_Reverb: 200
+  m_ReverbDelay: 0.011
+  m_HFReference: 5000
+  m_Diffusion: 0
+  m_Density: 0
+  m_LFReference: 250
+  m_RoomLF: 0
+--- !u!81 &4104472288267659675
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222879182373596369}
+  m_Enabled: 1
 --- !u!1 &6308452077753898172
 GameObject:
   m_ObjectHideFlags: 0

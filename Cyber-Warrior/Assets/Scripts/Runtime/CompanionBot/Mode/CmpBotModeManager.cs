@@ -39,7 +39,7 @@ namespace Runtime.CompanionBot.Mode
             }
             _inputReader.OnSwitchMode += SwitchModeInActionState;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
-            ChangeModeTo(_botModes[0]);
+            ChangeModeTo(_botModes[2]);
         }
 
         private void Update()

@@ -104,3 +104,4 @@ MonoBehaviour:
     m_Bits: 128
   yPositionOffset: 1
   playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}

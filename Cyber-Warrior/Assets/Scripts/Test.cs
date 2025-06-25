@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-#if UNITY_EDITOR
+
 public class Test : MonoBehaviour
 {
     [Header("Test Values")]
@@ -79,4 +79,3 @@ public class Test : MonoBehaviour
     }
     #endregion
 }
-#endif
