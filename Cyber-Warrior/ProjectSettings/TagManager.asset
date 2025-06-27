@@ -9,6 +9,7 @@ TagManager:
   - Crosshair
   - UpgradeArea
   - DoorOutside
+  - SafeArea
   layers:
   - Default
   - TransparentFX

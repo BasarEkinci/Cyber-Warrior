@@ -3,7 +3,6 @@ using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using Runtime.Enums;
 using Runtime.Inputs;
-using Runtime.Managers;
 using Runtime.Movement;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -15,6 +14,7 @@ namespace Runtime.Player
         #region Serilized Fields
         [SerializeField] private PlayerStatsSO playerStatsSo;
         [SerializeField] private VoidEventSO voidEventSo;
+        [SerializeField] private VoidEventSO levelSuccessEvent;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private RigBuilder rigBuilder;
         [SerializeField] private InputReader inputReader;
@@ -53,13 +53,8 @@ namespace Runtime.Player
             voidEventSo.OnEventRaised += OnPlayerDeath;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
             inputReader.OnMove += HandleMove;
+            levelSuccessEvent.OnEventRaised += OnLevelSucceed;
             _canMove = true;
-        }
-
-        private void OnGameStateChanged(GameState arg0)
-        {
-            _gameState = arg0;
-            _canMove = _gameState == GameState.Action || _gameState == GameState.Base;
         }
 
         private void Update()
@@ -77,23 +72,26 @@ namespace Runtime.Player
             _mover.MoveWithRb(_moveVector, _canMove);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("DoorOutside"))
-            {
-                gameStateEvent.RaiseEvent(GameState.Action);
-            }
-        }
-
         private void OnDisable()
         {
             voidEventSo.OnEventRaised -= OnPlayerDeath;
             gameStateEvent.OnEventRaised += OnGameStateChanged;
+            levelSuccessEvent.OnEventRaised -= OnLevelSucceed;
             inputReader.OnMove -= HandleMove;
         }
 
         #endregion
         #region My Methods
+        private void OnLevelSucceed()
+        {
+            _canMove = false;
+        }
+
+        private void OnGameStateChanged(GameState arg0)
+        {
+            _gameState = arg0;
+            _canMove = _gameState == GameState.Action || _gameState == GameState.Base;
+        }
         private void OnPlayerDeath()
         {
             rigBuilder.enabled = false;

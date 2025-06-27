@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using Runtime.Managers;
@@ -5,7 +6,6 @@ using Runtime.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class Test : MonoBehaviour
 {
@@ -79,3 +79,4 @@ public class Test : MonoBehaviour
     }
     #endregion
 }
+#endif

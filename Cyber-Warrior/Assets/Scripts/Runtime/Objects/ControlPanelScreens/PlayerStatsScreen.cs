@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -13,6 +14,7 @@ namespace Runtime.Objects.ControlPanelScreens
         
         [Header("Data")]
         [SerializeField] private PlayerStatsSO statsData;
+        [SerializeField] private VoidEventSO upgradeSucceedEvent;
 
         [Header("Text")] 
         [SerializeField] private TMP_Text maxHealth;
@@ -27,9 +29,20 @@ namespace Runtime.Objects.ControlPanelScreens
 
         private void OnEnable()
         {
+            upgradeSucceedEvent.OnEventRaised += OnUpgradeSucceed;
             SetStatsToScreen();
         }
 
+        private void OnUpgradeSucceed()
+        {
+            transform.DOScale(transform.localScale * 1.5f, 0.1f).SetLoops(2, LoopType.Yoyo);
+            SetStatsToScreen();
+        }
+
+        private void OnDisable()
+        {
+            upgradeSucceedEvent.OnEventRaised -= OnUpgradeSucceed;
+        }
 
         public override void SetStatsToScreen()
         {

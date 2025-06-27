@@ -2,7 +2,6 @@
 using Runtime.Enums;
 using Runtime.Inputs;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Runtime.Managers
 {
@@ -10,6 +9,8 @@ namespace Runtime.Managers
     {
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
+        [SerializeField] private GameObject endGamePanel;
+        [SerializeField] private VoidEventSO levelSuccessEvent;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private InputReader inputReader;
         
@@ -18,16 +19,17 @@ namespace Runtime.Managers
         private GameState _previousGameState;
         private void Start()
         {
-            if (gameOverPanel.activeSelf)
-            {
-                gameOverPanel.SetActive(false);
-            }
-            
+            endGamePanel.SetActive(false);
+            gameOverPanel.SetActive(false);
         }
 
         private void OnEnable()
         {
             gameStateEvent.OnEventRaised += HandleGameStateChange;
+            levelSuccessEvent.OnEventRaised += () =>
+            {
+                endGamePanel.SetActive(true);
+            };
             inputReader.OnPauseGame += TogglePauseGame;
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
@@ -52,6 +54,10 @@ namespace Runtime.Managers
         private void OnDisable()
         {
             gameStateEvent.OnEventRaised -= HandleGameStateChange;
+            levelSuccessEvent.OnEventRaised -= () =>
+            {
+                endGamePanel.SetActive(true);
+            };
             inputReader.OnPauseGame -= TogglePauseGame;
         }
         private void HandleGameStateChange(GameState state)

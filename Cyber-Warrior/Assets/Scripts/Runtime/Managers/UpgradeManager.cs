@@ -1,4 +1,5 @@
-﻿using Runtime.Data.UnityObjects.Events;
+﻿using Runtime.Audio;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Inputs;
 using Runtime.Interfaces;
 using UnityEngine;
@@ -80,6 +81,7 @@ namespace Runtime.Managers
             {
                 _upgradeable.Upgrade();
                 upgradeEvent.Invoke();
+                AudioManager.Instance.PlaySfx(SfxType.Upgrade);
             }
             else
                 Debug.Log("Not enough scrap.");

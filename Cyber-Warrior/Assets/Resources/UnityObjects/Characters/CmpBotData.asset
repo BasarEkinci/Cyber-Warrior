@@ -29,11 +29,11 @@ MonoBehaviour:
       eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       mesh: {fileID: 5794103751566755491, guid: 8877d463e7b5e9e47a081706a543a2eb, type: 3}
     healerData:
-      healCooldown: 1
-      healAmount: 8
-    levelPrice: 50
+      healCooldown: 2
+      healAmount: 10
+    levelPrice: 30
   - combatData:
-      attackCooldown: 1.9
+      attackCooldown: 1.8
       damage: 5
       range: 12
       enemyLayer:
@@ -43,11 +43,11 @@ MonoBehaviour:
       eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       mesh: {fileID: 5665959452139842833, guid: b3827c09224a8a64198cfb98ca43e06e, type: 3}
     healerData:
-      healCooldown: 8
-      healAmount: 10
-    levelPrice: 65
+      healCooldown: 2
+      healAmount: 15
+    levelPrice: 45
   - combatData:
-      attackCooldown: 1.8
+      attackCooldown: 1.5
       damage: 6
       range: 14
       enemyLayer:
@@ -57,6 +57,6 @@ MonoBehaviour:
       eyeMaterial: {fileID: 2100000, guid: 31cbee46a17f2b946a213d9dd64781f2, type: 2}
       mesh: {fileID: 6593914072655373387, guid: dc828958767e82b459a53174ed068d0f, type: 3}
     healerData:
-      healCooldown: 7
-      healAmount: 12
-    levelPrice: 80
+      healCooldown: 1.5
+      healAmount: 15
+    levelPrice: 60

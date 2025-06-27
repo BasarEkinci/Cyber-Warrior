@@ -1,4 +1,5 @@
-﻿using Runtime.Data.UnityObjects.Events;
+﻿using System;
+using Runtime.Data.UnityObjects.Events;
 using Runtime.Enums;
 using Runtime.Inputs;
 using Runtime.Managers;
@@ -21,9 +22,7 @@ namespace Runtime.CompanionBot.Mode
         [SerializeField] private InputReader inputReader;
 
         private PanelManager _panelManager;
-        private CmpBotEffectManager _effectManager;
         private BotAnchorPoints _targetProvider;
-        private Transform _parent;
         
         private bool _isStateActive;
 
@@ -31,7 +30,6 @@ namespace Runtime.CompanionBot.Mode
         {
             _targetProvider = FindFirstObjectByType<BotAnchorPoints>();
             _panelManager = GetComponentInParent<PanelManager>();
-            _parent = transform.parent;
         }
         private void Start()
         {
@@ -40,7 +38,6 @@ namespace Runtime.CompanionBot.Mode
             FollowPosition = _targetProvider.GetAnchorPoint(mode);
             eyeMaterial.color = modeColor;
         }
-
         #region Overridden Functions
 
         // ReSharper disable Unity.PerformanceAnalysis
@@ -74,7 +71,6 @@ namespace Runtime.CompanionBot.Mode
             transformEvent.OnEventRaised -= HandleTransformChanged;
             inputReader.OnStatsButtonPressed -= OnStatsButtonPressed;
             _panelManager.CloseAllPanels();
-            _effectManager?.CloseEyesLights();
             _isStateActive = false;
         }
 
@@ -84,19 +80,13 @@ namespace Runtime.CompanionBot.Mode
             {
                 return;
             }
-            if (_effectManager == null)
-            {
-                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
-            }
             if (!_panelManager.IsStatsPanelActive)
             {
                 _panelManager.OpenGameStatsPanel();
                 TargetObject = Camera.main.transform;
-                _effectManager.OpenEyesLights();
                 return;
             }
             _panelManager.CloseGameStatsPanel();
-            _effectManager.CloseEyesLights();
             TargetObject = _targetProvider.GetInitialTargetObject();
         }
 
@@ -112,10 +102,6 @@ namespace Runtime.CompanionBot.Mode
                 inputReader = FindFirstObjectByType<InputReader>();
             if (_panelManager == null)
                 _panelManager = GetComponentInParent<PanelManager>();
-            if (_parent == null)
-                _parent = transform.parent;
-            if (_effectManager == null)
-                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
             if (TargetObject == null)
                 TargetObject = anchorPoints.GetInitialTargetObject();
             if (FollowPosition == null)
@@ -124,23 +110,18 @@ namespace Runtime.CompanionBot.Mode
         
         private void HandleTransformChanged(Transform changedTransform = null)
         {
-            if (_effectManager == null)
-                _effectManager = _parent.GetComponentInChildren<CmpBotEffectManager>();
             if (changedTransform == null)
             {
                 TargetObject = _targetProvider.GetInitialTargetObject();
                 FollowPosition = _targetProvider.GetAnchorPoint(mode);
                 _panelManager.CloseAllPanels();
-                _effectManager.CloseEyesLights();
                 return;
             }
             _panelManager.CloseGameStatsPanel();
-            _effectManager.CloseEyesLights();        
             var upgradeArea = changedTransform.GetComponentInParent<UpgradeArea>();
             if (upgradeArea != null)
             {
                 _panelManager.OpenPanel(upgradeArea.Type);
-                _effectManager.OpenEyesLights();
             }
             TargetObject = anchorPoints.transform;
             FollowPosition = changedTransform;

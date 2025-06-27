@@ -23,6 +23,7 @@ namespace Runtime.Enemies
         [Header("Scriptables")]
         [SerializeField] private VoidEventSO playerDeathEvent;
         [SerializeField] private VoidEventSO enemyDeathEvent;
+        [SerializeField] private VoidEventSO levelSuccessEvent;
         [SerializeField] private GameStateEvent gameStateEvent;
         [SerializeField] private EnemySo enemySo;
         [SerializeField] private ScrapTypesSO scrapTypesSo;
@@ -81,6 +82,8 @@ namespace Runtime.Enemies
         {
              _enemyTickManager.Unregister(this);
              playerDeathEvent.OnEventRaised -= OnPlayerDeath;
+             levelSuccessEvent.OnEventRaised -= OnLevelSucceed;
+             gameStateEvent.OnEventRaised -= OnStateChange;
         }
 
         #endregion
@@ -146,9 +149,15 @@ namespace Runtime.Enemies
             _audioSource = GetComponent<AudioSource>();
             playerDeathEvent.OnEventRaised += OnPlayerDeath;
             gameStateEvent.OnEventRaised += OnStateChange;
+            levelSuccessEvent.OnEventRaised += OnLevelSucceed;
             _currentHealth = enemySo.maxHealth;
             _damageResistance = enemySo.damageResistance;
             AudioManager.Instance.SetClip(SfxType.EnemyNoise, _audioSource, true);
+        }
+
+        private void OnLevelSucceed()
+        {
+            Dead();
         }
 
         private void OnStateChange(GameState arg0)

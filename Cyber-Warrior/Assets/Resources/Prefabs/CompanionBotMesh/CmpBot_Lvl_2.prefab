@@ -561,6 +561,8 @@ MonoBehaviour:
   muzzleFlashSystems:
   - {fileID: 2700502205043580586}
   - {fileID: 5241806398037034203}
+  transformEventChannel: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
 --- !u!1 &5968550656021845984
 GameObject:
   m_ObjectHideFlags: 0

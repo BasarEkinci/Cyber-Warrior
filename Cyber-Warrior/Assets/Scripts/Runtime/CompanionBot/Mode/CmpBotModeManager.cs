@@ -31,6 +31,11 @@ namespace Runtime.CompanionBot.Mode
             _stateModeMap.Add(GameState.Base, typeof(BaseBotMode));
         }
 
+        private void Start()
+        {
+            ChangeModeTo(_botModes[2]);
+        }
+
         private void OnEnable()
         {
             if (_inputReader == null)

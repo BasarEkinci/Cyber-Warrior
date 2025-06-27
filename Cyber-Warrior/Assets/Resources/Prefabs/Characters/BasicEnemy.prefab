@@ -2240,6 +2240,7 @@ MonoBehaviour:
   bloodEffect: {fileID: 1321704285992798902, guid: 2e6ceac6bf4d75d42b52ea06d59390e5, type: 3}
   playerDeathEvent: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
   enemyDeathEvent: {fileID: 11400000, guid: 74466d43d8856f042bf9b7a31a6ccfd8, type: 2}
+  levelSuccessEvent: {fileID: 11400000, guid: 496f3cc13c7e031449db1d10ed7745e2, type: 2}
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   enemySo: {fileID: 11400000, guid: eda8384fcfa99464894aa7065ce77646, type: 2}
   scrapTypesSo: {fileID: 11400000, guid: e471b37dc98729f4eb227795aa44b012, type: 2}

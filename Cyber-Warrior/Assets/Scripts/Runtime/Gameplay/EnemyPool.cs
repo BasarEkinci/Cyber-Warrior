@@ -15,7 +15,6 @@ namespace Runtime.Gameplay
         {
             if (enemyPrefab == null)
             {
-                Debug.LogError("Enemy prefab is not assigned in the EnemyPool.");
                 return;
             }
 
@@ -36,21 +35,15 @@ namespace Runtime.Gameplay
                 enemy.gameObject.SetActive(true);
                 return enemy;
             }
-            else
-            {
-                Debug.LogWarning("No enemies available in the pool. Consider increasing the pool size.");
-                return null;
-            }
+            return null;
         }
         
         public void ReturnEnemy(Enemy enemy)
         {
             if (enemy == null)
             {
-                Debug.LogError("Attempted to return a null enemy to the pool.");
                 return;
             }
-
             enemy.gameObject.SetActive(false);
             _enemyPool.Enqueue(enemy);
         }

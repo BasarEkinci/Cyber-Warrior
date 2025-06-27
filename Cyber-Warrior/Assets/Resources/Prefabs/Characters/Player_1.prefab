@@ -1539,8 +1539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.049}
-  m_SizeDelta: {x: 2, y: 0.168}
+  m_AnchoredPosition: {x: 0, y: 2.0174}
+  m_SizeDelta: {x: 1.4636, y: 0.1049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8372293133716073016
 Canvas:
@@ -2353,6 +2353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatsSo: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
   voidEventSo: {fileID: 11400000, guid: e03fd6d9910381e49abf973c037d4e0a, type: 2}
+  levelSuccessEvent: {fileID: 11400000, guid: 496f3cc13c7e031449db1d10ed7745e2, type: 2}
   gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
   rigBuilder: {fileID: 2225839465524455756}
   inputReader: {fileID: 0}

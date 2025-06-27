@@ -1238,6 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsData: {fileID: 11400000, guid: 85199a0c834ffce4ca9a62bd1be76e7f, type: 2}
+  upgradeSucceedEvent: {fileID: 11400000, guid: c4359daebcda49548adedc39160b537f, type: 2}
   maxHealth: {fileID: 5658274232929909112}
   level: {fileID: 8943066414753808732}
 --- !u!1 &4558462129342250401
@@ -2319,6 +2320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunStats: {fileID: 11400000, guid: 694689ec0c976b3468aeaa9cd1cf9d4d, type: 2}
+  upgradeSucceedEvent: {fileID: 11400000, guid: 5e63c8825a2bedd42a0de051b3e1e505, type: 2}
   damageText: {fileID: 8979135021391218648}
   rangeText: {fileID: 3891784557181185496}
   attackRateText: {fileID: 7667044558060028117}

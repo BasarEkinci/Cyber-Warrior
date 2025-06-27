@@ -1,5 +1,4 @@
-﻿using System;
-using Runtime.Data.UnityObjects.ObjectData;
+﻿using Runtime.Data.UnityObjects.ObjectData;
 using Runtime.Interfaces;
 using Runtime.Managers;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace Runtime.UpgradeSystem.Handlers
         private void OnEnable()
         {
             CurrentLevel = GameDatabaseManager.Instance.LoadData(SaveKeys.GunLevel);
+            MaxLevel = data.GunStatsList.Count - 1;
         }
 
         public int GetLevelPrice(int level)

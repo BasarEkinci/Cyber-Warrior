@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   attackInterval: 0.5
-  moveSpeed: 10.5
+  moveSpeed: 10.2
   maxHealth: 50
   damageResistance: 1
   xpValue: 0

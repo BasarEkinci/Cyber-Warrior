@@ -18,6 +18,9 @@ namespace Runtime.UI
 
         private void OnEnable()
         {
+            if (totalKillsText == null || collectedScrapText == null)
+                return;
+            
             totalKillsText.text = $"Total Kills\n0";
             collectedScrapText.text = $"Collected Scrap\n0";
 

@@ -17,7 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 8300000, guid: bebbfe6acb877b447accae2bc484457f, type: 3}
-    - {fileID: 8300000, guid: 6bb8db3eedb1f234e8f4584d99073246, type: 3}
+    - {fileID: 8300000, guid: 658825b5e93a92141ba822d0d60c5579, type: 3}
     - {fileID: 8300000, guid: 69a423012fd332d40899e1a88eee6ddd, type: 3}
     - {fileID: 8300000, guid: 6a510223fb86064499c634ff24220c0a, type: 3}
     - {fileID: 8300000, guid: cc412c1374364b74a836b7f8055ad5eb, type: 3}
@@ -25,6 +25,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ab1f997367d7a86459cc35db27a4d814, type: 3}
     - {fileID: 8300000, guid: 51d2bd563ce8aa5488148b1bec911f99, type: 3}
     - {fileID: 8300000, guid: 5b4419ae4fd2ebb41874a03e6932e3d4, type: 3}
+    - {fileID: 8300000, guid: 1683970930a67ba4ea96ca2d06e811bf, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -49,7 +50,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 9
+      Data: 10
     - Name: 
       Entry: 7
       Data: 
@@ -230,6 +231,27 @@ MonoBehaviour:
     - Name: Clip
       Entry: 10
       Data: 8
+    - Name: Volume
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 12
+    - Name: $v
+      Entry: 7
+      Data: Runtime.Audio.AudioData, Assembly-CSharp
+    - Name: Clip
+      Entry: 10
+      Data: 9
     - Name: Volume
       Entry: 4
       Data: 1

@@ -17,7 +17,11 @@ MonoBehaviour:
     moveSpeed: 8
     rotateSpeed: 45
     maxHealth: 100
-  - levelPrice: 0
+  - levelPrice: 45
     moveSpeed: 8
     rotateSpeed: 45
     maxHealth: 120
+  - levelPrice: 60
+    moveSpeed: 8
+    rotateSpeed: 45
+    maxHealth: 150

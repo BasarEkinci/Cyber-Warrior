@@ -41,8 +41,9 @@ namespace Runtime.Objects.ControlPanelScreens
 
         private void OnUpgradeSucceed()
         {
+            Debug.Log("Upgrade Succeed");
             SetStatsToScreen();
-            transform.DOScale(transform.localScale * 1.2f, 0.1f).SetLoops(2, LoopType.Yoyo);
+            transform.DOScale(transform.localScale * 1.5f, 0.1f).SetLoops(2, LoopType.Yoyo);
         }
 
         public override bool IsPanelActive { get; set; }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Runtime.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,6 +30,13 @@ namespace Runtime.SceneManagement
             #else
             Application.Quit(); // Quit the application in a build
             #endif
+        }
+
+        public void RestartGame()
+        {
+            GameDatabaseManager.Instance.ClearAllData();
+            loadingScreen.SetActive(true);
+            StartCoroutine(LoadLevelAsync(0));
         }
 
         IEnumerator LoadLevelAsync(int sceneIndex)

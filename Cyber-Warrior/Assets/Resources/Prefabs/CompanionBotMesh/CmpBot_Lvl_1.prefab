@@ -39368,7 +39368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5794103751566755491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 941c5119bd828b04e80677e58976a2d8, type: 3}
   m_Name: 
@@ -39379,6 +39379,8 @@ MonoBehaviour:
   - {fileID: 993919414735932627}
   muzzleFlashSystems:
   - {fileID: 8337115654719308307}
+  transformEventChannel: {fileID: 11400000, guid: c523492a57eff4da4919e9bffb4e474a, type: 2}
+  gameStateEvent: {fileID: 11400000, guid: 728bf1760b7d11f4b8198a1a872a9450, type: 2}
 --- !u!1 &6234062223148719092
 GameObject:
   m_ObjectHideFlags: 0

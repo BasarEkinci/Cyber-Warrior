@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: PlayerGun
   m_EditorClassIdentifier: 
   GunStatsList:
-  - damage: 10
+  - damage: 50
     range: 50
-    attackInterval: 2
+    attackInterval: 1.5
     price: 30
-  - damage: 10
+  - damage: 11
     range: 50
-    attackInterval: 1.8
+    attackInterval: 1.2
+    price: 45
+  - damage: 14
+    range: 50
+    attackInterval: 1.2
     price: 60

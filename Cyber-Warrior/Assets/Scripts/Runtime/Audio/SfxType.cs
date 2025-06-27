@@ -14,5 +14,6 @@
         DoorOpen,
         PlayerDamage,
         PickupScrap,
+        Upgrade
     }
 }
